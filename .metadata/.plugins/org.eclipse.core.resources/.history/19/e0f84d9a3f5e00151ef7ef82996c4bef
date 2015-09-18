@@ -13,12 +13,10 @@ public class Textures {
 	
 	public Textures(){
 		//initialize them here by using function below
-		TestTexture = loadTexture("test","png");//example initialization
+		TestTexture = loadTexture("test","png");//example initialization 
 	}
 	
 	
-	
-	//first variable is filename, path begins in the res folder, the extension is the file extension
 	//The extension Variable needs to be lower case
 	public static Texture loadTexture(String key, String extension){
 		try {

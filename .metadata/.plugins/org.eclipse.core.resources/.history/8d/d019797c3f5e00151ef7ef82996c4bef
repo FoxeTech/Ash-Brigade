@@ -9,16 +9,14 @@ import org.newdawn.slick.opengl.TextureLoader;
 public class Textures {
 	
 	//create Texture variables here
-	public static Texture TestTexture;//Example variable
+	public static Texture TestTexture;
 	
 	public Textures(){
 		//initialize them here by using function below
-		TestTexture = loadTexture("test","png");//example initialization
+		TestTexture = loadTexture("test","png");
 	}
 	
 	
-	
-	//first variable is filename, path begins in the res folder, the extension is the file extension
 	//The extension Variable needs to be lower case
 	public static Texture loadTexture(String key, String extension){
 		try {
