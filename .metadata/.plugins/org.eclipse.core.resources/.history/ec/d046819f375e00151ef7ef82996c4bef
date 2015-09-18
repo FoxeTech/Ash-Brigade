@@ -1,0 +1,36 @@
+
+public class Game {
+	
+	private enum State{INTRO,MAIN_MENU,GAME,OPTIONS_MENU};
+	private State state = State.INTRO;
+	
+	public Game(){
+		
+	}
+	
+	public void update(){
+		if(state == State.INTRO){
+			
+		}else if(state == State.MAIN_MENU){
+			
+		}else if(state == State.GAME){
+			
+		}else if(state == State.OPTIONS_MENU){
+			
+		}
+	}
+	
+	public void render(){
+		if(state == State.INTRO){
+			
+		}else if(state == State.MAIN_MENU){
+			
+		}else if(state == State.GAME){
+			
+		}else if(state == State.OPTIONS_MENU){
+			
+		}
+	}
+	
+	
+}

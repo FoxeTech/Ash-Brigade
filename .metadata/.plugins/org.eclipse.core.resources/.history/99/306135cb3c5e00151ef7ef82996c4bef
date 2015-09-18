@@ -1,0 +1,14 @@
+package Graphics;
+import org.lwjgl.opengl.*;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.util.ResourceLoader;
+public class Graphics {
+	
+	public static void drawRectangle(int x, int y, int width, int height, Texture texture){
+		GL11.glPushMatrix();
+		GL11.glBegin(GL11.GL_QUADS);
+		GL11.glVertex2f(x, y);
+		GL11.glVertex2f(x, y);
+	}
+}
