@@ -1,4 +1,4 @@
-package Graphics;
+package View;
 import org.lwjgl.opengl.*;
 import org.newdawn.slick.opengl.Texture;
 public class Graphics {

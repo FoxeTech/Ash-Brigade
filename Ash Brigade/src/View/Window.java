@@ -1,3 +1,4 @@
+package View;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.*;
 public class Window {
