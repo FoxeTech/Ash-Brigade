@@ -1,0 +1,19 @@
+
+public class Game {
+	
+	private enum State{INTRO,MAIN_MENU,GAME,OPTIONS_MENU};
+	
+	public Game(){
+		
+	}
+	
+	public void update(){
+		
+	}
+	
+	public void render(){
+		
+	}
+	
+	
+}
