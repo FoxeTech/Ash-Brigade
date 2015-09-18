@@ -3,7 +3,6 @@ import org.lwjgl.opengl.*;
 public class Window {
 
 	public Window(){
-		//Creates window code
 		int width = 1920;
 		int height = 1080;
 		boolean fullScreen = true;
