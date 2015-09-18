@@ -1,6 +1,6 @@
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.*;
-
+/*This is temp code it will be improved!*/
 public class Window {
 
 	public Window(){
