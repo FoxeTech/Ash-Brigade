@@ -8,11 +8,10 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 public class Textures {
 	
-	//create Texture variables here
-	
+	public static Texture testTexture;
 	
 	public Textures(){
-		//initialize them here by using function below
+		testTexture = (Texture) loadTexture("test","png");
 	}
 	
 	

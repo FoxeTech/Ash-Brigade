@@ -8,18 +8,17 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 public class Textures {
 	
-	//create Texture variables here
-	
+	public static Texture testTexture;
 	
 	public Textures(){
-		//initialize them here by using function below
+		testTexture = loadTexture("test","png");
 	}
 	
 	
 	//The extension Variable needs to be lower case
-	public static Texture loadTexture(String key, String extension){
+	public static Textures loadTexture(String key, String extension){
 		try {
-			return	TextureLoader.getTexture(extension, new FileInputStream(new File("res/" + key + "." + extension)));
+			return	(Textures) TextureLoader.getTexture(extension, new FileInputStream(new File("res/" + key + "." + extension)));
 		} catch (IOException e) {
 			System.out.println("Error Loading Texture");
 		}

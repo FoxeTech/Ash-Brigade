@@ -1,6 +1,8 @@
 package Graphics;
 import org.lwjgl.opengl.*;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.util.ResourceLoader;
 public class Graphics {
 	
 	//Static drawing functions
