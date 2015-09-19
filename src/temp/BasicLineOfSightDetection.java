@@ -1,4 +1,5 @@
 package temp;
+
 public class BasicLineOfSightDetection {
 	// TODO: Remove ArrayList usage if performance is affected
 	// TODO: Actually include the dependencies for importing

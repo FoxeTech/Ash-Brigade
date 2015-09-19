@@ -2,6 +2,7 @@ package com.github.brigade.map;
 
 public class MapPoint {
 	private final int x, y;
+	private int height;
 	private EnumTileType tileType;
 
 	/**
@@ -25,6 +26,18 @@ public class MapPoint {
 	 */
 	public MapPoint(int x, int y) {
 		this(x, y, EnumTileType.Land);
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public void addHeight(int height) {
+		this.height += height;
 	}
 
 	public EnumTileType getTileType() {

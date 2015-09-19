@@ -1,7 +1,11 @@
 package com.github.brigade.window;
 
+import javax.swing.JOptionPane;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.*;
+
+import com.github.brigade.exception.DisplayException;
 
 public class Window {
 	private int width, height;
@@ -19,7 +23,12 @@ public class Window {
 		this.width = width;
 		this.height = height;
 		this.fullscreen = fullscreen;
-		setDisplayMode(width, height, fullscreen);
+		try {
+			setDisplayMode(width, height, fullscreen);
+		} catch (DisplayException e) {
+			JOptionPane.showMessageDialog(null, "Could not set up the game display with the current settings.\nSend this error to the devs!\n\n" + e.toString());
+			exit();
+		}
 	}
 
 	/**
@@ -69,8 +78,10 @@ public class Window {
 	 *            The new height
 	 * @param fullscreen
 	 *            The new fullscreen status
+	 * @throws DisplayException
+	 *             Thrown if the display mode could not be retrieved
 	 */
-	public void setDisplayMode(int width, int height, boolean fullscreen) {
+	public void setDisplayMode(int width, int height, boolean fullscreen) throws DisplayException {
 		if ((Display.getDisplayMode().getWidth() == width) && (Display.getDisplayMode().getHeight() == height) && (Display.isFullscreen() == fullscreen)) {
 			return;
 		}
@@ -104,8 +115,7 @@ public class Window {
 				this.fullscreen = false;
 			}
 			if (targetDisplayMode == null) {
-				System.out.println("Failed to find value mode: " + width + "x" + height + " fs=" + fullscreen);
-				return;
+				throw new DisplayException("Failed to find value mode: " + width + "x" + height + " fs=" + fullscreen);
 			}
 			Display.setDisplayMode(targetDisplayMode);
 			Display.setFullscreen(fullscreen);

@@ -1,30 +1,155 @@
 package com.github.brigade.map;
 
-import com.github.brigade.exception.MapException;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
-public class Map {
-	private final int width, height;
+import com.github.brigade.exception.MapException;
+import com.github.brigade.map.generation.NoiseParameters;
+import com.github.brigade.map.generation.PerlinNoise;
+
+/**
+ * <b>TODO</b>: Assosicate more data with map point and perhaps have multiple 2D
+ * arrays for information storage. (Example: Another layer for adding trees and
+ * other things)
+ */
+public class Map extends BufferedImage {
+	private final static int HEIGHT_BEACH = 125, HEIGHT_LAND = 139, HEIGHT_HIGHLAND = 190, HEIGHT_MOUNTAIN = 220;
 	private MapPoint[][] data;
 
 	public Map(int width, int height) {
-		this.width = width;
-		this.height = height;
+		super(width, height, TYPE_INT_ARGB);
 		data = new MapPoint[width][height];
 	}
 
+	public Map(EnumMapSize mapSize) {
+		this(mapSize.getWidth(), mapSize.getHeight());
+	}
+
 	public void generateTerrain() {
-		// NOTE: Not sure what kind of terrain generation everyone wants and if
-		// using somebody else's Perlin Noise generator is OK with you.
-		//
-		// TODO: Creating the terrain
-		// 1. Make int array same size as data (for height map generation)
-		// 2. Generate height map based on noise generator
-		// 3. Based on height, each point will be translated to a EnumTileType
-		// 4. Save data to data array (X,Y,EnumTileType)
-		// 5. Create image of field with the saved data
-		// 6. Display image via OpenGL texture binding (Make this class extend
-		// BufferedImage for simplicity's sake?)
-		// 7. Battle with data array's information (Obstacles for pathing)
+		int octaves = 10;
+		int w = getWidth();
+		int h = getHeight();
+		data = new MapPoint[w][h];
+		HashMap<Integer, int[][]> maps = new HashMap<Integer, int[][]>();
+		for (int oct = 0; oct < octaves; oct++) {
+			int size = (oct + 1) * oct;
+			float contrast = oct * 1.5f + 2;
+			int map[][] = getHeightMap(w, h, size, contrast);
+			maps.put(oct, map);
+		}
+
+		int out[][] = new int[w][h];
+		for (int x = 0; x < getWidth(); x++) {
+			for (int y = 0; y < getHeight(); y++) {
+				data[x][y] = new MapPoint(x, y);
+			}
+		}
+		float persistance = 3f;
+		for (int oct = 0; oct < octaves; oct++) {
+			for (int x = 0; x < getWidth(); x++) {
+				for (int y = 0; y < getHeight(); y++) {
+					int height = (int) Math.floor(maps.get(oct)[x][y] * persistance);
+					out[x][y] += height;
+					data[x][y].addHeight(height);
+				}
+			}
+			persistance /= 1.2f;
+		}
+		for (int x = 0; x < getWidth(); x++) {
+			for (int y = 0; y < getHeight(); y++) {
+				MapPoint mp = data[x][y];
+				mp.setHeight(mp.getHeight() / octaves);
+			}
+		}
+		for (int x = 0; x < getWidth(); x++) {
+			for (int y = 0; y < getHeight(); y++) {
+				int height = out[x][y] / octaves;
+				if (height > 255) {
+					height = 255;
+				}
+				if (height < 0) {
+					height = 0;
+				}
+				Color color = getColor(height);
+				setRGB(x, y, mix(color, height).getRGB());
+			}
+		}
+	}
+
+	private int[][] getHeightMap(int w, int h, int noiseSize, float noiseContrast) {
+		int[][] map = new int[w][h];
+		int directions = 360;
+		float[] lerpMods = { 1, 1, 1 };
+		NoiseParameters noiseParams = new NoiseParameters(noiseSize, noiseSize, directions, noiseContrast, lerpMods);
+		PerlinNoise noise = new PerlinNoise(noiseParams);
+		for (int x = 0; x < getWidth(); x++) {
+			for (int y = 0; y < getHeight(); y++) {
+				float xx = (float) x / getWidth() * noiseSize;
+				float yy = (float) y / getHeight() * noiseSize;
+				float n = (float) noise.getAt(xx, yy, noiseParams);
+				n -= 0.2f;
+				if (n < -1) {
+					n = -1;
+				}
+				int height = (int) ((((n + 1) * 255) / 2f));
+				map[x][y] = height;
+			}
+		}
+		return map;
+	}
+
+	private Color mix(Color color, int height) {
+		boolean isLand = true;
+		boolean isBeach = false;
+		if (height > HEIGHT_MOUNTAIN) {
+			height = height + HEIGHT_MOUNTAIN;
+		} else if (height > HEIGHT_HIGHLAND) {
+			height = height + HEIGHT_HIGHLAND;
+		} else if (height > HEIGHT_LAND) {
+			height = height + HEIGHT_LAND;
+		} else if (height > HEIGHT_BEACH) {
+			isBeach = true;
+			height = height + HEIGHT_BEACH;
+		} else {
+			isLand = false;
+		}
+		height /= 2;
+		int r = color.getRed();
+		int g = color.getGreen();
+		int b = color.getBlue();
+		if (isLand) {
+			int red = (r + height * 3) / 4;
+			int green = (g * 2 + height * 3) / 5;
+			int blue = (b + height * 3) / 4 + 5;
+			if (isBeach) {
+				red += 40;
+				green -= 10;
+			}
+			return new Color(red, green, blue);
+		} else {
+			int red = (r * 4 + height * 4) / 8;
+			int green = (g * 2 + height * 4) / 6 + 20;
+			int blue = (b * 2 + height * 5) / 7 + 20;
+			return new Color(red, green, blue);
+		}
+	}
+
+	private Color getColor(int height) {
+		if (height > HEIGHT_BEACH) {
+			if (height > HEIGHT_LAND) {
+				if (height > HEIGHT_HIGHLAND) {
+					if (height > HEIGHT_MOUNTAIN) {
+						return new Color(120, 120, 120);
+					}
+					return new Color(20, 150, 80);
+				}
+				return new Color(15, 200, 40);
+			}
+			return new Color(170, 190, 30);
+		} else {
+			return new Color(20, 130, 210);
+		}
 	}
 
 	/**
@@ -37,21 +162,13 @@ public class Map {
 	 *             If the coordinates are outside of the map's bounds.
 	 */
 	public MapPoint getPoint(int x, int y) throws MapException {
-		if ((x < 0 || x > width) || (y < 0 || y > height)) {
-			throw new MapException("The given x,y coordinates are out of the map bounds: [" + width + "," + height + "]");
+		if ((x < 0 || x > getWidth()) || (y < 0 || y > getHeight())) {
+			throw new MapException("The given x,y coordinates are out of the map bounds: [" + getWidth() + "," + getHeight() + "]");
 		}
 		return data[x][y];
 	}
 
-	public MapPoint[][] getData() {
+	public MapPoint[][] getMapData() {
 		return data;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public int getHeight() {
-		return height;
 	}
 }

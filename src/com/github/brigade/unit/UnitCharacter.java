@@ -89,7 +89,8 @@ public class UnitCharacter extends UnitLiving {
 	}
 
 	/**
-	 * Adds a dialog to the unit's array. <br><hr>
+	 * Adds a dialog to the unit's array. <br>
+	 * <hr>
 	 * <b>TODO</b>: Redo in effecient way ( <a href=
 	 * "http://stackoverflow.com/questions/1427200/most-memory-efficient-way-to-grow-an-array-in-java">
 	 * StackOverflow with good insight</a>)

@@ -1,9 +1,10 @@
 package com.github.brigade.exception;
 
-public class MapException extends Exception {
+public class DisplayException extends Exception {
 	private static final long serialVersionUID = 1L;
 
-	public MapException(String errorReason) {
+	public DisplayException(String errorReason) {
 		super(errorReason);
 	}
+
 }

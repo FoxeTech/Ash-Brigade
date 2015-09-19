@@ -81,6 +81,7 @@ public class Inventory {
 	 * given item. <br>
 	 * 
 	 * Example:
+	 * 
 	 * <pre>
 	 * Item i = ... //get the item in some way
 	 * unit.getInventory().setItem(i.getInventorySlot(), new Item(...), EnumItemType.Potion);
@@ -92,7 +93,8 @@ public class Inventory {
 	 *            The new item
 	 * @param type
 	 *            The inventory type
-	 * @throws InventoryException Thrown if the index is over the intended array's bounds
+	 * @throws InventoryException
+	 *             Thrown if the index is over the intended array's bounds
 	 */
 	public void setItem(int index, Item item, EnumItemType type) throws InventoryException {
 		switch (type) {

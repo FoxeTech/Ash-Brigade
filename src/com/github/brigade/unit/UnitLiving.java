@@ -3,10 +3,6 @@ package com.github.brigade.unit;
 import com.github.brigade.inventory.Inventory;
 
 public class UnitLiving extends Unit {
-	// TODO: Inventory for items and something else for Armor? How exactly is
-	// armor working for units?
-	// Idea 1: Have sectionalized inventory (one section being armor)
-	// Idea 2: Have armor be linked to an upgrade system (like a tech tree)
 	private final Inventory inventory = new Inventory();
 	private int health, healthMax;
 	// TODO: Have a EnumTileType[] that the unit can walk across (Given their
