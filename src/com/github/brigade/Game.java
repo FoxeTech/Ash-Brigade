@@ -38,7 +38,7 @@ public class Game {
 	}
 
 	private void render() {
-
+		
 	}
 
 	private void update() {

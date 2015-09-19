@@ -15,7 +15,7 @@ public class TextureUtil {
 	 *            The filename (Expected directory: 'res')
 	 * @param extension
 	 *            The file type
-	 */
+	 */	
 	public static Texture loadTexture(String filename, String extension) {
 		try {
 			return TextureLoader.getTexture(extension, new FileInputStream(new File("res/" + filename + "." + extension)));
