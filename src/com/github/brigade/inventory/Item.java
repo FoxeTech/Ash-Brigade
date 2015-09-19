@@ -3,8 +3,8 @@ package com.github.brigade.inventory;
 public class Item {
 	private final String name;
 	private final int id;
-	// TODO: More reasons/uses to make the inventory sectionalized
 	private final EnumItemType itemType;
+	private int inventorySlot = -1;
 
 	/**
 	 * Instantiates the item with a name, id, and type.
@@ -34,12 +34,30 @@ public class Item {
 		return name;
 	}
 
+	/**
+	 * Updates the item, letting it know what slot in the inventory it is in.
+	 * 
+	 * @param inventorySlot
+	 *            The slot
+	 */
+	public void setInventorySlot(int inventorySlot) {
+		this.inventorySlot = inventorySlot;
+	}
+
+	/**
+	 * Get's the item's current index in the character's inventory.
+	 * 
+	 * @return Returns -1 if the slot has not been set
+	 */
+	public int getInventorySlot() {
+		return inventorySlot;
+	}
+
 	public int getId() {
 		return id;
 	}
 
 	public EnumItemType getItemType() {
-		// TODO:
 		return itemType;
 	}
 }
