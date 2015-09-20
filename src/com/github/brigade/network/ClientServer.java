@@ -5,7 +5,7 @@ import java.net.InetAddress;
 
 import com.github.brigade.network.packet.Packet;
 
-public class ClientServer extends Networker {
+public class ClientServer extends Server {
 	// TODO: Keep track of more server data (Other players, ping, etc.)
 	// TODO: Since you can't run a server AND client (Same port binding
 	// exception), this will have to serve as both. Life will find a way ;-;

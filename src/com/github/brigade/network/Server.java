@@ -17,12 +17,12 @@ import com.github.brigade.network.packet.Packet;
  * TODO: Make an abstract and flexible packet object that networking will use
  * instead of generic objects.
  */
-public abstract class Networker {
+public abstract class Server {
 	protected final DatagramSocket socket;
 	protected final int port;
 	protected byte[] out = new byte[1024], in = new byte[1024];
 
-	public Networker(int port) throws IOException {
+	public Server(int port) throws IOException {
 		this.port = port;
 		socket = new DatagramSocket(port);
 	}
