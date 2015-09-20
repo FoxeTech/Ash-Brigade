@@ -1,4 +1,4 @@
-package com.github.brigade.window;
+package com.github.brigade.ui.window;
 
 import javax.swing.JOptionPane;
 

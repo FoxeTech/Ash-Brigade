@@ -2,7 +2,7 @@ package com.github.brigade.unit;
 
 import com.github.brigade.inventory.Inventory;
 
-public class UnitLiving extends Unit {
+public abstract class UnitLiving extends Unit {
 	private final Inventory inventory = new Inventory();
 	private int health, healthMax;
 	// TODO: Have a EnumTileType[] that the unit can walk across (Given their

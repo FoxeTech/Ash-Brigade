@@ -1,21 +1,17 @@
 package com.github.brigade;
 
-import java.awt.image.BufferedImage;
-
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.opengl.Texture;
 
-import com.github.brigade.map.EnumMapSize;
-import com.github.brigade.map.Map;
-import com.github.brigade.render.DrawUtils;
-import com.github.brigade.render.TextureUtil;
-import com.github.brigade.window.Window;
+import com.github.brigade.ui.util.MouseInput;
+import com.github.brigade.ui.window.Window;
 
 public class Game {
+	private static Game instance;
 	private final Window window;
 
 	public Game() {
+		instance = this;
 		// TODO: Load from settings to get last display settings for the window
 		int displayWidth = 500, displayHeight = 500;
 		boolean fullscreen = false;
@@ -36,6 +32,10 @@ public class Game {
 			long currentTime = System.currentTimeMillis() / 1000;
 			deltaTime += (currentTime - lastTime) * 60;
 			lastTime = currentTime;
+			MouseInput.update();
+			// NOTE: This while loop fucks mouse input up big-time.
+			// Try the example test I set up with and without the while loop.
+			// Alternatively having it in the render function works too...
 			while (deltaTime >= 1) {
 				update();
 				--deltaTime;
@@ -47,14 +47,24 @@ public class Game {
 	}
 
 	private void render() {
-		Map test = new Map(EnumMapSize.Medium);
-		test.generateTerrain();
-		BufferedImage img = TextureUtil.resize(test, 500, 500, TextureUtil.SCALE_NEAREST_NEIGHBOR);
-		Texture t = TextureUtil.loadTexture(img);
-		DrawUtils.drawRectangle(0, 0, t.getImageWidth(), t.getImageHeight(), t);
-	}
 
+	}
+	
 	private void update() {
 
+	}
+
+	/**
+	 * Returns a static instance of the game.
+	 */
+	public static Game get() {
+		return instance;
+	}
+
+	/**
+	 * Returns the window object of the game.
+	 */
+	public Window getWindow() {
+		return window;
 	}
 }
