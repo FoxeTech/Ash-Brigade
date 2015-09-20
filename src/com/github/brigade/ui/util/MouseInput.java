@@ -6,7 +6,7 @@ import com.github.brigade.Game;
 
 public class MouseInput {
 	public final static int LEFT = 0, RIGHT = 1, MIDDLE = 2;
-	private final static int CLICK_TICKS = 61;
+	private final static int CLICK_TICKS = 2;
 	private static boolean leftDown, rightDown, middleDown;
 	private static int clt, crt, cmt;
 	private static int lastX, lastY;

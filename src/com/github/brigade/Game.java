@@ -3,12 +3,14 @@ package com.github.brigade;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
+import com.github.brigade.ui.screen.menu.ExampleMenu;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.ui.window.Window;
 
 public class Game {
 	private static Game instance;
 	private final Window window;
+	private int updateTicks;
 
 	public Game() {
 		instance = this;
@@ -23,35 +25,45 @@ public class Game {
 		// cannot get this or nanoTime to run on a lower framerate (I can't
 		// figure out how to manually slow the game)
 		window.setup();
-		long lastTime = System.currentTimeMillis() / 1000;
-		int deltaTime = 0;
+
+		long lastTime = System.nanoTime();
+		double nanoCap = 1000000000.0 / (60.0);
+		double delta = 0;
+		long timer = System.currentTimeMillis();
+		int updates = 0;
 		while (!Display.isCloseRequested()) {
 			GL11.glViewport(0, 0, window.getWidth(), window.getHeight());
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 			GL11.glLoadIdentity();
-			long currentTime = System.currentTimeMillis() / 1000;
-			deltaTime += (currentTime - lastTime) * 60;
-			lastTime = currentTime;
-			MouseInput.update();
-			// NOTE: This while loop fucks mouse input up big-time.
-			// Try the example test I set up with and without the while loop.
-			// Alternatively having it in the render function works too...
-			while (deltaTime >= 1) {
+			long now = System.nanoTime();
+			delta += (now - lastTime) / nanoCap;
+			lastTime = now;
+			while (delta >= 1) {
 				update();
-				--deltaTime;
+				delta = 0;
+				updates++;
+			}
+			if (System.currentTimeMillis() - timer > 1000) {
+				timer += 1000;
+				updateTicks = updates;
+				updates = 0;
 			}
 			render();
 			Display.update();
+			Display.sync(60);
 		}
 		window.exit();
 	}
 
+	ExampleMenu em = new ExampleMenu();
+
 	private void render() {
-
+		em.render();
 	}
-	
-	private void update() {
 
+	private void update() {
+		MouseInput.update();
+		em.update();
 	}
 
 	/**

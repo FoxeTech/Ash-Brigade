@@ -3,7 +3,7 @@ package com.github.brigade.render;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
-public class DrawUtils {
+public class DrawUtil {
 
 	public static void drawRectangle(int x, int y, int width, int height, Texture texture) {
 		GL11.glPushMatrix();

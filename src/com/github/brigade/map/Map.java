@@ -26,6 +26,9 @@ public class Map extends BufferedImage {
 		this(mapSize.getWidth(), mapSize.getHeight());
 	}
 
+	/**
+	 * Generates layers of terrain and merges them into one realistic map.
+	 */
 	public void generateTerrain() {
 		int octaves = 10;
 		int w = getWidth();
