@@ -3,6 +3,7 @@ package com.github.brigade;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
+import com.github.brigade.render.Textures;
 import com.github.brigade.ui.screen.menu.ExampleMenu;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.ui.window.Window;
@@ -11,6 +12,8 @@ public class Game {
 	private static Game instance;
 	private final Window window;
 	private int updateTicks;
+	private	ExampleMenu em;
+	private Textures textures;
 
 	public Game() {
 		instance = this;
@@ -24,7 +27,9 @@ public class Game {
 		// TODO: System.nanoTime() is more accurate, although with testing I
 		// cannot get this or nanoTime to run on a lower framerate (I can't
 		// figure out how to manually slow the game)
-		window.setup();
+		window.setup();//All textures loading code must go after window.setup
+		textures = new Textures();
+		em = new ExampleMenu();
 
 		long lastTime = System.nanoTime();
 		double nanoCap = 1000000000.0 / (60.0);
@@ -55,7 +60,6 @@ public class Game {
 		window.exit();
 	}
 
-	ExampleMenu em = new ExampleMenu();
 
 	private void render() {
 		em.render();
