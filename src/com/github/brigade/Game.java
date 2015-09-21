@@ -4,7 +4,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
 import com.github.brigade.render.Textures;
-import com.github.brigade.ui.screen.menu.ExampleMenu;
+import com.github.brigade.ui.screen.menu.ExampleMenu1;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.ui.window.Window;
 
@@ -12,7 +12,7 @@ public class Game {
 	private static Game instance;
 	private final Window window;
 	private int updateTicks;
-	private	ExampleMenu em;
+	private	ExampleMenu1 em;
 	private Textures textures;
 
 	public Game() {
@@ -29,7 +29,7 @@ public class Game {
 		// figure out how to manually slow the game)
 		window.setup();//All textures loading code must go after window.setup
 		textures = new Textures();
-		em = new ExampleMenu();
+		em = new ExampleMenu1();
 
 		long lastTime = System.nanoTime();
 		double nanoCap = 1000000000.0 / (60.0);

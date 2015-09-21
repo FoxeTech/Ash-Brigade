@@ -6,13 +6,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.BufferedImageUtil;
 
 public class TextureUtil {
 	public static final int SCALE_NEAREST_NEIGHBOR = 1, SCALE_BILINEAR = 2, SCALE_BICUBIC = 3;
-
 	/**
 	 * Gets the Texture object of a file.
 	 * 
