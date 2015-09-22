@@ -86,30 +86,35 @@ public abstract class UnitLiving extends Unit {
 	}
 
 	/**
-	 * Sets the unit's line of sight by providing the x-y coordinates of all spaces in line of sight.
+	 * Sets the unit's line of sight by providing the x-y coordinates of all
+	 * spaces in line of sight.
 	 * 
 	 * @param lineOfSight
-	 * 				The unit's new line of sight in a 2-D MapPoint array.
+	 *            The unit's new line of sight in a 2-D MapPoint array.
 	 */
-	public void setLineOfSight(MapPoint[] lineOfSight){
-		
+	public void setLineOfSight(MapPoint[] lineOfSight) {
+
 		this.lineOfSight = new MapPoint[lineOfSight.length];
-		
-		for(int i = 0; i < lineOfSight.length; i++){
+
+		for (int i = 0; i < lineOfSight.length; i++) {
 			this.lineOfSight[i] = lineOfSight[i];
 		}
-		
+
 	}
-	
+
+	public String getName() {
+		return name;
+	}
+
 	/**
 	 * Gets the stat handler of the unit.
 	 * 
 	 * @return stats
 	 */
-	public StatHandler getStatHandler(){
+	public StatHandler getStatHandler() {
 		return stats;
 	}
-	
+
 	/**
 	 * Gets the inventory of the current unit.
 	 * 

@@ -3,12 +3,15 @@ package com.github.brigade;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
+import com.github.brigade.map.EnumMapSize;
+import com.github.brigade.map.Map;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.ui.window.Window;
 
 public class Game {
 	private static Game instance;
 	private final Window window;
+	private final Map map;
 	private int updateTicks;
 
 	public Game() {
@@ -17,6 +20,8 @@ public class Game {
 		int displayWidth = 500, displayHeight = 500;
 		boolean fullscreen = false;
 		window = new Window(displayWidth, displayHeight, fullscreen);
+		map = new Map(EnumMapSize.Large);
+		map.generateTerrain();
 	}
 
 	public void run() {
@@ -65,6 +70,10 @@ public class Game {
 		return instance;
 	}
 
+	public static Map getMap(){
+		return instance.map;
+	}
+	
 	/**
 	 * Returns the window object of the game.
 	 */

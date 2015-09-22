@@ -59,7 +59,7 @@ public class Map extends BufferedImage {
 			}
 			persistance /= 1.2f;
 		}
-		// TODO: Decorate (Resources)
+		populate();
 		for (int x = 0; x < getWidth(); x++) {
 			for (int y = 0; y < getHeight(); y++) {
 				MapPoint mp = data[x][y];
@@ -68,7 +68,7 @@ public class Map extends BufferedImage {
 				mp.setTileType((height > HEIGHT_MOUNTAIN) ? EnumTileType.Mountains : (height > HEIGHT_BEACH) ? EnumTileType.Land : EnumTileType.Water);
 			}
 		}
-		// TODO: Sanitize (remove tiny islands)
+		sanitize();
 		for (int x = 0; x < getWidth(); x++) {
 			for (int y = 0; y < getHeight(); y++) {
 				int height = out[x][y] / octaves;
@@ -82,6 +82,15 @@ public class Map extends BufferedImage {
 				setRGB(x, y, mix(color, height).getRGB());
 			}
 		}
+	}
+
+	private void populate() {
+		// TODO: Add resources (trees, rare minerals and bonuses) to map)
+		// TODO: Place player spawn points
+	}
+
+	private void sanitize() {
+		// TODO: Clear out tiny islands
 	}
 
 	private int[][] getHeightMap(int w, int h, int noiseSize, float noiseContrast) {
