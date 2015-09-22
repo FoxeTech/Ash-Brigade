@@ -11,6 +11,7 @@ public class Textures {
 	public static final Texture Water = null;
 	public static final Texture Lava = null;
 	public static final Texture Trees = null;
+	public static final Texture Lewd = null;
 
 	static {
 		testTexture = TextureUtil.loadTexture("test", "png");
