@@ -30,7 +30,7 @@ public class Container extends Component {
 
 	@Override
 	public void render() {
-		GL11.glColor4f(1f, 0.8f, 0.8f, 0.5f);
+		GL11.glColor4f(1f, 0.8f, 0.8f, 0.1f);
 		DrawUtil.drawRectangle(x, y, width, height);
 		GL11.glColor3f(1f, 1f, 1f);
 		for (Component c : components) {
