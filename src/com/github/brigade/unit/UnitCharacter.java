@@ -22,7 +22,7 @@ public class UnitCharacter extends UnitLiving {
 	 *            The name of the character
 	 */
 	public UnitCharacter(int origX, int origY, int health, int healthMax, String name, Dialog[] dialogs) {
-		super(origX, origY, health, healthMax);
+		super(origX, origY, health, healthMax, "NPC");
 		this.name = name;
 		this.dialogs = dialogs;
 	}

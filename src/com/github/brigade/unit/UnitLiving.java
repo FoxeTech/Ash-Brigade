@@ -1,10 +1,14 @@
 package com.github.brigade.unit;
 
 import com.github.brigade.inventory.Inventory;
+import com.github.brigade.map.MapPoint;
 
 public abstract class UnitLiving extends Unit {
+	private StatHandler stats;
 	private final Inventory inventory = new Inventory();
+	private String name;
 	private int health, healthMax;
+	private MapPoint[] lineOfSight;
 	// TODO: Have a EnumTileType[] that the unit can walk across (Given their
 	// unit type or allegiance)
 	// Idea 1: Have this be handled in a more specific unit class.
@@ -23,8 +27,9 @@ public abstract class UnitLiving extends Unit {
 	 * @param maxHealth
 	 *            Maximum amount of health for the unit
 	 */
-	public UnitLiving(int origX, int origY, int health, int healthMax) {
+	public UnitLiving(int origX, int origY, int health, int healthMax, String faction) {
 		super(origX, origY);
+		stats = new StatHandler(faction);
 		this.health = health;
 		this.healthMax = healthMax;
 	}
@@ -40,7 +45,7 @@ public abstract class UnitLiving extends Unit {
 	 *            Current and max health of the unit
 	 */
 	public UnitLiving(int origX, int origY, int health) {
-		this(origX, origY, health, health);
+		this(origX, origY, health, health, "None");
 	}
 
 	/**
@@ -80,6 +85,31 @@ public abstract class UnitLiving extends Unit {
 		this.healthMax = healthMax;
 	}
 
+	/**
+	 * Sets the unit's line of sight by providing the x-y coordinates of all spaces in line of sight.
+	 * 
+	 * @param lineOfSight
+	 * 				The unit's new line of sight in a 2-D MapPoint array.
+	 */
+	public void setLineOfSight(MapPoint[] lineOfSight){
+		
+		this.lineOfSight = new MapPoint[lineOfSight.length];
+		
+		for(int i = 0; i < lineOfSight.length; i++){
+			this.lineOfSight[i] = lineOfSight[i];
+		}
+		
+	}
+	
+	/**
+	 * Gets the stat handler of the unit.
+	 * 
+	 * @return stats
+	 */
+	public StatHandler getStatHandler(){
+		return stats;
+	}
+	
 	/**
 	 * Gets the inventory of the current unit.
 	 * 
