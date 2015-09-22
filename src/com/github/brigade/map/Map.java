@@ -17,13 +17,13 @@ public class Map extends BufferedImage {
 	private final static int HEIGHT_BEACH = 125, HEIGHT_LAND = 139, HEIGHT_HIGHLAND = 190, HEIGHT_MOUNTAIN = 220;
 	private MapPoint[][] data;
 
-	public Map(int width, int height) {
-		super(width, height, TYPE_INT_ARGB);
-		data = new MapPoint[width][height];
+	public Map(int size) {
+		super(size, size, TYPE_INT_ARGB);
+		data = new MapPoint[size][size];
 	}
 
 	public Map(EnumMapSize mapSize) {
-		this(mapSize.getWidth(), mapSize.getHeight());
+		this(mapSize.getSize());
 	}
 
 	/**
@@ -59,12 +59,16 @@ public class Map extends BufferedImage {
 			}
 			persistance /= 1.2f;
 		}
+		// TODO: Decorate (Resources)
 		for (int x = 0; x < getWidth(); x++) {
 			for (int y = 0; y < getHeight(); y++) {
 				MapPoint mp = data[x][y];
-				mp.setHeight(mp.getHeight() / octaves);
+				int height = mp.getHeight() / octaves;
+				mp.setHeight(height);
+				mp.setTileType((height > HEIGHT_MOUNTAIN) ? EnumTileType.Mountains : (height > HEIGHT_BEACH) ? EnumTileType.Land : EnumTileType.Water);
 			}
 		}
+		// TODO: Sanitize (remove tiny islands)
 		for (int x = 0; x < getWidth(); x++) {
 			for (int y = 0; y < getHeight(); y++) {
 				int height = out[x][y] / octaves;

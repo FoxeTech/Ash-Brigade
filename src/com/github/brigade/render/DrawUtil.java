@@ -7,6 +7,7 @@ public class DrawUtil {
 
 	public static void drawRectangle(int x, int y, int width, int height, Texture texture) {
 		GL11.glPushMatrix();
+		texture.bind();
 		GL11.glBegin(GL11.GL_QUADS);
 		{
 			GL11.glTexCoord2f(0, 0);

@@ -11,7 +11,6 @@ public class Button extends Component {
 
 	}
 
-
 	public void render() {
 		GL11.glColor3f(0.5f,0.5f,0.5f);
 		GL11.glBegin(GL11.GL_QUADS);
