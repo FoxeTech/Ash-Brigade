@@ -1,9 +1,7 @@
 package com.github.brigade.ui.screen.menu;
 
-import com.github.brigade.render.Textures;
 import com.github.brigade.ui.screen.component.Button;
 import com.github.brigade.ui.screen.component.Component;
-import com.github.brigade.ui.screen.component.TexturedButton;
 
 public class ExampleMenu extends MenuScreen {
 
@@ -14,7 +12,6 @@ public class ExampleMenu extends MenuScreen {
 				new Button(20, 140, 100, 50), new Button(130, 140, 100, 50), new Button(240, 140, 100, 50), new Button(350, 140, 100, 50),
 				new Button(20, 200, 100, 50), new Button(130, 200, 100, 50), new Button(240, 200, 100, 50), new Button(350, 200, 100, 50),
 				new Button(20, 260, 100, 50), new Button(130, 260, 100, 50), new Button(240, 260, 100, 50), new Button(350, 260, 100, 50),
-				//new TexturedButton(20,320,100,50,Textures.testTexture)
 				});
 	}
 

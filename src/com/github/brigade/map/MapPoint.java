@@ -44,6 +44,10 @@ public class MapPoint {
 		return tileType;
 	}
 
+	public void setTileType(EnumTileType tileType) {
+		this.tileType = tileType;
+	}
+
 	public int getX() {
 		return x;
 	}
