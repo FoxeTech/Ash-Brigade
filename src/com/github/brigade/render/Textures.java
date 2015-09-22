@@ -3,17 +3,17 @@ package com.github.brigade.render;
 import org.newdawn.slick.opengl.Texture;
 
 public class Textures {
-	public static final Texture testTexture;
-	public static final Texture placeHolder1;
-	public static final Texture placeHolder2;
-	public static final Texture Land = null;
-	public static final Texture Mountain = null;
-	public static final Texture Water = null;
-	public static final Texture Lava = null;
-	public static final Texture Trees = null;
-	public static final Texture Lewd = null;
+	public static Texture testTexture;
+	public static Texture placeHolder1;
+	public static Texture placeHolder2;
+	public static Texture Land;
+	public static Texture Mountain;
+	public static Texture Water;
+	public static Texture Lava;
+	public static Texture Trees;
+	public static Texture Lewd;
 
-	static {
+	public static void setup() {
 		testTexture = TextureUtil.loadTexture("test", "png");
 		placeHolder1 = TextureUtil.loadTexture("PL1", "png");
 		placeHolder2 = TextureUtil.loadTexture("PL2", "png");

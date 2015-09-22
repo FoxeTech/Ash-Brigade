@@ -44,7 +44,7 @@ public class MouseInput {
 		rightDown = rightDownNow;
 		middleDown = middleDownNow;
 		lastX = Mouse.getX();
-		lastY = Game.get().getWindow().getHeight() - Mouse.getY();
+		lastY = Game.getWindow().getHeight() - Mouse.getY();
 	}
 
 	public static boolean isLeftDown() {
@@ -84,7 +84,7 @@ public class MouseInput {
 	}
 
 	public static int getY() {
-		return Game.get().getWindow().getHeight() - Mouse.getY();
+		return Game.getWindow().getHeight() - Mouse.getY();
 	}
 
 }

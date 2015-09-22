@@ -45,12 +45,6 @@ public class TexturedButton extends Button {
 
 	@Override
 	public void render() {
-		// Example
-		/*
-		 * if (isMouseOver()){ DrawUtil.drawRectangle(x, y, width, height,
-		 * imageStates[1]); }else{ DrawUtil.drawRectangle(x, y, width, height,
-		 * imageStates[0]); }
-		 */
-		DrawUtil.drawRectangle(x, y, width, height, imageStates[0]);
+		DrawUtil.drawRectangle(x, y, width, height, (imageStates.length > 1) ? (isMouseOver() ? imageStates[1] : imageStates[0]) : imageStates[0]);
 	}
 }

@@ -5,14 +5,17 @@ import org.lwjgl.opengl.GL11;
 
 import com.github.brigade.map.EnumMapSize;
 import com.github.brigade.map.Map;
+import com.github.brigade.render.Textures;
+import com.github.brigade.ui.screen.Screen;
+import com.github.brigade.ui.screen.menu.MenuInGame;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.ui.window.Window;
 
 public class Game {
 	private static Game instance;
 	private final Window window;
-	private final Map map;
 	private int updateTicks;
+	private Screen currentScreen;
 
 	public Game() {
 		instance = this;
@@ -22,10 +25,12 @@ public class Game {
 		window = new Window(displayWidth, displayHeight, fullscreen);
 		map = new Map(EnumMapSize.Large);
 		map.generateTerrain();
+		currentScreen = new MenuInGame();
 	}
 
 	public void run() {
 		window.setup();// All textures loading code must go after window.setup
+		Textures.setup();
 		long lastTime = System.nanoTime();
 		double nanoCap = 1000000000.0 / (60.0);
 		double delta = 0;
@@ -39,7 +44,6 @@ public class Game {
 			delta += (now - lastTime) / nanoCap;
 			lastTime = now;
 			while (delta >= 1) {
-				MouseInput.update();
 				update();
 				delta = 0;
 				updates++;
@@ -56,32 +60,40 @@ public class Game {
 		window.exit();
 	}
 
-	private void render() {
+	private void update() {
+		MouseInput.update();
+		currentScreen.update();
 	}
 
-	private void update() {
-
+	private void render() {
+		currentScreen.render();
 	}
 
 	/**
-	 * Returns a static instance of the game.
+	 * Returns an instance of the current screen.
 	 */
-	public static Game get() {
-		return instance;
+	public static Screen getCurrentScreen() {
+		return instance.currentScreen;
 	}
 
-	public static Map getMap(){
-		return instance.map;
-	}
-	
 	/**
 	 * Returns the window object of the game.
 	 */
-	public Window getWindow() {
-		return window;
+	public static Window getWindow() {
+		return instance.window;
 	}
 
 	public int getUpdateTicks() {
 		return updateTicks;
+	}
+
+	// ----------------------//
+	// ----Testing Zone -----//
+	// ----------------------//
+	// TODO: Remove. This is purely for testing purposes for AI
+	private final Map map;
+
+	public static Map getMap() {
+		return instance.map;
 	}
 }
