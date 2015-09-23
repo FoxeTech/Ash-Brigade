@@ -1,26 +1,23 @@
 package com.github.brigade.unit;
 
 import com.github.brigade.inventory.Inventory;
+import com.github.brigade.map.EnumTileType;
 import com.github.brigade.map.MapPoint;
+import com.github.brigade.unit.data.UnitData;
+import com.github.brigade.unit.data.StatHandler;
 
 public abstract class UnitLiving extends Unit {
-	
-	private StatHandler stats;
-	private MapPoint[] lineOfSight;
-	private final Inventory inventory = new Inventory();
-	
-	private int health, healthMax;
-	private int index, commanderIndex;
-	private int loyaltyToCommander;
-	
-	// TODO: Have a EnumTileType[] that the unit can walk across (Given their
-	// unit type or allegiance)
-	// Idea 1: Have this be handled in a more specific unit class.
-	// Idea 2: See idea 1. Abstraction is key!
+	protected String name;
+	protected StatHandler stats;
+	protected MapPoint[] lineOfSight;
+	protected final Inventory inventory = new Inventory();
+	protected final UnitData data;
+	protected int health, healthMax;
+	protected EnumTileType[] allowedTiles = new EnumTileType[] { EnumTileType.Land };
 
 	/**
-	 * Instantiates the unit with an initial X,Y, current health, and maximum
-	 * health.
+	 * Instantiates the unit with an initial X,Y, current health, maximum
+	 * health, faction/loyalty data, and a name.
 	 * 
 	 * @param origX
 	 *            Original and current X of the unit
@@ -30,34 +27,54 @@ public abstract class UnitLiving extends Unit {
 	 *            Current health of the unit
 	 * @param maxHealth
 	 *            Maximum amount of health for the unit
-	 * @param faction
-	 *			  The faction name that the unit is a part of
-	 *@param index
-	 *			  This unit's unique index	 					           	
+	 * @param data
+	 *            The faction and loyalty data for the unit
+	 * @param name
+	 *            The unit's name
 	 */
-	public UnitLiving(int origX, int origY, int health, int healthMax, String faction, String name, int index) {
-		super(origX, origY, name);
-		stats = new StatHandler(faction);
+	public UnitLiving(int origX, int origY, int health, int healthMax, UnitData data, String name) {
+		super(origX, origY);
+		stats = new StatHandler(data.getFactionName());
 		this.health = health;
 		this.healthMax = healthMax;
-		this.index = index;
-		commanderIndex = -1;//indicates no commander
+		this.data = data;
+		this.name = name;
 	}
 
 	/**
-	 * Instantiates the unit with an initial X,Y, and health.
+	 * Instantiates the unit with an initial X,Y, health, faction/loyalty data,
+	 * and a name.
 	 * 
 	 * @param origX
 	 *            Original and current X of the unit
 	 * @param origY
 	 *            Original and current Y of the unit
-	 * @param currHealth
-	 *            Current and max health of the unit
-	 * @param index
-	 * 			  This unit's unique index           		
+	 * @param health
+	 *            Health of the unit
+	 * @param data
+	 *            The faction and loyalty data for the unit
+	 * @param name
+	 *            The unit's name
 	 */
-	public UnitLiving(int origX, int origY, int health, String faction, String name, int index) {
-		this(origX, origY, health, health, faction, name, index);
+	public UnitLiving(int origX, int origY, int health, UnitData data, String name) {
+		this(origX, origY, health, health, data, name);
+	}
+
+	/**
+	 * Instantiates the unit with an initial X,Y, health, and faction/loyalty
+	 * data.
+	 * 
+	 * @param origX
+	 *            Original and current X of the unit
+	 * @param origY
+	 *            Original and current Y of the unit
+	 * @param health
+	 *            Health of the unit
+	 * @param data
+	 *            The faction and loyalty data for the unit
+	 */
+	public UnitLiving(int origX, int origY, int health, UnitData data) {
+		this(origX, origY, health, health, data, UnitConstants.DEFAULT_NAME);
 	}
 
 	/**
@@ -79,34 +96,6 @@ public abstract class UnitLiving extends Unit {
 	}
 
 	/**
-	 * Gets the index of the unit.
-	 * 
-	 * @return index
-	 */
-	public int getIndex(){
-		return index;
-	}
-	
-	/**
-	 * Gets the index of the unit commanding this one.
-	 * 
-	 * @return commanderIndex
- * 				-1 denotes no commander
-	 */
-	public int getCommanderIndex(){
-		return commanderIndex;
-	}
-	
-	/**
-	 * Gets the loyalty unit has to their commander.
-	 * 
-	 * @return loyaltyToCommander
-	 */
-	public int getLoyaltyToCommander(){
-		return loyaltyToCommander;
-	}
-	
-	/**
 	 * Sets the unit's health.
 	 * 
 	 * @param health
@@ -124,14 +113,35 @@ public abstract class UnitLiving extends Unit {
 	public void setMaxHealth(int healthMax) {
 		this.healthMax = healthMax;
 	}
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	/**
-	 * Sets the unit's commander using the commander's index.
-	 * 
-	 * @param commanderIndex
+	 * Get's the type of tiles the unit can pass over.
 	 */
-	public void setCommanderIndex(int commanderIndex){
-		this.commanderIndex = commanderIndex;
+	public EnumTileType[] getAllowedTiles() {
+		return allowedTiles;
+	}
+
+	/**
+	 * Set the type of tiles the unit can pass over.
+	 * 
+	 * @param allowedTiles
+	 *            Array of tiles <br>
+	 *            Example:
+	 * 
+	 *            <pre>
+	 *            new EnumTileType[] { EnumTileType.Land };
+	 *            </pre>
+	 */
+	public void setAllowedTiles(EnumTileType[] allowedTiles) {
+		this.allowedTiles = allowedTiles;
 	}
 
 	/**
@@ -142,15 +152,14 @@ public abstract class UnitLiving extends Unit {
 	 *            The unit's new line of sight in a 2-D MapPoint array.
 	 */
 	public void setLineOfSight(MapPoint[] lineOfSight) {
-
-		this.lineOfSight = new MapPoint[lineOfSight.length];
-
-		for (int i = 0; i < lineOfSight.length; i++) {
-			this.lineOfSight[i] = lineOfSight[i];
-		}
-
+		this.lineOfSight = lineOfSight;
+		// Don't think this way was warrented or needed
+		/*
+		 * this.lineOfSight = new MapPoint[lineOfSight.length]; for (int i = 0;
+		 * i < lineOfSight.length; i++) { this.lineOfSight[i] = lineOfSight[i];
+		 * }
+		 */
 	}
-
 
 	/**
 	 * Gets the stat handler of the unit.
@@ -168,5 +177,12 @@ public abstract class UnitLiving extends Unit {
 	 */
 	public Inventory getInventory() {
 		return inventory;
+	}
+
+	/**
+	 * Get's the unit's data.
+	 */
+	public UnitData getUnitData() {
+		return data;
 	}
 }

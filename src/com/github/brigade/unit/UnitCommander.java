@@ -1,46 +1,63 @@
 package com.github.brigade.unit;
 
-public class UnitCommander extends UnitLiving{
+import com.github.brigade.unit.data.UnitData;
 
-	private int numSubordinates;
-	
-	private String rankName;
-	private UnitLiving[] subordinates;
-	private UnitConstants uConstants;
-	
-	public UnitCommander(int origX, int origY, int health, int healthMax, String faction, String name, int index) {
-		super(origX, origY, health, healthMax, faction, name, index);
-		uConstants = new UnitConstants();
-		
-		numSubordinates = 0;
-		
-		if(faction.equals(uConstants.ASIAN_FACTION_NAME))
-			subordinates = new UnitLiving[uConstants.ASIAN_FACTION_FIRST_GROUPING_SIZE];
-		else if(faction.equals(uConstants.ARABIAN_FACTION_NAME))
-			subordinates = new UnitLiving[uConstants.ARABIAN_FACTION_FIRST_GROUPING_SIZE];
-		else if(faction.equals(uConstants.EUROPEAN_FACTION_NAME))
-			subordinates = new UnitLiving[uConstants.EUROPEAN_FACTION_FIRST_GROUPING_SIZE];
-		
+public class UnitCommander extends UnitLiving {
+	protected int numSubordinates;
+	protected String rankName;// TODO: Put rank types and data into EnumFaction
+	protected UnitLiving[] subordinates;
+
+	/**
+	 * Instantiates the commander with an initial X,Y, current & maximum health,
+	 * a name, and faction/loyalty data.
+	 * 
+	 * @param origX
+	 *            Original and current X of the unit
+	 * @param origY
+	 *            Original and current Y of the unit
+	 * @param currHealth
+	 *            Current health of the unit
+	 * @param maxHealth
+	 *            Maximum amount of health for the unit
+	 * @param name
+	 *            The name of the character
+	 * @param data
+	 *            The faction/loyalty data for the character
+	 */
+	public UnitCommander(int origX, int origY, int health, int healthMax, String name, UnitData data) {
+		super(origX, origY, health, healthMax, data, name);
+		subordinates = new UnitLiving[data.getFaction().gSize1];
 	}
-	
-	public UnitCommander(int origX, int origY, int health, String faction, String name, int index){
-		super(origX, origY, health, health, faction, name, index);
-		
+
+	public UnitCommander(int origX, int origY, int health, String name, UnitData data) {
+		this(origX, origY, health, health, name, data);
 	}
-	
-	public void addSubordinate(UnitLiving unit){
-		try{
-			subordinates[numSubordinates] = unit;
-			numSubordinates++;
-		}catch(ArrayIndexOutOfBoundsException ex){ex.printStackTrace();}
+
+	/**
+	 * Add's a unit to the commander's roster.
+	 * 
+	 * @param unit
+	 * @throws ArrayIndexOutOfBoundsException
+	 *             Thrown when the index is over the maximum amount of units
+	 *             allowed
+	 */
+	public void addSubordinate(UnitLiving unit) throws ArrayIndexOutOfBoundsException {
+		subordinates[numSubordinates] = unit;
+		numSubordinates++;
 	}
-	
-	public String getRankName(){
+
+	public String getRankName() {
 		return rankName;
 	}
-	
-	public UnitLiving[] getSubordinates(){
+
+	public UnitLiving[] getSubordinates() {
 		return subordinates;
 	}
 
+	/**
+	 * Returns how many units the commander can command.
+	 */
+	public int getCommandCap() {
+		return subordinates.length;
+	}
 }

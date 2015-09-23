@@ -1,14 +1,14 @@
 package com.github.brigade.unit;
 
+import com.github.brigade.unit.data.UnitData;
 import com.github.brigade.unit.dialog.Dialog;
 
 public class UnitCharacter extends UnitLiving {
-	private final String name;
-	private Dialog[] dialogs;
+	protected Dialog[] dialogs;
 
 	/**
 	 * Instantiates the unit with an initial X,Y, current & maximum health, a
-	 * name, and a list of character dialog.
+	 * name, faction/loyalty data, and a list of character dialog.
 	 * 
 	 * @param origX
 	 *            Original and current X of the unit
@@ -20,16 +20,19 @@ public class UnitCharacter extends UnitLiving {
 	 *            Maximum amount of health for the unit
 	 * @param name
 	 *            The name of the character
+	 * @param data
+	 *            The faction/loyalty data for the character
+	 * @param dialogs
+	 *            The dialogs for the character
 	 */
-	public UnitCharacter(int origX, int origY, int health, int healthMax, String name, Dialog[] dialogs) {
-		super(origX, origY, health, healthMax, "NPC");
-		this.name = name;
+	public UnitCharacter(int origX, int origY, int health, int healthMax, String name, UnitData data, Dialog[] dialogs) {
+		super(origX, origY, health, healthMax, data, name);
 		this.dialogs = dialogs;
 	}
 
 	/**
-	 * Instantiates the unit with an initial X,Y, current & maximum health, and
-	 * a name.
+	 * Instantiates the unit with an initial X,Y, current & maximum health, a
+	 * name, and faction/loyalty data.
 	 * 
 	 * @param origX
 	 *            Original and current X of the unit
@@ -41,27 +44,30 @@ public class UnitCharacter extends UnitLiving {
 	 *            Maximum amount of health for the unit
 	 * @param name
 	 *            The name of the character
+	 * @param data
+	 *            The faction/loyalty data for the character
 	 */
-	public UnitCharacter(int origX, int origY, int health, int healthMax, String name) {
-		this(origX, origY, health, healthMax, name, null);
+	public UnitCharacter(int origX, int origY, int health, int healthMax, UnitData data) {
+		this(origX, origY, health, healthMax, UnitConstants.DEFAULT_NAME, data, null);
 	}
 
 	/**
-	 * Instantiates the unit with an initial X,Y, health, and name.
+	 * Instantiates the unit with an initial X,Y, current & maximum health, a
+	 * name, and faction/loyalty data.
 	 * 
 	 * @param origX
 	 *            Original and current X of the unit
 	 * @param origY
 	 *            Original and current Y of the unit
-	 * @param currHealth
-	 *            Current and max health of the unit
+	 * @param health
+	 *            Health of the unit
+	 * @param name
+	 *            The name of the character
+	 * @param data
+	 *            The faction/loyalty data for the character
 	 */
-	public UnitCharacter(int origX, int origY, int health, String name) {
-		this(origX, origY, health, health, name);
-	}
-
-	public String getName() {
-		return name;
+	public UnitCharacter(int origX, int origY, int health, String name, UnitData data) {
+		this(origX, origY, health, health, name, data, null);
 	}
 
 	/**
