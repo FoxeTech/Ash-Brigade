@@ -6,9 +6,8 @@ import java.net.InetAddress;
 import com.github.brigade.network.packet.Packet;
 
 public class Client extends UDPClient {
-	// TODO: Keep track of more server data (Other players, ping, etc.)
-	// TODO: Since you can't run a server AND client (Same port binding
-	// exception), this will have to serve as both. Life will find a way ;-;
+	// TODO: Keep track of more server data (Other players, ping, etc.) (Should
+	// be received from the server that bounces information back to this client)
 	private final InetAddress IPAddress;
 
 	public Client(String ip, int port) throws IOException {

@@ -34,5 +34,4 @@ public abstract class Packet implements Serializable {
 	public int getPacketID() {
 		return packetID;
 	}
-
 }

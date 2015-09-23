@@ -85,15 +85,43 @@ public abstract class UDPClient {
 		}
 	}
 
+	/**
+	 * The socket that listens to all traffic on the set port.
+	 */
 	public DatagramSocket getSocket() {
 		return socket;
 	}
 
+	/**
+	 * The port for the server to listen on.
+	 */
 	public int getPort() {
 		return port;
 	}
-	
-	public boolean isClient(){
+
+	/**
+	 * Returns if the current UDPClient is a client.
+	 * 
+	 * @return
+	 * 		<ul>
+	 *         <li>True - Client</li>
+	 *         <li>False - Server</li>
+	 *         </ul>
+	 */
+	public boolean isClient() {
 		return isClient;
+	}
+
+	/**
+	 * Returns if the current UDPClient is a server.
+	 * 
+	 * @return
+	 * 		<ul>
+	 *         <li>True - Server</li>
+	 *         <li>False - Client</li>
+	 *         </ul>
+	 */
+	public boolean isServer() {
+		return !isClient;
 	}
 }
