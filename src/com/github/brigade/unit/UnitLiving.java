@@ -4,11 +4,15 @@ import com.github.brigade.inventory.Inventory;
 import com.github.brigade.map.MapPoint;
 
 public abstract class UnitLiving extends Unit {
+	
 	private StatHandler stats;
-	private final Inventory inventory = new Inventory();
-	private String name;
-	private int health, healthMax;
 	private MapPoint[] lineOfSight;
+	private final Inventory inventory = new Inventory();
+	
+	private int health, healthMax;
+	private int index, commanderIndex;
+	private int loyaltyToCommander;
+	
 	// TODO: Have a EnumTileType[] that the unit can walk across (Given their
 	// unit type or allegiance)
 	// Idea 1: Have this be handled in a more specific unit class.
@@ -26,12 +30,18 @@ public abstract class UnitLiving extends Unit {
 	 *            Current health of the unit
 	 * @param maxHealth
 	 *            Maximum amount of health for the unit
+	 * @param faction
+	 *			  The faction name that the unit is a part of
+	 *@param index
+	 *			  This unit's unique index	 					           	
 	 */
-	public UnitLiving(int origX, int origY, int health, int healthMax, String faction) {
-		super(origX, origY);
+	public UnitLiving(int origX, int origY, int health, int healthMax, String faction, String name, int index) {
+		super(origX, origY, name);
 		stats = new StatHandler(faction);
 		this.health = health;
 		this.healthMax = healthMax;
+		this.index = index;
+		commanderIndex = -1;//indicates no commander
 	}
 
 	/**
@@ -43,9 +53,11 @@ public abstract class UnitLiving extends Unit {
 	 *            Original and current Y of the unit
 	 * @param currHealth
 	 *            Current and max health of the unit
+	 * @param index
+	 * 			  This unit's unique index           		
 	 */
-	public UnitLiving(int origX, int origY, int health) {
-		this(origX, origY, health, health, "None");
+	public UnitLiving(int origX, int origY, int health, String faction, String name, int index) {
+		this(origX, origY, health, health, faction, name, index);
 	}
 
 	/**
@@ -67,6 +79,34 @@ public abstract class UnitLiving extends Unit {
 	}
 
 	/**
+	 * Gets the index of the unit.
+	 * 
+	 * @return index
+	 */
+	public int getIndex(){
+		return index;
+	}
+	
+	/**
+	 * Gets the index of the unit commanding this one.
+	 * 
+	 * @return commanderIndex
+ * 				-1 denotes no commander
+	 */
+	public int getCommanderIndex(){
+		return commanderIndex;
+	}
+	
+	/**
+	 * Gets the loyalty unit has to their commander.
+	 * 
+	 * @return loyaltyToCommander
+	 */
+	public int getLoyaltyToCommander(){
+		return loyaltyToCommander;
+	}
+	
+	/**
 	 * Sets the unit's health.
 	 * 
 	 * @param health
@@ -83,6 +123,15 @@ public abstract class UnitLiving extends Unit {
 	 */
 	public void setMaxHealth(int healthMax) {
 		this.healthMax = healthMax;
+	}
+	
+	/**
+	 * Sets the unit's commander using the commander's index.
+	 * 
+	 * @param commanderIndex
+	 */
+	public void setCommanderIndex(int commanderIndex){
+		this.commanderIndex = commanderIndex;
 	}
 
 	/**
@@ -102,9 +151,6 @@ public abstract class UnitLiving extends Unit {
 
 	}
 
-	public String getName() {
-		return name;
-	}
 
 	/**
 	 * Gets the stat handler of the unit.

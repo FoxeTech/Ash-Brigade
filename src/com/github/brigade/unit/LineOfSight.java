@@ -64,12 +64,12 @@ public class LineOfSight {
 		MapPoint[] losList = new MapPoint[losSize];
 		
 		try {
-			losList = calculateCircleLOS(instance.getMap().getPoint(x, y), 0, agility, losList, instance);
+			losList = calculateCircleLOS(instance.getMap().getPoint(x, y), 0, agility, losList);
 		} catch (MapException e) {e.printStackTrace();}
 		
 	}
 	
-	private MapPoint[] calculateCircleLOS(MapPoint space, int step, int distance, MapPoint[] losList, Game instance) {
+	private MapPoint[] calculateCircleLOS(MapPoint space, int step, int distance, MapPoint[] losList) {
 		if (step == distance || space.getTileType() == EnumTileType.Mountains || space.getTileType() == EnumTileType.Lava)
 			return losList;
 		else {
@@ -81,25 +81,25 @@ public class LineOfSight {
 
 			if (space.getX() < instance.getMap().getNumXTiles()){
 				try {
-					calculateCircleLOS(instance.getMap().getPoint(space.getX()+1, space.getY()), step + 1, distance, losList, instance);
+					calculateCircleLOS(instance.getMap().getPoint(space.getX()+1, space.getY()), step + 1, distance, losList);
 				} catch (MapException e) {e.printStackTrace();}
 			}
 			
 			if (space.getX() > 0){
 				try {
-					calculateCircleLOS(instance.getMap().getPoint(space.getX()-1, space.getY()), step + 1, distance, losList, instance);
+					calculateCircleLOS(instance.getMap().getPoint(space.getX()-1, space.getY()), step + 1, distance, losList);
 				} catch (MapException e) {e.printStackTrace();}
 			}
 			
 			if (space.getY() < instance.getMap().getNumYTiles()){
 				try {
-					calculateCircleLOS(instance.getMap().getPoint(space.getX(), space.getY()+1), step + 1, distance, losList, instance);
+					calculateCircleLOS(instance.getMap().getPoint(space.getX(), space.getY()+1), step + 1, distance, losList);
 				} catch (MapException e) {e.printStackTrace();}
 			}
 			
 			if (space.getY() > 0){
 				try {
-					calculateCircleLOS(instance.getMap().getPoint(space.getX(), space.getY()-1), step + 1, distance, losList, instance);
+					calculateCircleLOS(instance.getMap().getPoint(space.getX(), space.getY()-1), step + 1, distance, losList);
 				} catch (MapException e) {e.printStackTrace();}
 			}
 			
