@@ -1,5 +1,7 @@
 package com.github.brigade;
 
+import java.io.IOException;
+
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
@@ -14,23 +16,32 @@ import com.github.brigade.ui.window.Window;
 public class Game {
 	private static Game instance;
 	private final Window window;
+	private final UserClient client;
 	private int updateTicks;
 	private Screen currentScreen;
 
 	public Game() {
 		instance = this;
 		// TODO: Load from settings to get last display settings for the window
-		int displayWidth = 500, displayHeight = 500;
+		int displayWidth = 800, displayHeight = 600;
 		boolean fullscreen = false;
 		window = new Window(displayWidth, displayHeight, fullscreen);
+		//
+		String username = "test";
+		String password = "password";
+		client = new UserClient(username, password);
+		client.setup();
+		//
 		map = new Map(EnumMapSize.Large);
 		map.generateTerrain();
+		//
 		currentScreen = new MenuInGame();
 	}
 
 	public void run() {
 		window.setup();// All textures loading code must go after window.setup
 		Textures.setup();
+		setup();
 		long lastTime = System.nanoTime();
 		double nanoCap = 1000000000.0 / (60.0);
 		double delta = 0;
@@ -60,7 +71,21 @@ public class Game {
 		window.exit();
 	}
 
+	private void setup() {
+		try {
+			boolean isPlaying = true;
+			boolean isHost = true;
+			client.setGame("localhost", 7777, isPlaying, isHost);
+			client.getConnection().setClientCount(2);
+			client.joinGame();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// Unable to create/connect client, abandon networking
+	}
+
 	private void update() {
+		client.getConnection().receive();
 		MouseInput.update();
 		currentScreen.update();
 	}
@@ -83,17 +108,25 @@ public class Game {
 		return instance.window;
 	}
 
+	/**
+	 * Returns the UserClient instance of the game.
+	 */
+	public static UserClient getClient() {
+		return instance.client;
+	}
+
+	/**
+	 * Returns how many updates were performed in the last second.
+	 */
 	public int getUpdateTicks() {
 		return updateTicks;
 	}
 
-	// ----------------------//
-	// ----Testing Zone -----//
-	// ----------------------//
 	// TODO: Remove. This is purely for testing purposes for AI
 	private final Map map;
 
 	public static Map getMap() {
 		return instance.map;
 	}
+
 }

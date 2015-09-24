@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketTimeoutException;
 
 import com.github.brigade.network.packet.Packet;
 
@@ -22,11 +23,22 @@ public abstract class UDPClient {
 	protected final int port;
 	protected final boolean isClient;
 	protected byte[] out = new byte[1024], in = new byte[1024];
+	private int clientIndex;
+	protected ClientData[] clients;
 
 	public UDPClient(int port, boolean isClient) throws IOException {
 		this.port = port;
 		this.isClient = isClient;
 		socket = new DatagramSocket(port);
+		socket.setSoTimeout(1);
+	}
+
+	/**
+	 * Sets the size of the client array.
+	 */
+	public void setClientCount(int size) {
+		clientIndex = 0;
+		clients = new ClientData[size];
 	}
 
 	/**
@@ -54,6 +66,8 @@ public abstract class UDPClient {
 				handlePacket((Packet) objIn, receivePacket.getAddress());
 			}
 			bis.close();
+		} catch (SocketTimeoutException e) {
+			// Ignore
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -123,5 +137,21 @@ public abstract class UDPClient {
 	 */
 	public boolean isServer() {
 		return !isClient;
+	}
+
+	/**
+	 * Returns an array of connected clients.
+	 */
+	public ClientData[] getClients() {
+		return clients;
+	}
+
+	public void addClient(String name, InetAddress address) {
+		ClientData clientDat = new ClientData(name, address);
+		if (clientIndex >= clients.length) {
+			return;
+		}
+		clients[clientIndex] = clientDat;
+		clientIndex += 1;
 	}
 }
