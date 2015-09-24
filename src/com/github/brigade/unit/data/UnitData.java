@@ -1,7 +1,5 @@
 package com.github.brigade.unit.data;
 
-import com.github.brigade.unit.EnumFaction;
-
 public class UnitData {
 	private final int id, commanderID;
 	private EnumFaction faction;

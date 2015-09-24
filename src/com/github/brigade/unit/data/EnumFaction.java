@@ -1,4 +1,4 @@
-package com.github.brigade.unit;
+package com.github.brigade.unit.data;
 
 public enum EnumFaction {
 	Asian("Adesh", "", "", 9, 81, 729, 6561, 39366), 
