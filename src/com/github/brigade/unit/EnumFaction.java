@@ -2,12 +2,12 @@ package com.github.brigade.unit;
 
 public enum EnumFaction {
 	Asian("Adesh", "", "", 9, 81, 729, 6561, 39366), 
-	Euro("Reyan", "", "", 8, 80, 480, 4920, 19680), 
-	Arab("Lanett", "Squad", "Brigade", 10, 100, 1000, 10000, 100000), 
-	Rouge("Rouge", "Gang", "Bandit", 10, 100, 1000, 10000, 100000);
+	Euro("Lanett", "", "", 8, 80, 480, 4920, 19680), 
+	Arab("Reyan", "Squad", "Brigade", 10, 100, 1000, 10000, 100000), 
+	Rogue("Rogue", "Gang", "Bandit", 10, 100, 1000, 10000, 100000);
 
-	String name, groupName1, groupName2;
-	int gSize1, gSize2, gSize3, gSize4, gSize5;
+	private String name, groupName1, groupName2;
+	private int gSize1, gSize2, gSize3, gSize4, gSize5;
 
 	EnumFaction(String name, String groupName1, String groupName2, int gSize1, int gSize2, int gSize3, int gSize4, int gSize5) {
 		this.name = name;
@@ -32,23 +32,23 @@ public enum EnumFaction {
 		return groupName2;
 	}
 
-	public int getgSize1() {
+	public int getGSize1() {
 		return gSize1;
 	}
 
-	public int getgSize2() {
+	public int getGSize2() {
 		return gSize2;
 	}
 
-	public int getgSize3() {
+	public int getGSize3() {
 		return gSize3;
 	}
 
-	public int getgSize4() {
+	public int getGSize4() {
 		return gSize4;
 	}
 
-	public int getgSize5() {
+	public int getGSize5() {
 		return gSize5;
 	}
 }

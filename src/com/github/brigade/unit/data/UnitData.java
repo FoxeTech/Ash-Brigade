@@ -51,7 +51,7 @@ public class UnitData {
 	 *            <b>TODO</b>: Get Chandler to elaborate what this is
 	 */
 	public UnitData(int id, int commanderID) {
-		this(id, commanderID, -1, EnumFaction.Rouge);
+		this(id, commanderID, -1, EnumFaction.Rogue);
 	}
 
 	/**

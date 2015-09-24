@@ -26,7 +26,7 @@ public class UnitCommander extends UnitLiving {
 	 */
 	public UnitCommander(int origX, int origY, int health, int healthMax, String name, UnitData data) {
 		super(origX, origY, health, healthMax, data, name);
-		subordinates = new UnitLiving[data.getFaction().gSize1];
+		subordinates = new UnitLiving[data.getFaction().getGSize1()];
 	}
 
 	public UnitCommander(int origX, int origY, int health, String name, UnitData data) {
