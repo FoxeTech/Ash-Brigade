@@ -9,6 +9,7 @@ import com.github.brigade.map.EnumMapSize;
 import com.github.brigade.map.Map;
 import com.github.brigade.render.Textures;
 import com.github.brigade.ui.screen.Screen;
+import com.github.brigade.ui.screen.menu.MainMenu;
 import com.github.brigade.ui.screen.menu.MenuInGame;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.ui.window.Window;
@@ -34,13 +35,12 @@ public class Game {
 		//
 		map = new Map(EnumMapSize.Large);
 		map.generateTerrain();
-		//
-		currentScreen = new MenuInGame();
 	}
 
 	public void run() {
 		window.setup();// All textures loading code must go after window.setup
 		Textures.setup();
+		currentScreen = new MainMenu();//currentScreen must be initialized after textures have been loaded
 		setup();
 		long lastTime = System.nanoTime();
 		double nanoCap = 1000000000.0 / (60.0);
