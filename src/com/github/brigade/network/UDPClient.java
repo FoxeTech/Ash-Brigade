@@ -23,7 +23,7 @@ public abstract class UDPClient {
 	protected final int port;
 	protected final boolean isClient;
 	protected byte[] out = new byte[1024], in = new byte[1024];
-	private int clientIndex;
+	protected int clientIndex;
 	protected ClientData[] clients;
 
 	public UDPClient(int port, boolean isClient) throws IOException {
@@ -100,6 +100,38 @@ public abstract class UDPClient {
 	}
 
 	/**
+	 * Adds a client to the clients array.
+	 * 
+	 * @param name
+	 *            The client's name
+	 * @param address
+	 *            The client's InetAddress
+	 */
+	public void addClient(String name, InetAddress address) {
+		ClientData clientDat = new ClientData(name, address);
+		if (canAddClient()) {
+			clients[clientIndex] = clientDat;
+			clientIndex += 1;
+		}
+	}
+
+	/**
+	 * Returns true if there is space for another client to join the server.
+	 */
+	public boolean canAddClient() {
+		return clientIndex < clients.length;
+	}
+
+	/**
+	 * Returns true if the given address is local.
+	 * 
+	 * @param address
+	 */
+	public boolean isLocalhost(InetAddress address) {
+		return address.isAnyLocalAddress() || address.isLoopbackAddress();
+	}
+
+	/**
 	 * The socket that listens to all traffic on the set port.
 	 */
 	public DatagramSocket getSocket() {
@@ -144,14 +176,5 @@ public abstract class UDPClient {
 	 */
 	public ClientData[] getClients() {
 		return clients;
-	}
-
-	public void addClient(String name, InetAddress address) {
-		ClientData clientDat = new ClientData(name, address);
-		if (clientIndex >= clients.length) {
-			return;
-		}
-		clients[clientIndex] = clientDat;
-		clientIndex += 1;
 	}
 }

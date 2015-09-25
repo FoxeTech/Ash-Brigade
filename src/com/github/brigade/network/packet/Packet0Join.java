@@ -23,6 +23,23 @@ public class Packet0Join extends Packet {
 
 	@Override
 	public void onServerPacketReceive(InetAddress address, Server server) {
+		boolean shouldAdd = server.canAddClient();
+		if (shouldAdd) {
+			try {
+				server.sendPacket(new Packet2JoinAcknowledge(true), address);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				server.sendPacket(new Packet2JoinAcknowledge(false), address);
+			} catch (IOException e) {
+				// TODO: Find a way to handle the error. If they've disconnected
+				// I guess do nothing :\
+				e.printStackTrace();
+			}
+			return;
+		}
 		server.addClient(name, address);
 		for (ClientData clientData : server.getClients()) {
 			if (clientData == null) {
@@ -30,6 +47,7 @@ public class Packet0Join extends Packet {
 			}
 			String otherIP = clientData.getIp().getHostAddress();
 			String fromIP = address.getHostAddress();
+			// If the server is localhost
 			boolean sendLocal = server.isClient() ? (clientData.getIp().isAnyLocalAddress() || clientData.getIp().isLoopbackAddress()) : false;
 			if (!otherIP.equals(fromIP) || sendLocal) {
 				try {
