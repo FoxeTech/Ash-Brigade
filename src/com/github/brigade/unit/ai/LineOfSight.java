@@ -52,8 +52,7 @@ public class LineOfSight {
 		int x = unit.getX();
 		int y = unit.getY();
 
-		// formula for determining number of spaces in a los
-		int losSize = (agility * (2 * (agility + 1))) + 1;
+		int losSize = getSizeLOS(unit);
 
 		MapPoint[] losList = new MapPoint[losSize];
 
@@ -65,6 +64,17 @@ public class LineOfSight {
 
 	}
 
+	public int getSizeLOS(UnitLiving unit){
+		int agility = unit.getStatHandler().getAgility();
+		int x = unit.getX();
+		int y = unit.getY();
+
+		// formula for determining number of spaces in a los
+		int losSize = (agility * (2 * (agility + 1))) + 1;
+		
+		return losSize;
+	}
+	
 	private MapPoint[] calculateCircleLOS(MapPoint space, int step, int distance, MapPoint[] losList) {
 		if (step == distance || space.getTileType() == EnumTileType.Mountains || space.getTileType() == EnumTileType.Lava)
 			return losList;
