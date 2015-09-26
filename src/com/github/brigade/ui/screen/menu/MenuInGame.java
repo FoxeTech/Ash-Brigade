@@ -4,6 +4,7 @@ import com.github.brigade.Game;
 import com.github.brigade.ui.screen.component.Button;
 import com.github.brigade.ui.screen.component.Component;
 import com.github.brigade.ui.screen.component.Container;
+import com.github.brigade.ui.screen.component.MapDisplay;
 
 public class MenuInGame extends MenuScreen {
 	public MenuInGame() {
@@ -11,14 +12,34 @@ public class MenuInGame extends MenuScreen {
 	}
 
 	private static Component[] getComponents() {
-		Button b1 = new Button(5, 5, 90, 90);
-		//
 		int h = Game.getWindow().getHeight();
 		int w = Game.getWindow().getWidth();
-		int contHeight = 100;
+		int mapHeight = (int) (h * 0.2);
+		int mapWidth = mapHeight;
+		int mapResolution = 256;
+		int mapX = 0;// w - mapWid;
+		int mapY = h - mapResolution;
+		MapDisplay mapDisp = new MapDisplay(mapX, mapY, mapResolution);
+		mapDisp.setMap(Game.getMap());
+		//
+		int contHeight = 96;
 		int contTop = h - contHeight;
-		Container container = new Container(0, contTop, w, contHeight, new Component[] { b1 });
-		return new Container[] { container };
+		Button[] btns = new Button[12];
+		//
+		int hPadding = 4;
+		int vPadding = 4;
+		int mapOffset = mapX + mapResolution;
+		for (int i = 0; i < 12; i++) {
+			//
+			int btnHeight = 90 - vPadding * 2;
+			int btnWidth = btnHeight;
+			int x = hPadding + i * btnWidth + i * hPadding;
+			int y = vPadding - 1;
+			btns[i] = new Button(x, y, btnWidth, btnHeight);
+		}
+		//
+		Container container = new Container(mapOffset, contTop, w - mapOffset, contHeight, btns);
+		return new Component[] { container, mapDisp };
 	}
 
 }

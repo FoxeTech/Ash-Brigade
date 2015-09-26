@@ -18,7 +18,7 @@ public class Map extends BufferedImage {
 	private MapPoint[][] data;
 
 	public Map(int size) {
-		super(size, size, TYPE_INT_ARGB);
+		super(256, 256, TYPE_INT_ARGB);
 		data = new MapPoint[size][size];
 	}
 

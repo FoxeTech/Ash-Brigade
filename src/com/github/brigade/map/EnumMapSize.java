@@ -1,7 +1,7 @@
 package com.github.brigade.map;
 
 public enum EnumMapSize {
-	Tiny(25), Small(50), Medium(100), Large(200), Huge(500);
+	Tiny(32), Small(64), Medium(128), Large(256), Huge(512);
 
 	private final int size;
 

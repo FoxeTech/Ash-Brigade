@@ -2,6 +2,9 @@ package com.github.brigade.ui.screen.component;
 
 import org.lwjgl.opengl.GL11;
 
+import com.github.brigade.render.DrawUtil;
+import com.github.brigade.render.Textures;
+
 public class Button extends Component {
 	public Button(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -12,14 +15,13 @@ public class Button extends Component {
 	}
 
 	public void render() {
-		GL11.glColor3f(0.5f,0.5f,0.5f);
-		GL11.glBegin(GL11.GL_QUADS);
-		{
-			GL11.glVertex2f(x, y);// Top Left
-			GL11.glVertex2f(x + width, y);// Top Right
-			GL11.glVertex2f(x + width, y + height);// Bottom Right
-			GL11.glVertex2f(x, y + height); // Bottom Left
+		if (isMouseOver()) {
+			GL11.glColor3f(0.9f, 1f, 0.9f);
+		} else {
+			GL11.glColor3f(1f, 0.9f, 0.9f);
 		}
-		GL11.glEnd();
+		DrawUtil.drawRectangle(x, y, width, height, Textures.Tile_Grad);
+		GL11.glColor3f(1f, 1f, 1f);
+		DrawUtil.drawRectangle(x, y, width, height, Textures.Tile_Holder);
 	}
 }

@@ -3,7 +3,6 @@ package com.github.brigade.network.packet;
 import java.net.InetAddress;
 
 import com.github.brigade.Game;
-import com.github.brigade.network.ClientData;
 import com.github.brigade.network.Server;
 
 public class Packet2JoinAcknowledge extends Packet {
@@ -17,14 +16,15 @@ public class Packet2JoinAcknowledge extends Packet {
 
 	@Override
 	public void onClientPacketReceive(InetAddress address) {
-		if (!canJoin) {
+		if (canJoin) {
+			Game.getClient().setCurrentServer(address);
+		} else {
 			// TODO: Unable to join the server. Terminate connection.
 		}
-
 	}
 
 	@Override
 	public void onServerPacketReceive(InetAddress address, Server server) {
-		// Should not be received by the server
+		// The server should not receive this packet
 	}
 }

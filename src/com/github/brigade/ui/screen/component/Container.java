@@ -3,6 +3,7 @@ package com.github.brigade.ui.screen.component;
 import org.lwjgl.opengl.GL11;
 
 import com.github.brigade.render.DrawUtil;
+import com.github.brigade.render.Textures;
 
 /**
  * Contains sub-components and passes information along to them.
@@ -30,9 +31,10 @@ public class Container extends Component {
 
 	@Override
 	public void render() {
-		GL11.glColor4f(1f, 0.8f, 0.8f, 0.1f);
-		DrawUtil.drawRectangle(x, y, width, height);
 		GL11.glColor3f(1f, 1f, 1f);
+		DrawUtil.drawRectangle(x, y, width, height, Textures.Tile_Grad);
+		DrawUtil.drawRectangle(x, y - 8, width, height, Textures.Bar);
+		DrawUtil.drawRectangle(x, y , width, height, Textures.Bar_Upside);
 		for (Component c : components) {
 			c.render();
 		}

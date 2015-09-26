@@ -3,7 +3,6 @@ package com.github.brigade.network.packet;
 import java.io.IOException;
 import java.net.InetAddress;
 
-import com.github.brigade.Game;
 import com.github.brigade.network.ClientData;
 import com.github.brigade.network.Server;
 
@@ -18,7 +17,7 @@ public class Packet0Join extends Packet {
 
 	@Override
 	public void onClientPacketReceive(InetAddress address) {
-		Game.getClient().setCurrentServer(address);
+		// Client's should not get this packet
 	}
 
 	@Override
@@ -48,7 +47,7 @@ public class Packet0Join extends Packet {
 			String otherIP = clientData.getIp().getHostAddress();
 			String fromIP = address.getHostAddress();
 			// If the server is localhost
-			boolean sendLocal = server.isClient() ? (clientData.getIp().isAnyLocalAddress() || clientData.getIp().isLoopbackAddress()) : false;
+			boolean sendLocal = server.isClient() ? (server.isLocalhost(clientData.getIp())) : false;
 			if (!otherIP.equals(fromIP) || sendLocal) {
 				try {
 					server.sendPacket(new Packet1PlayerData(clientData), clientData.getIp());

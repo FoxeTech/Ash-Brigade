@@ -128,6 +128,9 @@ public abstract class UDPClient {
 	 * @param address
 	 */
 	public boolean isLocalhost(InetAddress address) {
+		if (address == null){
+			return false;
+		}
 		return address.isAnyLocalAddress() || address.isLoopbackAddress();
 	}
 
