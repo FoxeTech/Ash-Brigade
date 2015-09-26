@@ -55,7 +55,7 @@ public class Game {
 	public void run() {
 		window.setup();// All textures loading code must go after window.setup
 		Textures.setup();
-		DrawUtil.CreateString("Xeranthemum.ttf", 24f);
+		DrawUtil.CreateFont("Xeranthemum.ttf", 24f);
 		currentScreen = new OptionsMenu();//currentScreen must be initialized after textures have been loaded
 		setup();
 		long lastTime = System.nanoTime();
