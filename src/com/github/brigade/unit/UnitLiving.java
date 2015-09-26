@@ -145,7 +145,7 @@ public abstract class UnitLiving extends Unit {
 	}
 
 	/**
-	 * Sets the unit's line of sight by providing the x-y coordinates of all
+	 * Sets the unit's line of sight by providing the MapPoint objects of all
 	 * spaces in line of sight.
 	 * 
 	 * @param lineOfSight
@@ -153,14 +153,17 @@ public abstract class UnitLiving extends Unit {
 	 */
 	public void setLineOfSight(MapPoint[] lineOfSight) {
 		this.lineOfSight = lineOfSight;
-		// Don't think this way was warrented or needed
-		/*
-		 * this.lineOfSight = new MapPoint[lineOfSight.length]; for (int i = 0;
-		 * i < lineOfSight.length; i++) { this.lineOfSight[i] = lineOfSight[i];
-		 * }
-		 */
 	}
 
+	/**
+	 * Gets the unit's line of sight in a MapPoint array
+	 * 
+	 * @return lineOfSight
+	 */
+	public MapPoint[] getLineOfSight(){
+		return lineOfSight;
+	}
+	
 	/**
 	 * Gets the stat handler of the unit.
 	 * 

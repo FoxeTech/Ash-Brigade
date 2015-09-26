@@ -1,8 +1,11 @@
 package com.github.brigade.map;
 
+import com.github.brigade.unit.UnitLiving;
+
 public class MapPoint {
 	private final int x, y;
 	private int height;
+	private UnitLiving unit;
 	private EnumTileType tileType;
 
 	/**
@@ -16,6 +19,7 @@ public class MapPoint {
 		this.x = x;
 		this.y = y;
 		this.tileType = tileType;
+		unit = null;
 	}
 
 	/**
@@ -39,11 +43,23 @@ public class MapPoint {
 	public void addHeight(int height) {
 		this.height += height;
 	}
+	
+	public void addUnit(UnitLiving unit){
+		this.unit = unit;
+	}
 
+	public void RemoveUnit(){
+		this.unit = null;
+	}
+	
+	public UnitLiving getUnit(){
+		return unit;
+	}
+	
 	public EnumTileType getTileType() {
 		return tileType;
 	}
-
+	
 	public void setTileType(EnumTileType tileType) {
 		this.tileType = tileType;
 	}
