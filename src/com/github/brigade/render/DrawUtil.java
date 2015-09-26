@@ -2,48 +2,12 @@ package com.github.brigade.render;
 
 import org.lwjgl.opengl.GL11;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.font.*;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.util.ResourceLoader;
 
 public class DrawUtil {
-
-	public static TrueTypeFont FONT;
-	public static float FONT_SIZE;
-
-	/**
-	 * Creates a Font by loading in a font.
-	 * @param filename
-	 * @param size
-	 */
-	public static void CreateFont(String filename,float size){
-		try{
-			InputStream inputStream = ResourceLoader.getResourceAsStream("res/Fonts/" + filename);
-			Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-			awtFont = awtFont.deriveFont(size);
-			FONT = new TrueTypeFont(awtFont,false);
-			FONT_SIZE = size;
-		}catch(FileNotFoundException e){
-			CreateFont("Xeranthemum.ttf",24f);
-			e.printStackTrace();
-		} catch (FontFormatException e) {
-			CreateFont("Xeranthemum.ttf",24f);
-			e.printStackTrace();
-		} catch (IOException e) {
-			CreateFont("Xeranthemum.ttf",24f);
-			e.printStackTrace();
-		}
-	}
-
 	/**
 	 * Draws a texture at (x,y) with the width an hight parameters respectively
+	 * 
 	 * @param x
 	 * @param y
 	 * @param width
@@ -71,6 +35,7 @@ public class DrawUtil {
 
 	/**
 	 * Draws a rectangle at (x,y)
+	 * 
 	 * @param x
 	 * @param y
 	 * @param width

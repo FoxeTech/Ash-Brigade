@@ -1,30 +1,28 @@
 package com.github.brigade.ui.screen.component;
 
-import com.github.brigade.render.DrawUtil;
+import com.github.brigade.render.font.FontObj;
 
-public class Text extends Component{
-
+public class Text extends Component {
 	private String text;
-	private float fontSize;
-	
-	public Text(int x, int y, int width, int height,String text,float fontSize) {
+	private FontObj font;
+
+	public Text(int x, int y, int width, int height, String text, FontObj font) {
 		super(x, y, width, height);
 		this.text = text;
-		this.fontSize = fontSize;
+		this.font = font;
 	}
-	
-	public float getFontSize(){
-		return fontSize;
+
+	public FontObj getFontSize() {
+		return font;
 	}
 
 	@Override
 	public void onClick(int mouseID) {
-		
+
 	}
 
 	@Override
 	public void render() {
-		DrawUtil.FONT.drawString(x,y,text);
+		font.getTTF().drawString(x, y, text);
 	}
-
 }

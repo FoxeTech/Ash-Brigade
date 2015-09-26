@@ -8,28 +8,24 @@ import org.lwjgl.opengl.ARBMultisample;
 
 import com.github.brigade.map.EnumMapSize;
 import com.github.brigade.map.Map;
-import com.github.brigade.render.DrawUtil;
 import com.github.brigade.render.GameTextureLevel;
 import com.github.brigade.render.Resolution;
 import com.github.brigade.render.Textures;
+import com.github.brigade.render.font.FontUtil;
 import com.github.brigade.ui.screen.Screen;
-import com.github.brigade.ui.screen.menu.MainMenu;
-import com.github.brigade.ui.screen.menu.MenuInGame;
 import com.github.brigade.ui.screen.menu.OptionsMenu;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.ui.window.Window;
 
 public class Game {
-	
 	//Options Variables
 	public static boolean vsync = false;
 	public static boolean vsync60 = false;
 	public static boolean vsync30 = false;
 	public static boolean msaa = false;
 	public static GameTextureLevel textureLevel = GameTextureLevel.LOW;
-	public static Resolution gameResolution = Resolution.X1366x768;
+	public static Resolution gameResolution = Resolution.X1920x1080;
 	//End Options Variables
-	
 	private static Game instance;
 	private final Window window;
 	private final UserClient client;
@@ -39,7 +35,7 @@ public class Game {
 	public Game() {
 		instance = this;
 		// TODO: Load from settings to get last display settings for the window
-		int displayWidth = 800, displayHeight = 600;
+		int displayWidth = gameResolution.getWidth(), displayHeight = gameResolution.getHeight();
 		boolean fullscreen = false;
 		window = new Window(displayWidth, displayHeight, fullscreen);
 		//
@@ -55,7 +51,7 @@ public class Game {
 	public void run() {
 		window.setup();// All textures loading code must go after window.setup
 		Textures.setup();
-		DrawUtil.CreateFont("Xeranthemum.ttf", 24f);
+		FontUtil.CreateFont("Xeranthemum.ttf", 24f);
 		currentScreen = new OptionsMenu();//currentScreen must be initialized after textures have been loaded
 		setup();
 		long lastTime = System.nanoTime();
