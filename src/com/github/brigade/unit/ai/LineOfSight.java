@@ -26,7 +26,23 @@ public class LineOfSight {
 	 *            The unit whose los is to be found
 	 */
 	public void getSpearLOS(UnitLiving unit) {
+		
+		int agility = unit.getStatHandler().getAgility();
+		int x = unit.getX();
+		int y = unit.getY();
 
+		int losSize = getSizeLOS(unit);
+
+		MapPoint[] losList = new MapPoint[losSize];
+
+		try {
+			losList = calculateDiagonalLOS(Game.getMap().getPoint(x, y), 0, agility, losList);
+		} catch (MapException e) {
+			e.printStackTrace();
+		}
+		
+		unit.setLineOfSight(losList);
+		
 	}
 
 	/**
@@ -61,6 +77,8 @@ public class LineOfSight {
 		} catch (MapException e) {
 			e.printStackTrace();
 		}
+		
+		unit.setLineOfSight(losList);
 
 	}
 
@@ -121,6 +139,85 @@ public class LineOfSight {
 		return losList;
 	}
 
+	private MapPoint[] calculateDiagonalLOS(MapPoint space, int step, int distance, MapPoint[] losList){
+		
+		if (step == distance || space.getTileType() == EnumTileType.Mountains || space.getTileType() == EnumTileType.Lava)
+			return losList;
+		else {
+
+			if (!isDuplicate(losList, space.getX(), space.getY())) {
+				losList[numLOSPoints] = space;
+				numLOSPoints++;
+			}
+
+			if(space.getX() < Game.getMap().getNumXTiles() && space.getY() < Game.getMap().getNumYTiles()){
+				try{
+					calculateDiagonalLOS(Game.getMap().getPoint(space.getX() + 1, space.getY() + 1), step + 1, distance, losList);
+				}catch(MapException e){
+					e.printStackTrace();
+				}
+			}
+			
+			if(space.getX() > 0 && space.getY() > 0){
+				try{
+					calculateDiagonalLOS(Game.getMap().getPoint(space.getX() - 1, space.getY() - 1), step + 1, distance, losList);
+				}catch(MapException e){
+					e.printStackTrace();
+				}
+			}
+			
+			if(space.getX() < Game.getMap().getNumXTiles() && space.getY() > 0){
+				try{
+					calculateDiagonalLOS(Game.getMap().getPoint(space.getX() + 1, space.getY() - 1), step + 1, distance, losList);
+				}catch(MapException e){
+					e.printStackTrace();
+				}
+			}
+			
+			if(space.getX() > 0 && space.getY() < Game.getMap().getNumYTiles()){
+				try{
+					calculateDiagonalLOS(Game.getMap().getPoint(space.getX() - 1, space.getY() + 1), step + 1, distance, losList);
+				}catch(MapException e){
+					e.printStackTrace();
+				}
+			}
+			
+			if (space.getX() < Game.getMap().getNumXTiles()) {
+				try {
+					calculateCircleLOS(Game.getMap().getPoint(space.getX() + 1, space.getY()), step + 1, distance, losList);
+				} catch (MapException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (space.getX() > 0) {
+				try {
+					calculateCircleLOS(Game.getMap().getPoint(space.getX() - 1, space.getY()), step + 1, distance, losList);
+				} catch (MapException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (space.getY() < Game.getMap().getNumYTiles()) {
+				try {
+					calculateCircleLOS(Game.getMap().getPoint(space.getX(), space.getY() + 1), step + 1, distance, losList);
+				} catch (MapException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (space.getY() > 0) {
+				try {
+					calculateCircleLOS(Game.getMap().getPoint(space.getX(), space.getY() - 1), step + 1, distance, losList);
+				} catch (MapException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return losList;
+	}
+	
 	private boolean isDuplicate(MapPoint[] losList, int x, int y) {
 		for (int i = 0; i < losList.length; i++) {
 			if (losList[i].getX() == x && losList[i].getY() == y)
