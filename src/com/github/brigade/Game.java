@@ -8,6 +8,7 @@ import org.lwjgl.opengl.ARBMultisample;
 
 import com.github.brigade.map.EnumMapSize;
 import com.github.brigade.map.Map;
+import com.github.brigade.render.DrawUtil;
 import com.github.brigade.render.GameTextureLevel;
 import com.github.brigade.render.Resolution;
 import com.github.brigade.render.Textures;
@@ -54,6 +55,7 @@ public class Game {
 	public void run() {
 		window.setup();// All textures loading code must go after window.setup
 		Textures.setup();
+		DrawUtil.CreateString("Xeranthemum.ttf", 24f);
 		currentScreen = new OptionsMenu();//currentScreen must be initialized after textures have been loaded
 		setup();
 		long lastTime = System.nanoTime();

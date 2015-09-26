@@ -30,7 +30,7 @@ public class DropDown extends Component{
 			button.render();
 			for(int i = 0; i < options.length;i++){
 				options[i].setX(x);
-				options[i].setY(y + options[i].getHeight());
+				options[i].setY(options[i].getHeight() + y + (options[i].getHeight() * (i)));
 				options[i].render();
 			}
 		}else{

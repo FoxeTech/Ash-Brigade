@@ -1,9 +1,41 @@
 package com.github.brigade.render;
 
 import org.lwjgl.opengl.GL11;
+
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.font.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.util.ResourceLoader;
 
 public class DrawUtil {
+
+	public static TrueTypeFont FONT;
+	public static float FONT_SIZE;
+
+	public static void CreateString(String filename,float size){
+		try{
+			InputStream inputStream = ResourceLoader.getResourceAsStream("res/Fonts/" + filename);
+			Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+			awtFont = awtFont.deriveFont(size);
+			FONT = new TrueTypeFont(awtFont,false);
+			FONT_SIZE = size;
+		}catch(FileNotFoundException e){
+			CreateString("Xeranthemum.ttf",24f);
+			e.printStackTrace();
+		} catch (FontFormatException e) {
+			CreateString("Xeranthemum.ttf",24f);
+			e.printStackTrace();
+		} catch (IOException e) {
+			CreateString("Xeranthemum.ttf",24f);
+			e.printStackTrace();
+		}
+	}
 
 	public static void drawRectangle(int x, int y, int width, int height, Texture texture) {
 		GL11.glPushMatrix();
