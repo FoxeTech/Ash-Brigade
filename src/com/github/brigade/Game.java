@@ -4,17 +4,31 @@ import java.io.IOException;
 
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.ARBMultisample;
 
 import com.github.brigade.map.EnumMapSize;
 import com.github.brigade.map.Map;
+import com.github.brigade.render.GameTextureLevel;
+import com.github.brigade.render.Resolution;
 import com.github.brigade.render.Textures;
 import com.github.brigade.ui.screen.Screen;
 import com.github.brigade.ui.screen.menu.MainMenu;
 import com.github.brigade.ui.screen.menu.MenuInGame;
+import com.github.brigade.ui.screen.menu.OptionsMenu;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.ui.window.Window;
 
 public class Game {
+	
+	//Options Variables
+	public static boolean vsync = false;
+	public static boolean vsync60 = false;
+	public static boolean vsync30 = false;
+	public static boolean msaa = false;
+	public static GameTextureLevel textureLevel = GameTextureLevel.LOW;
+	public static Resolution gameResolution = Resolution.X1366x768;
+	//End Options Variables
+	
 	private static Game instance;
 	private final Window window;
 	private final UserClient client;
@@ -40,7 +54,7 @@ public class Game {
 	public void run() {
 		window.setup();// All textures loading code must go after window.setup
 		Textures.setup();
-		currentScreen = new MainMenu();//currentScreen must be initialized after textures have been loaded
+		currentScreen = new OptionsMenu();//currentScreen must be initialized after textures have been loaded
 		setup();
 		long lastTime = System.nanoTime();
 		double nanoCap = 1000000000.0 / (60.0);
@@ -66,7 +80,7 @@ public class Game {
 			}
 			render();
 			Display.update();
-			Display.sync(60);
+			//Display.sync(60);
 		}
 		window.exit();
 	}
@@ -92,6 +106,18 @@ public class Game {
 
 	private void render() {
 		currentScreen.render();
+		if(vsync){
+			if(vsync60){
+				Display.sync(60);
+			}else if(vsync30){
+				Display.sync(30);
+			}
+		}
+		if(msaa){
+			GL11.glEnable(ARBMultisample.GL_MULTISAMPLE_ARB);
+		}else{
+			GL11.glDisable(ARBMultisample.GL_MULTISAMPLE_ARB);
+		}
 	}
 
 	/**

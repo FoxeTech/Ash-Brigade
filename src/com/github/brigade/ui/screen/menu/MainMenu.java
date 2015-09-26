@@ -9,8 +9,8 @@ import com.github.brigade.ui.screen.component.TexturedButton;
 
 public class MainMenu extends MenuScreen{
 
-	private static final int width = Display.getWidth() / 6;
-	private static final int height = Display.getHeight() / 10;
+	public static final int width = Display.getWidth() / 6;
+	public static final int height = Display.getHeight() / 10;
 	public MainMenu() {
 		this(new Component[] { 
 				new TexturedButton(Display.getWidth()/4,20,Display.getWidth()/2,Display.getHeight()/4,Textures.placeHolder1),
