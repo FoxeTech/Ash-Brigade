@@ -4,7 +4,7 @@ public class UnitData {
 	private final int id, commanderID;
 	private EnumFaction faction;
 	
-	private int loyaltyIndex;
+	private double loyaltyIndex;
 	private int selfWorth;//used in AI calculations (likelihood that a unit tries to save itself)
 	private int honour;//used in AI calculations (likelihood that a unit will go kamikaze)
 	
@@ -16,13 +16,13 @@ public class UnitData {
 	 * @param id
 	 *            The unit's unique ID
 	 * @param commanderID
-	 *            <b>TODO</b>: Get Chandler to elaborate what this is
+	 *            The ID of this unit's commander
 	 * @param loyaltyIndex
 	 *            The unit that commands this one's ID
 	 * @param faction
 	 *            The faction the unit belongs to
 	 */
-	public UnitData(int id, int commanderID, int loyaltyIndex, EnumFaction faction) {
+	public UnitData(int id, int commanderID, double loyaltyIndex, EnumFaction faction) {
 		this.id = id;
 		this.commanderID = commanderID;
 		this.loyaltyIndex = loyaltyIndex;
@@ -93,10 +93,14 @@ public class UnitData {
 	 * 
 	 * @return loyaltyToCommander
 	 */
-	public int getLoyalityIndex() {
+	public double getLoyaltyIndex() {
 		return loyaltyIndex;
 	}
 
+	public void setLoyaltyIndex(int loyaltyIndex){
+		this.loyaltyIndex = loyaltyIndex;
+	}
+	
 	/**
 	 * Gets the unit's own selfworth. 
 	 * This is used for AI calculations and determines if the unit will run away or not

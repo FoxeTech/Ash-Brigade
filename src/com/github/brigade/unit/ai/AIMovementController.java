@@ -1,12 +1,19 @@
 package com.github.brigade.unit.ai;
 
-import com.github.brigade.exception.UnitException;
 import com.github.brigade.map.MapPoint;
 import com.github.brigade.unit.Faction;
-import com.github.brigade.unit.UnitCommander;
 import com.github.brigade.unit.UnitLiving;
 import com.github.brigade.unit.data.EnumFaction;
 
+/**
+ * 
+ * Currently the skirmish AI works as follows:
+ * 
+ * Unit looks for best space in its line of sight to go to.
+ * 
+ * @author Chandler
+ *
+ */
 public class AIMovementController {
 	
 	LineOfSight los = new LineOfSight();
@@ -15,21 +22,20 @@ public class AIMovementController {
 	
 	public void moveUnit(UnitLiving unit){
 		
-		UnitCommander commander = null;
 		MapPoint bestOverallSpace = null;
 		MapPoint bestUnitSpace = getBestSpace(unit, analyzeUnitLOS(unit));
 		MapPoint bestCommanderSpace = getBestSpace(unit, analyzeUnitVicinity(unit));
 		
 		if(unit.getUnitData().getCommanderID() != -1){
-			try {
-				commander = (UnitCommander) faction.getUnit(unit.getUnitData().getCommanderID());
-				//TODO: make this part better, it was just thrown together at 3:47 in the morning...
-				if(unit.getUnitData().getLoyalityIndex() > 5)
-					bestOverallSpace = bestCommanderSpace;
-				
-			} catch (UnitException ex) {ex.printStackTrace();}
+			double ran = Math.random();
+			//deals with percent chance of unit following orders
+			if(ran < unit.getUnitData().getLoyaltyIndex())
+				bestOverallSpace = bestCommanderSpace;
 		}else
 			bestOverallSpace = bestUnitSpace;
+		
+		//TODO: move unit to best overall space
+		
 	}
 	
 	//find the space with the highest number of points in favor of the unit
@@ -118,8 +124,11 @@ public class AIMovementController {
 		UnitLiving[] unitsInVicinity = new UnitLiving[enemyFaction.getNumUnits()];
 		
 		for(int i = 0; i < enemyFaction.getNumUnits(); i++){
-			if(unitAgility + enemyUnits[i].getStatHandler().getAgility() >= getDistance(unit, enemyUnits[i]))
+			//enemy is in vicinity if enemy's agility plus current unit's agility >= distance between the two
+			if(unitAgility + enemyUnits[i].getStatHandler().getAgility() >= getDistance(unit, enemyUnits[i])){
 				unitsInVicinity[numEnemyUnits] = enemyUnits[i];
+				numEnemyUnits++;
+			}
 		}
 		
 		return enemyUnits;
