@@ -4,10 +4,14 @@ import org.newdawn.slick.opengl.Texture;
 
 import com.github.brigade.Game;
 import com.github.brigade.render.DrawUtil;
+import com.github.brigade.ui.screen.menu.MainMenu;
+import com.github.brigade.ui.screen.menu.MenuInGame;
+import com.github.brigade.ui.screen.menu.OptionsMenu;
+import com.github.brigade.ui.util.MouseInput;
 
 public class TexturedButton extends Button {
 	private final Texture[] imageStates;
-	private Object screen;
+	private ButtonActions action;
 
 	/**
 	 * Instantiates the TexturedButton with x,y,width,and height. Also gives the
@@ -20,10 +24,10 @@ public class TexturedButton extends Button {
 	 * @param imageStates
 	 *            The button's array of Textures
 	 */
-	public TexturedButton(int x, int y, int width, int height, Texture[] imageStates, Object screen) {
+	public TexturedButton(int x, int y, int width, int height, Texture[] imageStates, ButtonActions action) {
 		super(x, y, width, height);
 		this.imageStates = imageStates;
-		this.screen = screen;
+		this.action = action;
 	}
 	
 	/**
@@ -42,13 +46,40 @@ public class TexturedButton extends Button {
 	 * @param image
 	 *            The button texture
 	 */
-	public TexturedButton(int x, int y, int width, int height, Texture image, Object screen) {
-		this(x, y, width, height, new Texture[] { image },screen);
+	public TexturedButton(int x, int y, int width, int height, Texture image, ButtonActions action) {
+		this(x, y, width, height, new Texture[] { image },action);
 	}
 
 	@Override
 	public void onClick(int mouseID) {
-		Game.setScreen(screen);
+		if(mouseID == MouseInput.LEFT){
+			if(action == ButtonActions.changeScreenToMainMenu){
+				Game.setScreen(new MainMenu());
+			}else if(action == ButtonActions.changeScreenToOptionsMenu){
+				Game.setScreen(new OptionsMenu());
+			}else if(action == ButtonActions.changeScreeToGame){
+				Game.setScreen(new MenuInGame());
+			}else if(action == ButtonActions.toggleMSAA){
+				Game.msaa = !Game.msaa;
+			}else if(action == ButtonActions.toggleVsync){
+				Game.vsync = !Game.vsync;
+				Game.vsync60 = true;
+			}else if(action == ButtonActions.toggleVsync30){
+				Game.vsync30 = !Game.vsync30;
+				if(Game.vsync30){
+					Game.vsync = true;
+				}else{
+					Game.vsync = false;
+				}
+			}else if(action == ButtonActions.toggleVsync60){
+				Game.vsync60 = !Game.vsync60;
+				if(Game.vsync60){
+					Game.vsync = true;
+				}else{
+					Game.vsync = false;
+				}
+			}
+		}
 	}
 
 	@Override

@@ -128,8 +128,8 @@ public class Game {
 		return instance.currentScreen;
 	}
 	
-	public static void setScreen(Object screen){
-		instance.currentScreen = (MenuScreen)screen;
+	public static void setScreen(MenuScreen screen){
+		instance.currentScreen = screen;
 	}
 
 	/**

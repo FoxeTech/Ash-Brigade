@@ -9,12 +9,13 @@ public class DropDown extends Component{
 	private TexturedButton button;
 	private Component[] options;
 	private boolean clicked;
+	private ButtonActions action;
 
-	public DropDown(int x, int y, int width, int height, Texture texture,Object screen, Component[] options) {
+	public DropDown(int x, int y, int width, int height, Texture texture,Component[] options,ButtonActions action) {
 		super(x, y, width, height);
 		this.options = options;
 		clicked = false;
-		button = new TexturedButton(x,y,width,height,texture,screen);
+		button = new TexturedButton(x,y,width,height,texture,action);
 	}
 
 	@Override
