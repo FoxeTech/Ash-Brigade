@@ -1,12 +1,9 @@
 package com.github.brigade.ui.screen.menu;
 
-import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import com.github.brigade.Game;
 import com.github.brigade.exception.MapException;
-import com.github.brigade.map.EnumTileType;
-import com.github.brigade.map.MapPoint;
 import com.github.brigade.render.DrawUtil;
 import com.github.brigade.render.Textures;
 import com.github.brigade.ui.screen.component.Button;
@@ -17,7 +14,7 @@ import com.github.brigade.ui.util.MouseInput;
 
 public class MenuInGame extends MenuScreen {
 	private int x = 0, y = 0, lx = 0, ly = 0;
-	private int textureSize = 16;
+	private int textureSize = 32;
 
 	public MenuInGame() {
 		super(getComponents());
@@ -39,11 +36,6 @@ public class MenuInGame extends MenuScreen {
 	}
 
 	private void clamp() {
-		// int xCheck = size - x - Game.gameResolution.getWidth();
-		// int yCheck = size - y - Game.gameResolution.getHeight();
-		// int menuHeight = getComponents()[0].getHeight() + 7;
-		// int xCheck = -size + Game.gameResolution.getWidth();
-		// int yCheck = -size + Game.gameResolution.getHeight() - menuHeight;
 		int xCheck = getMaxX();
 		int yCheck = getMaxY();
 		if (x < 0) {
@@ -51,9 +43,6 @@ public class MenuInGame extends MenuScreen {
 		}
 		if (y < 0) {
 			y = 0;
-		}
-		if (System.currentTimeMillis() % 100 == 0){
-			System.out.println(x + ":" + y);
 		}
 		if (x > xCheck) {
 			x = xCheck;
@@ -76,7 +65,7 @@ public class MenuInGame extends MenuScreen {
 	 * screen dimensions and tile size.
 	 */
 	private int getMaxY() {
-		return Game.getMap().getHeight() * (textureSize)- Game.gameResolution.getHeight();
+		return Game.getMap().getHeight() * (textureSize) - Game.gameResolution.getHeight();
 	}
 
 	Tile[][] tiles;
@@ -99,27 +88,15 @@ public class MenuInGame extends MenuScreen {
 
 	private Tile[][] genTiles() {
 		int twid = (int) Math.ceil(Game.gameResolution.getWidth() / textureSize);
-		int thei = (int) Math.ceil(Game.gameResolution.getHeight() / textureSize);
-
+		int thei = (int) Math.ceil((Game.gameResolution.getHeight() - getContainer().getHeight()) / textureSize);
 		Tile[][] ret = new Tile[twid][thei];
 		for (int x = 0; x < twid; x++) {
 			for (int y = 0; y < thei; y++) {
 				Texture t = null;
 				try {
-					MapPoint mp = Game.getMap().getPoint(x + (this.x / textureSize), y + (this.y / textureSize));
-					if (mp == null) {
-						System.out.println("mp");
-					}
-					EnumTileType ett = mp.getTileType();
-					if (ett == null) {
-						System.out.println("ett");
-					}
-					t = ett.getTexture();
-					if (t == null) {
-						System.out.println("t");
-					}
+					t = Game.getMap().getPoint(x + (this.x / textureSize), y + (this.y / textureSize)).getTileType().getTexture();
 				} catch (MapException e) {
-					//e.printStackTrace();
+					e.printStackTrace();
 				}
 				if (t == null) {
 					t = Textures.Sand;
@@ -131,8 +108,15 @@ public class MenuInGame extends MenuScreen {
 	}
 
 	private boolean tilesNeedUpdate() {
-		// TODO Auto-generated method stub
 		return (tiles == null) ? true : (lx != x || ly != y);
+	}
+
+	private MapDisplay getMapDisplay() {
+		return (MapDisplay) getComponents()[1];
+	}
+
+	private Container getContainer() {
+		return (Container) getComponents()[0];
 	}
 
 	private static Component[] getComponents() {
