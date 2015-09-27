@@ -164,6 +164,14 @@ public abstract class UnitLiving extends Unit {
 		return lineOfSight;
 	}
 	
+	public boolean isPointInLOS(MapPoint space){
+		for(int i = 0; i < lineOfSight.length; i++){
+			if(space.equals(lineOfSight[i]))
+				return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * Gets the stat handler of the unit.
 	 * 
