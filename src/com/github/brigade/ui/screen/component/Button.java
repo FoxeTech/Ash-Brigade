@@ -14,6 +14,7 @@ public class Button extends Component {
 
 	}
 
+
 	public void render() {
 		if (isMouseOver()) {
 			GL11.glColor3f(0.9f, 1f, 0.9f);

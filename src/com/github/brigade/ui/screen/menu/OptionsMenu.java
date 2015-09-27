@@ -23,9 +23,9 @@ public class OptionsMenu extends MenuScreen {
 	public static Component[] get() {
 		FontObj font = FontUtil.CreateFont("Xeranthemum.ttf", 20);
 		Text t = new Text(Display.getWidth() / 2 - 4 * ((int) (font.getSize())), 20, 0, 0, "Options", font);
-		TexturedButton tb1 = new TexturedButton(0, 0, MainMenu.width, MainMenu.height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 });
-		TexturedButton tb2 = new TexturedButton(0, 0, MainMenu.width, MainMenu.height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 });
-		DropDown d = new DropDown(20, 20, 100, 50, Textures.testTexture, new Component[] { tb1, tb2 });
+		TexturedButton tb1 = new TexturedButton(0, 0, MainMenu.width, MainMenu.height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 },null);
+		TexturedButton tb2 = new TexturedButton(0, 0, MainMenu.width, MainMenu.height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 },null);
+		DropDown d = new DropDown(20, 20, 100, 50, Textures.testTexture,null, new Component[] { tb1, tb2 });
 		return new Component[] { t, d };
 	}
 }

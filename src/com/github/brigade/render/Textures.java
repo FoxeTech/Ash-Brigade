@@ -6,6 +6,8 @@ public class Textures {
 	public static Texture testTexture;
 	public static Texture placeHolder1;
 	public static Texture placeHolder2;
+	public static Texture tempOptionsFirst;
+	public static Texture tempOptionsSecond;
 	//
 	public static Texture Map_Holder;
 	public static Texture Tile_Grad;
@@ -37,5 +39,7 @@ public class Textures {
 		Tile_Holder = TextureUtil.loadTexture("tile_holder", "png");
 		Bar = TextureUtil.loadTexture("bar", "png");
 		Bar_Upside = TextureUtil.loadTexture("bar_upside", "png");
+		tempOptionsFirst = TextureUtil.loadTexture("Menu/Options_First","png");
+		tempOptionsSecond = TextureUtil.loadTexture("Menu/Options_Second","png");
 	}
 }

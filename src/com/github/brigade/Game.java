@@ -12,7 +12,10 @@ import com.github.brigade.render.GameTextureLevel;
 import com.github.brigade.render.Resolution;
 import com.github.brigade.render.Textures;
 import com.github.brigade.ui.screen.Screen;
+import com.github.brigade.ui.screen.menu.MainMenu;
 import com.github.brigade.ui.screen.menu.MenuInGame;
+import com.github.brigade.ui.screen.menu.MenuScreen;
+import com.github.brigade.ui.screen.menu.OptionsMenu;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.ui.window.Window;
 
@@ -52,7 +55,7 @@ public class Game {
 		//
 		map.generateTerrain();
 		//
-		currentScreen = new MenuInGame();//currentScreen must be initialized after textures have been loaded
+		currentScreen = new MainMenu();//currentScreen must be initialized after textures have been loaded
 		//setup();
 		long lastTime = System.nanoTime();
 		double nanoCap = 1000000000.0 / (60.0);
@@ -123,6 +126,10 @@ public class Game {
 	 */
 	public static Screen getCurrentScreen() {
 		return instance.currentScreen;
+	}
+	
+	public static void setScreen(Object screen){
+		instance.currentScreen = (MenuScreen)screen;
 	}
 
 	/**
