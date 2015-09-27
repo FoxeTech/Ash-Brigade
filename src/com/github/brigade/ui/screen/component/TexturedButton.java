@@ -11,7 +11,7 @@ import com.github.brigade.ui.util.MouseInput;
 
 public class TexturedButton extends Button {
 	private final Texture[] imageStates;
-	private ButtonActions action;
+	private ButtonAction action;
 
 	/**
 	 * Instantiates the TexturedButton with x,y,width,and height. Also gives the
@@ -24,7 +24,7 @@ public class TexturedButton extends Button {
 	 * @param imageStates
 	 *            The button's array of Textures
 	 */
-	public TexturedButton(int x, int y, int width, int height, Texture[] imageStates, ButtonActions action) {
+	public TexturedButton(int x, int y, int width, int height, Texture[] imageStates, ButtonAction action) {
 		super(x, y, width, height);
 		this.imageStates = imageStates;
 		this.action = action;
@@ -46,39 +46,14 @@ public class TexturedButton extends Button {
 	 * @param image
 	 *            The button texture
 	 */
-	public TexturedButton(int x, int y, int width, int height, Texture image, ButtonActions action) {
+	public TexturedButton(int x, int y, int width, int height, Texture image, ButtonAction action) {
 		this(x, y, width, height, new Texture[] { image },action);
 	}
 
 	@Override
 	public void onClick(int mouseID) {
-		if(mouseID == MouseInput.LEFT){
-			if(action == ButtonActions.changeScreenToMainMenu){
-				Game.setScreen(new MainMenu());
-			}else if(action == ButtonActions.changeScreenToOptionsMenu){
-				Game.setScreen(new OptionsMenu());
-			}else if(action == ButtonActions.changeScreeToGame){
-				Game.setScreen(new MenuInGame());
-			}else if(action == ButtonActions.toggleMSAA){
-				Game.msaa = !Game.msaa;
-			}else if(action == ButtonActions.toggleVsync){
-				Game.vsync = !Game.vsync;
-				Game.vsync60 = true;
-			}else if(action == ButtonActions.toggleVsync30){
-				Game.vsync30 = !Game.vsync30;
-				if(Game.vsync30){
-					Game.vsync = true;
-				}else{
-					Game.vsync = false;
-				}
-			}else if(action == ButtonActions.toggleVsync60){
-				Game.vsync60 = !Game.vsync60;
-				if(Game.vsync60){
-					Game.vsync = true;
-				}else{
-					Game.vsync = false;
-				}
-			}
+		if(action != null && mouseID == MouseInput.LEFT){
+			action.onClick();
 		}
 	}
 
