@@ -1,8 +1,5 @@
 package com.github.brigade.unit.ai;
 
-import com.github.brigade.Game;
-import com.github.brigade.exception.MapException;
-import com.github.brigade.map.EnumTileType;
 import com.github.brigade.map.MapPoint;
 import com.github.brigade.unit.UnitCommander;
 import com.github.brigade.unit.UnitLiving;

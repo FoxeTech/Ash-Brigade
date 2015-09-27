@@ -11,9 +11,8 @@ import com.github.brigade.map.Map;
 import com.github.brigade.render.GameTextureLevel;
 import com.github.brigade.render.Resolution;
 import com.github.brigade.render.Textures;
-import com.github.brigade.render.font.FontUtil;
 import com.github.brigade.ui.screen.Screen;
-import com.github.brigade.ui.screen.menu.OptionsMenu;
+import com.github.brigade.ui.screen.menu.MenuInGame;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.ui.window.Window;
 
@@ -24,7 +23,7 @@ public class Game {
 	public static boolean vsync30 = false;
 	public static boolean msaa = false;
 	public static GameTextureLevel textureLevel = GameTextureLevel.LOW;
-	public static Resolution gameResolution = Resolution.X1920x1080;
+	public static Resolution gameResolution = Resolution.X1600x900;
 	//End Options Variables
 	private static Game instance;
 	private final Window window;
@@ -45,15 +44,16 @@ public class Game {
 		client.setup();
 		//
 		map = new Map(EnumMapSize.Large);
-		map.generateTerrain();
 	}
 
 	public void run() {
 		window.setup();// All textures loading code must go after window.setup
 		Textures.setup();
-		FontUtil.CreateFont("Xeranthemum.ttf", 24f);
-		currentScreen = new OptionsMenu();//currentScreen must be initialized after textures have been loaded
-		setup();
+		//
+		map.generateTerrain();
+		//
+		currentScreen = new MenuInGame();//currentScreen must be initialized after textures have been loaded
+		//setup();
 		long lastTime = System.nanoTime();
 		double nanoCap = 1000000000.0 / (60.0);
 		double delta = 0;
@@ -78,7 +78,7 @@ public class Game {
 			}
 			render();
 			Display.update();
-			//Display.sync(60);
+			Display.sync(60);
 		}
 		window.exit();
 	}
@@ -97,7 +97,7 @@ public class Game {
 	}
 
 	private void update() {
-		client.getConnection().receive();
+		//client.getConnection().receive();
 		MouseInput.update();
 		currentScreen.update();
 	}

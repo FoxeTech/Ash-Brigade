@@ -5,7 +5,14 @@ import org.newdawn.slick.opengl.Texture;
 import com.github.brigade.render.Textures;
 
 public enum EnumTileType {
-	Land(Textures.Land), Mountains(Textures.Mountain), Water(Textures.Water), Lava(Textures.Lava), Trees(Textures.Trees), Dildo(Textures.Lewd);
+	Land(Textures.Grass), 
+	Beach(Textures.Sand), 
+	Mountains(Textures.Snow), 
+	Water(Textures.Water), 
+	Lava(Textures.Lava), 
+	Trees(Textures.Trees), 
+	Dildo(Textures.Lewd), 
+	Highland(Textures.ColdGrass);
 
 	private final Texture[] textures;
 

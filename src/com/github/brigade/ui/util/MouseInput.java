@@ -10,6 +10,7 @@ public class MouseInput {
 	private static boolean leftDown, rightDown, middleDown;
 	private static int clt, crt, cmt;
 	private static int lastX, lastY;
+	private static int lastXDiff, lastYDiff;
 
 	/**
 	 * Updates the following:
@@ -43,6 +44,8 @@ public class MouseInput {
 		leftDown = leftDownNow;
 		rightDown = rightDownNow;
 		middleDown = middleDownNow;
+		lastXDiff = Mouse.getX() - lastX;
+		lastYDiff = Game.getWindow().getHeight() - Mouse.getY() - lastY;
 		lastX = Mouse.getX();
 		lastY = Game.getWindow().getHeight() - Mouse.getY();
 	}
@@ -77,6 +80,14 @@ public class MouseInput {
 
 	public static int getLastY() {
 		return lastY;
+	}
+
+	public static int getLastXDiff() {
+		return lastXDiff;
+	}
+
+	public static int getLastYDiff() {
+		return lastYDiff;
 	}
 
 	public static int getX() {

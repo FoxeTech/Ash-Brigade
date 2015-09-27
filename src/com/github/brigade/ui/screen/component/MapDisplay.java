@@ -9,6 +9,7 @@ import com.github.brigade.render.TextureUtil;
 import com.github.brigade.render.Textures;
 
 public class MapDisplay extends Component {
+	private Map lastMap;
 	private Texture mapTexture;
 
 	public MapDisplay(int x, int y, int resolution) {
@@ -20,7 +21,12 @@ public class MapDisplay extends Component {
 	}
 
 	public void setMap(Map map) {
+		lastMap = map;
 		mapTexture = TextureUtil.loadTexture(map);
+	}
+
+	public Map getLastMap() {
+		return lastMap;
 	}
 
 	public void render() {

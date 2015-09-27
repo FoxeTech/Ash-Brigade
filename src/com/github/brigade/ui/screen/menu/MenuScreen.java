@@ -28,13 +28,13 @@ public abstract class MenuScreen extends Screen {
 		}
 		for (Component component : menuComponents) {
 			if (component.isMouseOver()) {
-				if (MouseInput.hasClickedLeft()) {
+				if (MouseInput.hasClickedLeft() && MouseInput.isLeftDown()) {
 					component.onClick(MouseInput.LEFT);
 				}
-				if (MouseInput.hasClickedRight()) {
+				if (MouseInput.hasClickedRight() && MouseInput.isRightDown()) {
 					component.onClick(MouseInput.RIGHT);
 				}
-				if (MouseInput.hasClickedMiddle()) {
+				if (MouseInput.hasClickedMiddle() && MouseInput.isMiddleDown()) {
 					component.onClick(MouseInput.MIDDLE);
 				}
 			}
