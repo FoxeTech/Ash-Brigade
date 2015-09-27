@@ -25,7 +25,7 @@ public class Game {
 	public static boolean vsync60 = false;
 	public static boolean vsync30 = false;
 	public static boolean msaa = false;
-	public static GameTextureLevel textureLevel = GameTextureLevel.LOW;
+	public static GameTextureLevel textureLevel = GameTextureLevel.MEDIUM;
 	public static Resolution gameResolution = Resolution.X1600x900;
 	//End Options Variables
 	private static Game instance;

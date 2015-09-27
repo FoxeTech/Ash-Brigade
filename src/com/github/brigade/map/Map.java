@@ -18,7 +18,7 @@ public class Map extends BufferedImage {
 	private MapPoint[][] data;
 
 	public Map(int size) {
-		super(256, 256, TYPE_INT_ARGB);
+		super(size, size, TYPE_INT_ARGB);
 		data = new MapPoint[size][size];
 	}
 
@@ -30,7 +30,7 @@ public class Map extends BufferedImage {
 	 * Generates layers of terrain and merges them into one realistic map.
 	 */
 	public void generateTerrain() {
-		int octaves = 10;
+		int octaves = 7;
 		int w = getWidth();
 		int h = getHeight();
 		data = new MapPoint[w][h];

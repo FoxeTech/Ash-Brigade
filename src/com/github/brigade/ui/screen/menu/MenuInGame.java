@@ -1,10 +1,12 @@
 package com.github.brigade.ui.screen.menu;
 
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import com.github.brigade.Game;
 import com.github.brigade.exception.MapException;
 import com.github.brigade.render.DrawUtil;
+import com.github.brigade.render.GameTextureLevel;
 import com.github.brigade.render.Textures;
 import com.github.brigade.ui.screen.component.Button;
 import com.github.brigade.ui.screen.component.Component;
@@ -14,7 +16,7 @@ import com.github.brigade.ui.util.MouseInput;
 
 public class MenuInGame extends MenuScreen {
 	private int x = 0, y = 0, lx = 0, ly = 0;
-	private int textureSize = 32;
+	private int textureSize = 64;
 
 	public MenuInGame() {
 		super(getComponents());
@@ -72,6 +74,11 @@ public class MenuInGame extends MenuScreen {
 
 	@Override
 	public void render() {
+		boolean blurTextures = false;
+		boolean rotate = false;
+		if (blurTextures) {
+			GL11.glTranslated(textureSize / 2, textureSize / 2, 0);
+		}
 		if (tiles != null) {
 			for (int x = 0; x < tiles.length; x++) {
 				for (int y = 0; y < tiles[0].length; y++) {
@@ -79,16 +86,23 @@ public class MenuInGame extends MenuScreen {
 					if (t == null) {
 						continue;
 					}
-					DrawUtil.drawRectangle(t.x, t.y, t.size, t.size, t.t);
+					if (Game.textureLevel == GameTextureLevel.LOW || !blurTextures) {
+						DrawUtil.drawRectangle(t.x, t.y, t.size, t.size, t.t);
+					} else {
+						DrawUtil.drawBlendRectangle(t.x, t.y, t.size, t.size, t.t, rotate);
+					}
 				}
 			}
+		}
+		if (blurTextures) {
+			GL11.glTranslated(-textureSize / 2, -textureSize / 2, 0);
 		}
 		super.render();
 	}
 
 	private Tile[][] genTiles() {
 		int twid = (int) Math.ceil(Game.gameResolution.getWidth() / textureSize);
-		int thei = (int) Math.ceil((Game.gameResolution.getHeight() - getContainer().getHeight()) / textureSize);
+		int thei = (int) Math.ceil((Game.gameResolution.getHeight() - getContainer().getHeight() + textureSize) / textureSize);
 		Tile[][] ret = new Tile[twid][thei];
 		for (int x = 0; x < twid; x++) {
 			for (int y = 0; y < thei; y++) {
