@@ -2,11 +2,7 @@ package com.github.brigade.ui.screen.component;
 
 import org.newdawn.slick.opengl.Texture;
 
-import com.github.brigade.Game;
 import com.github.brigade.render.DrawUtil;
-import com.github.brigade.ui.screen.menu.MainMenu;
-import com.github.brigade.ui.screen.menu.MenuInGame;
-import com.github.brigade.ui.screen.menu.OptionsMenu;
 import com.github.brigade.ui.util.MouseInput;
 
 public class TexturedButton extends Button {

@@ -16,7 +16,10 @@ import com.github.brigade.ui.util.MouseInput;
 
 public class MenuInGame extends MenuScreen {
 	private int x = 0, y = 0, lx = 0, ly = 0;
-	private int textureSize = 64;
+	private int textureSize = 128;
+	private Selection sel = new Selection();
+	private Tile[][] tiles;
+	private Tile tileMouseOver = null;
 
 	public MenuInGame() {
 		super(getComponents());
@@ -32,11 +35,39 @@ public class MenuInGame extends MenuScreen {
 		if (tilesNeedUpdate()) {
 			tiles = genTiles();
 		}
+		if (tiles != null) {
+			int mx = MouseInput.getX();
+			int my = MouseInput.getY();
+			int twid = tiles.length;
+			int thei = tiles[0].length;
+			int tx = mx / textureSize;
+			int ty = my / textureSize;
+			if (tx < twid && ty < thei) {
+				tileMouseOver = tiles[tx][ty];
+			}
+		}
 		lx = x;
 		ly = y;
 		super.update();
 	}
 
+	@Override
+	protected void onClick(int mouseID, int x, int y, boolean isMouseReleasing) {
+		if (!isMouseReleasing) {
+			sel.canShow = false;
+			sel.x1 = x;
+			sel.y1 = y;
+		} else {
+			sel.x2 = x;
+			sel.y2 = y;
+			sel.canShow = true;
+		}
+		// TODO: Instead of rendering x/y's try rendering the tiles from Sel
+	}
+
+	/**
+	 * Ensures the user does not move the map out of bounds.
+	 */
 	private void clamp() {
 		int xCheck = getMaxX();
 		int yCheck = getMaxY();
@@ -70,8 +101,6 @@ public class MenuInGame extends MenuScreen {
 		return Game.getMap().getHeight() * (textureSize) - Game.gameResolution.getHeight();
 	}
 
-	Tile[][] tiles;
-
 	@Override
 	public void render() {
 		boolean blurTextures = false;
@@ -87,11 +116,20 @@ public class MenuInGame extends MenuScreen {
 						continue;
 					}
 					if (Game.textureLevel == GameTextureLevel.LOW || !blurTextures) {
-						DrawUtil.drawRectangle(t.x, t.y, t.size, t.size, t.t);
+						DrawUtil.drawRectangle(t.x, t.y, t.size, t.size, t.texture);
 					} else {
-						DrawUtil.drawBlendRectangle(t.x, t.y, t.size, t.size, t.t, rotate);
+						DrawUtil.drawBlendRectangle(t.x, t.y, t.size, t.size, t.texture, rotate);
 					}
 				}
+			}
+		}
+		if (tileMouseOver != null) {
+			DrawUtil.drawRectangle(tileMouseOver.x, tileMouseOver.y, tileMouseOver.size, tileMouseOver.size, Textures.Tile_Holder);
+		}
+		if (sel != null) {
+			if (sel.canShow) {
+				DrawUtil.drawRectangle(sel.x1, sel.y1, sel.x2, sel.y2, Textures.placeHolder1);
+
 			}
 		}
 		if (blurTextures) {
@@ -100,6 +138,9 @@ public class MenuInGame extends MenuScreen {
 		super.render();
 	}
 
+	/**
+	 * Returns a 2D array of Tiles to assist in rendering.
+	 */
 	private Tile[][] genTiles() {
 		int twid = (int) Math.ceil(Game.gameResolution.getWidth() / textureSize);
 		int thei = (int) Math.ceil((Game.gameResolution.getHeight() - getContainer().getHeight() + textureSize) / textureSize);
@@ -121,6 +162,9 @@ public class MenuInGame extends MenuScreen {
 		return ret;
 	}
 
+	/**
+	 * Returns true if the map needs to be updated.
+	 */
 	private boolean tilesNeedUpdate() {
 		return (tiles == null) ? true : (lx != x || ly != y);
 	}
@@ -165,12 +209,45 @@ public class MenuInGame extends MenuScreen {
 		return new Component[] { container, mapDisp };
 	}
 
+	class Selection {
+		public boolean canShow;
+		public int x1, x2, y1, y2;
+
+		public Tile[][] getSelectedTiles() {
+			if (tiles == null) {
+				return null;
+			}
+			int twid = tiles.length;
+			int thei = tiles[0].length;
+			int tx1 = x1 / textureSize;
+			int ty1 = y1 / textureSize;
+			int tx2 = x2 / textureSize;
+			int ty2 = y2 / textureSize;
+			boolean x2Larger = (tx2 > tx1);
+			boolean y2Larger = (ty2 > ty1);
+			Tile[][] ret = new Tile[x2Larger ? tx2 - tx1 : tx1 - tx2][y2Larger ? ty2 - ty1 : ty1 - ty2];
+			int initX = x2Larger ? tx1 : tx2;
+			int initY = y2Larger ? ty1 : ty2;
+			int endX = x2Larger ? tx2 : tx1;
+			int endY = y2Larger ? ty2 : ty1;
+			for (int x = initX; x < endX - 1; x++) {
+				for (int y = initY; y < endY - 1; y++) {
+					try {
+						ret[x][y] = tiles[x][y];
+					} catch (ArrayIndexOutOfBoundsException e) {
+					}
+				}
+			}
+			return ret;
+		}
+	}
+
 	class Tile {
-		public Texture t;
+		public Texture texture;
 		public int x, y, size;
 
 		Tile(int x, int y, int s, Texture t) {
-			this.t = t;
+			this.texture = t;
 			this.x = x;
 			this.y = y;
 			this.size = s;

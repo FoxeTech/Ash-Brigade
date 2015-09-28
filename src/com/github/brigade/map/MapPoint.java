@@ -44,7 +44,7 @@ public class MapPoint {
 		this.height += height;
 	}
 	
-	public void addUnit(UnitLiving unit){
+	public void setUnit(UnitLiving unit){
 		this.unit = unit;
 	}
 
