@@ -32,6 +32,15 @@ public class MenuInGame extends MenuScreen {
 			y -= MouseInput.getLastYDiff();
 		}
 		clamp();
+		if (sel.canShow) {
+			sel.x2 = MouseInput.getX();
+			sel.y2 = MouseInput.getY();
+		} else {
+			sel.x1 = MouseInput.getX();
+			sel.y1 = MouseInput.getY();
+			sel.x2 = MouseInput.getX();
+			sel.y2 = MouseInput.getY();
+		}
 		if (tilesNeedUpdate()) {
 			tiles = genTiles();
 		}
@@ -53,16 +62,15 @@ public class MenuInGame extends MenuScreen {
 
 	@Override
 	protected void onClick(int mouseID, int x, int y, boolean isMouseReleasing) {
-		if (!isMouseReleasing) {
+		if (isMouseReleasing) {
 			sel.canShow = false;
+			sel.selection = true;
+		} else {
+			sel.canShow = true;
+			sel.selection = false;
 			sel.x1 = x;
 			sel.y1 = y;
-		} else {
-			sel.x2 = x;
-			sel.y2 = y;
-			sel.canShow = true;
 		}
-		// TODO: Instead of rendering x/y's try rendering the tiles from Sel
 	}
 
 	/**
@@ -128,8 +136,25 @@ public class MenuInGame extends MenuScreen {
 		}
 		if (sel != null) {
 			if (sel.canShow) {
-				DrawUtil.drawRectangle(sel.x1, sel.y1, sel.x2, sel.y2, Textures.placeHolder1);
+				// DrawUtil.drawRectangle(sel.x1, sel.y1, sel.x2, sel.y2,
+				// Textures.Tile_Grad);
+				DrawUtil.drawRectangle(sel.x1, sel.y1, sel.x2 - sel.x1, sel.y2 - sel.y1, Textures.Tile_Grad);
 
+			}
+			Tile[][] tz = sel.getSelectedTiles();
+			if (tz != null) {
+				try {
+					for (Tile[] row : tz) {
+						for (Tile t : row) {
+							if (t != null) {
+								DrawUtil.drawRectangle(t.x, t.y, t.size, t.size, Textures.placeHolder1);
+							}
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
 			}
 		}
 		if (blurTextures) {
@@ -142,7 +167,7 @@ public class MenuInGame extends MenuScreen {
 	 * Returns a 2D array of Tiles to assist in rendering.
 	 */
 	private Tile[][] genTiles() {
-		int twid = (int) Math.ceil(Game.gameResolution.getWidth() / textureSize);
+		int twid = (int) Math.ceil((Game.gameResolution.getWidth() + textureSize) / textureSize);
 		int thei = (int) Math.ceil((Game.gameResolution.getHeight() - getContainer().getHeight() + textureSize) / textureSize);
 		Tile[][] ret = new Tile[twid][thei];
 		for (int x = 0; x < twid; x++) {
@@ -210,6 +235,7 @@ public class MenuInGame extends MenuScreen {
 	}
 
 	class Selection {
+		public boolean selection;
 		public boolean canShow;
 		public int x1, x2, y1, y2;
 
@@ -219,10 +245,10 @@ public class MenuInGame extends MenuScreen {
 			}
 			int twid = tiles.length;
 			int thei = tiles[0].length;
-			int tx1 = x1 / textureSize;
-			int ty1 = y1 / textureSize;
-			int tx2 = x2 / textureSize;
-			int ty2 = y2 / textureSize;
+			int tx1 = (x1) / textureSize;
+			int ty1 = (y1) / textureSize;
+			int tx2 = (x2) / textureSize;
+			int ty2 = (y2) / textureSize;
 			boolean x2Larger = (tx2 > tx1);
 			boolean y2Larger = (ty2 > ty1);
 			Tile[][] ret = new Tile[x2Larger ? tx2 - tx1 : tx1 - tx2][y2Larger ? ty2 - ty1 : ty1 - ty2];
