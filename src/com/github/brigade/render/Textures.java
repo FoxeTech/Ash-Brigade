@@ -6,10 +6,17 @@ public class Textures {
 	public static Texture testTexture;
 	public static Texture placeHolder1;
 	public static Texture placeHolder2;
-	public static Texture tempOptionsFirst;
-	public static Texture tempOptionsSecond;
+	public static Texture OptionsFirst;
+	public static Texture OptionsSecond;
+	public static Texture vsyncOff;
+	public static Texture vsyncOn;
+	public static Texture vsyncOff30;
+	public static Texture vsyncOn30;
+	public static Texture vsyncOff60;
+	public static Texture vsyncOn60;
 	//
 	public static Texture Map_Holder;
+	public static Texture Map_Holder_Large;
 	public static Texture Tile_Grad;
 	public static Texture Tile_Holder;
 	public static Texture Bar;
@@ -39,7 +46,14 @@ public class Textures {
 		Tile_Holder = TextureUtil.loadTexture("tile_holder", "png");
 		Bar = TextureUtil.loadTexture("bar", "png");
 		Bar_Upside = TextureUtil.loadTexture("bar_upside", "png");
-		tempOptionsFirst = TextureUtil.loadTexture("Menu/Options_First","png");
-		tempOptionsSecond = TextureUtil.loadTexture("Menu/Options_Second","png");
+		OptionsFirst = TextureUtil.loadTexture("Menu/Options_First","png");
+		OptionsSecond = TextureUtil.loadTexture("Menu/Options_Second","png");
+		vsyncOff = TextureUtil.loadTexture("Menu/Vsync_Off","png");
+		vsyncOn = TextureUtil.loadTexture("Menu/Vsync_On","png");
+		vsyncOff30 = TextureUtil.loadTexture("Menu/Vsync_Off_30","png");
+		vsyncOn30 = TextureUtil.loadTexture("Menu/Vsync_On_30","png");
+		vsyncOff60 = TextureUtil.loadTexture("Menu/Vsync_Off_60","png");
+		vsyncOn60 = TextureUtil.loadTexture("Menu/Vsync_On_60","png");
+		Map_Holder_Large = TextureUtil.loadTexture("holder_large", "png");
 	}
 }

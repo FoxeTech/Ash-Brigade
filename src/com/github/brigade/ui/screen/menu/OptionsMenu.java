@@ -32,9 +32,33 @@ public class OptionsMenu extends MenuScreen {
 				Game.setScreen(new MainMenu());
 			}
 		});
+		TexturedButton vsync = new TexturedButton(40,40 + MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff,Textures.vsyncOn},
+		new ButtonAction(){
+			@Override
+			public void onClick(){
+				Game.vsync = !Game.vsync;
+				Game.vsync60 = !Game.vsync60;
+			}
+		});
+		TexturedButton vsync30 = new TexturedButton(40,40 + 2 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff30,Textures.vsyncOn30},
+		new ButtonAction(){
+			@Override
+			public void onClick(){
+				Game.vsync30 = !Game.vsync30;
+				Game.vsync = Game.vsync30;
+			}
+		});
+		TexturedButton vsync60 = new TexturedButton(40,40 + 3 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff60,Textures.vsyncOn60},
+		new ButtonAction(){
+			@Override
+			public void onClick(){
+				Game.vsync60 = !Game.vsync60;
+				Game.vsync = Game.vsync60;
+			}
+		});
 		//TexturedButton tb1 = new TexturedButton(0, 0, MainMenu.width, MainMenu.height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 },Game.previousScreen);
 		//TexturedButton tb2 = new TexturedButton(0, 0, MainMenu.width, MainMenu.height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 },null);
 		//DropDown d = new DropDown(20, 20, 100, 50, Textures.testTexture,null, new Component[] { tb1, tb2 });
-		return new Component[] { t, d };
+		return new Component[] { t, d, vsync, vsync30, vsync60 };
 	}
 }

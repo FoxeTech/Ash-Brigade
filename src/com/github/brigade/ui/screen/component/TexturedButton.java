@@ -3,6 +3,7 @@ package com.github.brigade.ui.screen.component;
 import org.newdawn.slick.opengl.Texture;
 
 import com.github.brigade.render.DrawUtil;
+import com.github.brigade.render.Textures;
 import com.github.brigade.ui.util.MouseInput;
 
 public class TexturedButton extends Button {
@@ -55,6 +56,7 @@ public class TexturedButton extends Button {
 
 	@Override
 	public void render() {
+		DrawUtil.drawRectangle(x - 6, y - 6, width + 12, height + 12, Textures.Map_Holder_Large);
 		DrawUtil.drawRectangle(x, y, width, height, (imageStates.length > 1) ? (isMouseOver() ? imageStates[1] : imageStates[0]) : imageStates[0]);
 	}
 }

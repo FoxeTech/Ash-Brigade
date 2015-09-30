@@ -39,12 +39,12 @@ public class MainMenu extends MenuScreen {
 		};
 		TexturedButton tb = new TexturedButton(Display.getWidth() / 4, 20, Display.getWidth() / 2, Display.getHeight() / 4, Textures.placeHolder1, ba1);
 		TexturedButton tb1 = new TexturedButton(20, Display.getHeight() / 4 + 25, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, ba2);
-		TexturedButton tb2 = new TexturedButton(20, Display.getHeight() / 4 + 25 + height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null);
-		TexturedButton tb3 = new TexturedButton(20, Display.getHeight() / 4 + 25 + 2 * height, width, height, new Texture[] { Textures.tempOptionsFirst, Textures.tempOptionsSecond }, ba3);
-		TexturedButton tb4 = new TexturedButton(20, Display.getHeight() / 4 + 25 + 3 * height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null);
-		TexturedButton tb5 = new TexturedButton(20, Display.getHeight() / 4 + 25 + 4 * height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null);
-		TexturedButton tb6 = new TexturedButton(20, Display.getHeight() / 4 + 25 + 5 * height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null);
-		return new Component[] { tb, tb1, tb2, tb3, tb4, tb5, tb6 };
+		TexturedButton tb2 = new TexturedButton(20, Display.getHeight() / 4 + 37 + height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null);
+		TexturedButton tb3 = new TexturedButton(20, (Display.getHeight() / 4) + 49 + (2 * height), width, height, new Texture[] { Textures.OptionsFirst, Textures.OptionsSecond }, ba3);
+		TexturedButton tb4 = new TexturedButton(20, Display.getHeight() / 4 + 61 + 3 * height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null);
+		TexturedButton tb5 = new TexturedButton(20, Display.getHeight() / 4 + 73 + 4 * height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null);
+		TexturedButton tb6 = new TexturedButton(20, Display.getHeight() / 4 + 85 + 5 * height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null);
+		return new Component[] { tb, tb1, tb2, tb3, tb4, tb5, tb6};
 	}
 
 	public MainMenu(Component[] menuComponents) {

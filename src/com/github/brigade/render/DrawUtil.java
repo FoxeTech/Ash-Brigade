@@ -32,7 +32,6 @@ public class DrawUtil {
 		GL11.glEnd();
 		GL11.glPopMatrix();
 	}
-
 	public static void drawBlendRectangle(int x, int y, int width, int height, Texture texture, boolean rotate) {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		texture.bind();
