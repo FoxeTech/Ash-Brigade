@@ -8,6 +8,7 @@ import com.github.brigade.render.Textures;
 import com.github.brigade.ui.screen.component.ButtonAction;
 import com.github.brigade.ui.screen.component.Component;
 import com.github.brigade.ui.screen.component.TexturedButton;
+import com.github.brigade.ui.screen.component.UpdateButton;
 
 public class MainMenu extends MenuScreen {
 
@@ -37,13 +38,20 @@ public class MainMenu extends MenuScreen {
 				Game.setScreen(new OptionsMenu());
 			}
 		};
-		TexturedButton tb = new TexturedButton(Display.getWidth() / 4, 20, Display.getWidth() / 2, Display.getHeight() / 4, Textures.placeHolder1, ba1);
-		TexturedButton tb1 = new TexturedButton(20, Display.getHeight() / 4 + 25, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, ba2);
-		TexturedButton tb2 = new TexturedButton(20, Display.getHeight() / 4 + 37 + height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null);
-		TexturedButton tb3 = new TexturedButton(20, (Display.getHeight() / 4) + 49 + (2 * height), width, height, new Texture[] { Textures.OptionsFirst, Textures.OptionsSecond }, ba3);
-		TexturedButton tb4 = new TexturedButton(20, Display.getHeight() / 4 + 61 + 3 * height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null);
-		TexturedButton tb5 = new TexturedButton(20, Display.getHeight() / 4 + 73 + 4 * height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null);
-		TexturedButton tb6 = new TexturedButton(20, Display.getHeight() / 4 + 85 + 5 * height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null);
+		UpdateButton temp = new UpdateButton(){
+
+			@Override
+			public void updateSelected(TexturedButton button) {
+								
+			}
+		};
+		TexturedButton tb = new TexturedButton(Display.getWidth() / 4, 20, Display.getWidth() / 2, Display.getHeight() / 4, Textures.placeHolder1, ba1,temp);
+		TexturedButton tb1 = new TexturedButton(20, Display.getHeight() / 4 + 25, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, ba2,temp);
+		TexturedButton tb2 = new TexturedButton(20, Display.getHeight() / 4 + 37 + height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null,temp);
+		TexturedButton tb3 = new TexturedButton(20, (Display.getHeight() / 4) + 49 + (2 * height), width, height, new Texture[] { Textures.OptionsFirst, Textures.OptionsSecond }, ba3,temp);
+		TexturedButton tb4 = new TexturedButton(20, Display.getHeight() / 4 + 61 + 3 * height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null,temp);
+		TexturedButton tb5 = new TexturedButton(20, Display.getHeight() / 4 + 73 + 4 * height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null,temp);
+		TexturedButton tb6 = new TexturedButton(20, Display.getHeight() / 4 + 85 + 5 * height, width, height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, null,temp);
 		return new Component[] { tb, tb1, tb2, tb3, tb4, tb5, tb6};
 	}
 

@@ -25,4 +25,10 @@ public class Text extends Component {
 	public void render() {
 		font.getTTF().drawString(x, y, text);
 	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 }

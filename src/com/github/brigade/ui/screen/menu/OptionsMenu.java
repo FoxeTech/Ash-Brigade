@@ -12,6 +12,7 @@ import com.github.brigade.ui.screen.component.Component;
 import com.github.brigade.ui.screen.component.DropDown;
 import com.github.brigade.ui.screen.component.Text;
 import com.github.brigade.ui.screen.component.TexturedButton;
+import com.github.brigade.ui.screen.component.UpdateButton;
 
 public class OptionsMenu extends MenuScreen {
 
@@ -31,6 +32,11 @@ public class OptionsMenu extends MenuScreen {
 			public void onClick() {
 				Game.setScreen(new MainMenu());
 			}
+		},new UpdateButton(){
+			@Override
+			public void updateSelected(TexturedButton button){
+				
+			}
 		});
 		TexturedButton vsync = new TexturedButton(40,40 + MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff,Textures.vsyncOn},
 		new ButtonAction(){
@@ -38,6 +44,18 @@ public class OptionsMenu extends MenuScreen {
 			public void onClick(){
 				Game.vsync = !Game.vsync;
 				Game.vsync60 = !Game.vsync60;
+				if(Game.vsync30){
+					Game.vsync30 = false;
+				}
+			}
+		},Game.vsync,new UpdateButton(){
+			@Override
+			public void updateSelected(TexturedButton button){
+				if(Game.vsync){
+					button.setSelected(true);
+				}else{
+					button.setSelected(false);
+				}
 			}
 		});
 		TexturedButton vsync30 = new TexturedButton(40,40 + 2 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff30,Textures.vsyncOn30},
@@ -46,6 +64,18 @@ public class OptionsMenu extends MenuScreen {
 			public void onClick(){
 				Game.vsync30 = !Game.vsync30;
 				Game.vsync = Game.vsync30;
+				if(Game.vsync60){
+					Game.vsync60 = false;
+				}
+			}
+		},Game.vsync30,new UpdateButton(){
+			@Override
+			public void updateSelected(TexturedButton button){
+				if(Game.vsync30){
+					button.setSelected(true);
+				}else{
+					button.setSelected(false);
+				}
 			}
 		});
 		TexturedButton vsync60 = new TexturedButton(40,40 + 3 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff60,Textures.vsyncOn60},
@@ -54,6 +84,18 @@ public class OptionsMenu extends MenuScreen {
 			public void onClick(){
 				Game.vsync60 = !Game.vsync60;
 				Game.vsync = Game.vsync60;
+				if(Game.vsync30){
+					Game.vsync30 = false;
+				}
+			}
+		},Game.vsync60,new UpdateButton(){
+			@Override
+			public void updateSelected(TexturedButton button){
+				if(Game.vsync60){
+					button.setSelected(true);
+				}else{
+					button.setSelected(false);
+				}
 			}
 		});
 		//TexturedButton tb1 = new TexturedButton(0, 0, MainMenu.width, MainMenu.height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 },Game.previousScreen);

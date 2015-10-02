@@ -47,4 +47,10 @@ public class Container extends Component {
 	public Component getComponent(int index) {
 		return components[index];
 	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 }

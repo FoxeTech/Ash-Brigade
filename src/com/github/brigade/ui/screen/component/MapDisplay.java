@@ -40,4 +40,10 @@ public class MapDisplay extends Component {
 		DrawUtil.drawRectangle(x, y, width, height, Textures.Map_Holder);
 
 	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 }

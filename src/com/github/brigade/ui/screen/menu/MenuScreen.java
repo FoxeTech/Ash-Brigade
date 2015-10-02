@@ -41,6 +41,7 @@ public abstract class MenuScreen extends Screen {
 					component.onClick(MouseInput.MIDDLE);
 				}
 			}
+			component.update();
 		}
 	}
 

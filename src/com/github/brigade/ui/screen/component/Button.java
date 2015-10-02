@@ -25,4 +25,10 @@ public class Button extends Component {
 		GL11.glColor3f(1f, 1f, 1f);
 		DrawUtil.drawRectangle(x, y, width, height, Textures.Tile_Holder);
 	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 }

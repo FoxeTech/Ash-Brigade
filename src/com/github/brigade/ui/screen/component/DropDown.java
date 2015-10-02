@@ -10,12 +10,13 @@ public class DropDown extends Component{
 	private Component[] options;
 	private boolean clicked;
 	private ButtonAction action;
+	private UpdateButton update;
 
-	public DropDown(int x, int y, int width, int height, Texture texture,Component[] options,ButtonAction action) {
+	public DropDown(int x, int y, int width, int height, Texture texture,Component[] options,ButtonAction action,UpdateButton update) {
 		super(x, y, width, height);
 		this.options = options;
 		clicked = false;
-		button = new TexturedButton(x,y,width,height,texture,action);
+		button = new TexturedButton(x,y,width,height,texture,action,update);
 	}
 
 	@Override
@@ -37,6 +38,12 @@ public class DropDown extends Component{
 		}else{
 			button.render();
 		}
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

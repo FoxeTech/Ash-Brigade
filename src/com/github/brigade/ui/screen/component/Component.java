@@ -24,6 +24,7 @@ public abstract class Component {
 	 *            </ul>
 	 */
 	public abstract void onClick(int mouseID);
+	public abstract void update();
 
 	/**
 	 * Returns if the mouse is over the component.
