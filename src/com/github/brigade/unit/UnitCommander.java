@@ -4,7 +4,7 @@ import com.github.brigade.unit.data.UnitData;
 
 public class UnitCommander extends UnitLiving {
 	protected int numSubordinates;
-	protected String rankName;// TODO: Put rank types and data into EnumFaction
+	protected String rankName;
 	protected UnitLiving[] subordinates;
 
 	/**

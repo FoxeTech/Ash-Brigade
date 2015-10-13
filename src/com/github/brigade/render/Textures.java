@@ -33,11 +33,11 @@ public class Textures {
 	public static Texture Lewd;
 
 	public static void setup() {
-		Snow = TextureUtil.loadTexture("snow", "png");
-		ColdGrass = TextureUtil.loadTexture("high_grass", "png");
-		Grass = TextureUtil.loadTexture("grass", "png");
-		Sand = TextureUtil.loadTexture("sand", "png");
-		Water = TextureUtil.loadTexture("water", "png");
+		Snow = TextureUtil.loadTexture("Tiles/snow", "png");
+		ColdGrass = TextureUtil.loadTexture("Tiles/high_grass", "png");
+		Grass = TextureUtil.loadTexture("Tiles/grass", "png");
+		Sand = TextureUtil.loadTexture("Tiles/sand", "png");
+		Water = TextureUtil.loadTexture("Tiles/water", "png");
 		testTexture = TextureUtil.loadTexture("test", "png");
 		placeHolder1 = TextureUtil.loadTexture("PL1", "png");
 		placeHolder2 = TextureUtil.loadTexture("PL2", "png");
