@@ -38,7 +38,7 @@ public class OptionsMenu extends MenuScreen {
 				
 			}
 		});
-		TexturedButton vsync = new TexturedButton(40,40 + MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff,Textures.vsyncOn},
+		TexturedButton vsync = new TexturedButton(40,50 + MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff,Textures.vsyncOn},
 		new ButtonAction(){
 			@Override
 			public void onClick(){
@@ -58,7 +58,7 @@ public class OptionsMenu extends MenuScreen {
 				}
 			}
 		});
-		TexturedButton vsync30 = new TexturedButton(40,40 + 2 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff30,Textures.vsyncOn30},
+		TexturedButton vsync30 = new TexturedButton(40,60 + 2 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff30,Textures.vsyncOn30},
 		new ButtonAction(){
 			@Override
 			public void onClick(){
@@ -78,7 +78,7 @@ public class OptionsMenu extends MenuScreen {
 				}
 			}
 		});
-		TexturedButton vsync60 = new TexturedButton(40,40 + 3 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff60,Textures.vsyncOn60},
+		TexturedButton vsync60 = new TexturedButton(40,70 + 3 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff60,Textures.vsyncOn60},
 		new ButtonAction(){
 			@Override
 			public void onClick(){
