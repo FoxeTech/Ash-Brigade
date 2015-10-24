@@ -1,6 +1,6 @@
 # Ash-Brigade
 
-Some game we're making. Yeah that's all we gotta say for now.
+A multi-level 2D strategy game focused on ranking up and eventually taking over the fantasy world through a flexible storyline that changes based on what the player does.
 
 # Temp code pastes:
 
