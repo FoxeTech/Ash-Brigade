@@ -34,6 +34,9 @@ public class Game {
 	private int updateTicks;
 	private Screen currentScreen;
 
+	/**
+	 * Initializes everything needed to create a window and start the game
+	 */
 	public Game() {
 		instance = this;
 		// TODO: Load from settings to get last display settings for the window
@@ -49,6 +52,9 @@ public class Game {
 		map = new Map(EnumMapSize.Large);
 	}
 
+	/**
+	 * Runs main game loop
+	 */
 	public void run() {
 		window.setup();// All textures loading code must go after window.setup
 		Textures.setup();
@@ -86,6 +92,9 @@ public class Game {
 		window.exit();
 	}
 
+	/**
+	 * Sets up network connections
+	 */
 	private void setup() {
 		try {
 			boolean isPlaying = true;
@@ -99,12 +108,18 @@ public class Game {
 		// Unable to create/connect client, abandon networking
 	}
 
+	/**
+	 * Updates the mouse values and the screen
+	 */
 	private void update() {
 		//client.getConnection().receive();
 		MouseInput.update();
 		currentScreen.update();
 	}
 
+	/**
+	 * Draws the current screen to the screen
+	 */
 	private void render() {
 		currentScreen.render();
 		if(vsync){
@@ -123,11 +138,16 @@ public class Game {
 
 	/**
 	 * Returns an instance of the current screen.
+	 * @return Returns an instance of the current screen
 	 */
 	public static Screen getCurrentScreen() {
 		return instance.currentScreen;
 	}
 	
+	/**
+	 * Sets the screen to a new screen
+	 * @param screen
+	 */
 	public static void setScreen(MenuScreen screen){
 		instance.currentScreen = screen;
 	}
@@ -156,6 +176,10 @@ public class Game {
 	// TODO: Remove. This is purely for testing purposes for AI
 	private final Map map;
 
+	/**
+	 * Returns the map
+	 * @return Returns the map
+	 */
 	public static Map getMap() {
 		return instance.map;
 	}

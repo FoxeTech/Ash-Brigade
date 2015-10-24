@@ -1,8 +1,15 @@
 package com.github.brigade.ui.screen;
 
 import com.github.brigade.ui.util.MouseInput;
-
+/**
+ * 
+ * @author Matt
+ *
+ */
 public abstract class Screen {
+	/**
+	 * Updates the state of the screen such as keyboard input
+	 */
 	public void update() {
 		if (MouseInput.hasClickedLeft()) {
 			onClick(MouseInput.LEFT, MouseInput.getX(), MouseInput.getY(), !MouseInput.isLeftDown());

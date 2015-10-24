@@ -32,6 +32,15 @@ public class DrawUtil {
 		GL11.glEnd();
 		GL11.glPopMatrix();
 	}
+	/**
+	 * Draws a rectangle based on the x, y coordinates with a width and height. The rectangle is given a texture and is rotated
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param texture
+	 * @param rotate
+	 */
 	public static void drawBlendRectangle(int x, int y, int width, int height, Texture texture, boolean rotate) {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		texture.bind();

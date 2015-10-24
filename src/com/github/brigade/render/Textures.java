@@ -32,6 +32,9 @@ public class Textures {
 	public static Texture Trees;
 	public static Texture Lewd;
 
+	/**
+	 * Loads in all of the textures from a file
+	 */
 	public static void setup() {
 		Snow = TextureUtil.loadTexture("Tiles/snow", "png");
 		ColdGrass = TextureUtil.loadTexture("Tiles/high_grass", "png");

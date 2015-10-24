@@ -8,6 +8,11 @@ import java.io.InputStream;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
+/**
+ * Helper methods for loading fonts
+ * @author Craig
+ * @version 1.0.2
+ */
 public class FontUtil {
 	/**
 	 * Creates a FontObj given a font's filename and size.

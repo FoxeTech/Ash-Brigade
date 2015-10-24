@@ -1,5 +1,9 @@
 package com.github.brigade.render;
-
+/**
+ * Stores the resolution of the game window
+ * @author Craig
+ * @version 1.0.2
+ */
 public enum Resolution {
 	X800x600(800,600), 
 	X1024x600(1024,600), 
@@ -19,14 +23,28 @@ public enum Resolution {
 	X4096x2160(4096,2160);
 	
 	int width, height;
+	/**
+	 * Creates a new resolution
+	 * @param width
+	 * @param height
+	 */
 	Resolution(int width, int height){
 		this.width = width;
 		this.height = height;
 	}
 	
+	/**
+	 * Returns the width
+	 * @return Returns the width
+	 */
 	public int getWidth(){
 		return width;
 	}
+	
+	/**
+	 * Returns the height
+	 * @return Returns the heigth
+	 */
 	public int getHeight(){
 		return height;
 	}

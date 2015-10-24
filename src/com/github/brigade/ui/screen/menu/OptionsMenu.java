@@ -19,10 +19,17 @@ public class OptionsMenu extends MenuScreen {
 	private static final int width = Display.getWidth() / 6;
 	private static final int height = Display.getHeight() / 10;
 
+	/**
+	 * Adds components to screen
+	 */
 	public OptionsMenu() {
 		super(get());
 	}
 
+	/**
+	 * Returns the components that need to be added to the screen
+	 * @return Returns the components that need to be added to the screen
+	 */
 	public static Component[] get() {
 		FontObj font = FontUtil.CreateFont("Xeranthemum.ttf", 20);
 		Text t = new Text(Display.getWidth() / 2 - 4 * ((int) (font.getSize())), 20, 0, 0, "Options", font);

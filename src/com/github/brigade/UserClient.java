@@ -22,6 +22,11 @@ public class UserClient {
 	private boolean isHost;
 	private boolean isPlaying;
 
+	/**
+	 * Create a new user client
+	 * @param username
+	 * @param password
+	 */
 	public UserClient(String username, String password) {
 		this.username = username;
 		verify();
