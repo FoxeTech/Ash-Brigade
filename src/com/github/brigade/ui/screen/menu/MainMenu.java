@@ -25,16 +25,13 @@ public class MainMenu extends MenuScreen {
 	public static final int width = Display.getWidth() / 6;
 	public static final int height = Display.getHeight() / 10;
 
-<<<<<<< HEAD
 	//here for testing/debugging purposes
 	private static UnitGroup army1;
 	private static UnitGroup army2;
 	
-=======
 	/**
 	 * Adds all of the GUI components to it
 	 */
->>>>>>> origin/master
 	public MainMenu() {
 		this(get(), "Main");
 	}
@@ -88,7 +85,6 @@ public class MainMenu extends MenuScreen {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * This method here only to create an army for debugging skirmish mode
 	 */
 	private static void generateArmies(){
@@ -111,14 +107,6 @@ public class MainMenu extends MenuScreen {
 				e.printStackTrace();
 			}
 		}
-		
-=======
-	 * Adds all of the components to the Main Menu GUI
-	 * @param menuComponents
-	 */
-	public MainMenu(Component[] menuComponents) {
-		super(menuComponents);
->>>>>>> origin/master
 	}
 	
 	public MainMenu(Component[] menuComponents, String screenName) {
