@@ -6,8 +6,10 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.ARBMultisample;
 
+import com.github.brigade.exception.GroupOverflowException;
 import com.github.brigade.map.EnumMapSize;
 import com.github.brigade.map.Map;
+import com.github.brigade.map.MapPoint;
 import com.github.brigade.render.GameTextureLevel;
 import com.github.brigade.render.Resolution;
 import com.github.brigade.render.Textures;
@@ -18,6 +20,11 @@ import com.github.brigade.ui.screen.menu.MenuScreen;
 import com.github.brigade.ui.screen.menu.OptionsMenu;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.ui.window.Window;
+import com.github.brigade.unit.UnitGroup;
+import com.github.brigade.unit.UnitLiving;
+import com.github.brigade.unit.data.EnumFaction;
+import com.github.brigade.unit.data.UnitData;
+import com.github.brigade.unit.unitClasses.TestUnit;
 
 public class Game {
 	//Options Variables
@@ -29,11 +36,12 @@ public class Game {
 	public static Resolution gameResolution = Resolution.X1600x900;
 	//End Options Variables
 	private static Game instance;
+	private final Map map;
 	private final Window window;
 	private final UserClient client;
 	private int updateTicks;
 	private Screen currentScreen;
-
+	
 	public Game() {
 		instance = this;
 		// TODO: Load from settings to get last display settings for the window
@@ -46,9 +54,9 @@ public class Game {
 		client = new UserClient(username, password);
 		client.setup();
 		//
-		map = new Map(EnumMapSize.Large);
+		map = new Map(EnumMapSize.Small);
 	}
-
+	
 	public void run() {
 		window.setup();// All textures loading code must go after window.setup
 		Textures.setup();
@@ -79,7 +87,7 @@ public class Game {
 				updateTicks = updates;
 				updates = 0;
 			}
-			render();
+			render(map.getMapData());
 			Display.update();
 			Display.sync(60);
 		}
@@ -105,7 +113,11 @@ public class Game {
 		currentScreen.update();
 	}
 
-	private void render() {
+	private void render(MapPoint[][] data) {
+		
+		if(currentScreen.getScreenName().equalsIgnoreCase("Skirmish"))
+			currentScreen.render(data);
+			
 		currentScreen.render();
 		if(vsync){
 			if(vsync60){
@@ -152,9 +164,6 @@ public class Game {
 	public int getUpdateTicks() {
 		return updateTicks;
 	}
-
-	// TODO: Remove. This is purely for testing purposes for AI
-	private final Map map;
 
 	public static Map getMap() {
 		return instance.map;

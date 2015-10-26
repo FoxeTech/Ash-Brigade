@@ -6,6 +6,7 @@ import com.github.brigade.unit.data.EnumFaction;
 public class CriticalPoint {
 
 	private UnitGroup occupyingArmy;
+	private UnitGroup attackingArmy;
 	private EnumFaction faction;
 	
 	private int numAdjacentPoints;
@@ -23,12 +24,20 @@ public class CriticalPoint {
 		this.faction = faction;
 	}
 	
-	public void setArmy(UnitGroup occupyingArmy){
+	public void setOccupyingArmy(UnitGroup occupyingArmy){
 		this.occupyingArmy = occupyingArmy;
 	}
 	
-	public void removeArmy(){
+	public void setAttackingArmy(UnitGroup attackingArmy){
+		this.attackingArmy = attackingArmy;
+	}
+	
+	public void removeOccupyingArmy(){
 		occupyingArmy = null;
+	}
+	
+	public void removeAttackingArmy(){
+		attackingArmy = null;
 	}
 	
 	public void addAdjacentPoint(CriticalPoint adjacentPoint){

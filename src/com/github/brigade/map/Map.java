@@ -7,6 +7,8 @@ import java.util.HashMap;
 import com.github.brigade.exception.MapException;
 import com.github.brigade.map.generation.NoiseParameters;
 import com.github.brigade.map.generation.PerlinNoise;
+import com.github.brigade.unit.UnitGroup;
+import com.github.brigade.unit.UnitLiving;
 
 /**
  * <b>TODO</b>: Assosicate more data with map point and perhaps have multiple 2D
@@ -95,7 +97,7 @@ public class Map extends BufferedImage {
 		// TODO: Add resources (trees, rare minerals and bonuses) to map)
 		// TODO: Place player spawn points
 	}
-
+	
 	private void sanitize() {
 		// TODO: Clear out tiny islands
 	}

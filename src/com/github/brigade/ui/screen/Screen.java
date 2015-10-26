@@ -1,8 +1,20 @@
 package com.github.brigade.ui.screen;
 
+import com.github.brigade.map.MapPoint;
 import com.github.brigade.ui.util.MouseInput;
 
 public abstract class Screen {
+	
+	private String screenName;
+	
+	public Screen(String screenName){
+		this.screenName = screenName;
+	}
+	
+	public String getScreenName(){
+		return screenName;
+	}
+	
 	public void update() {
 		if (MouseInput.hasClickedLeft()) {
 			onClick(MouseInput.LEFT, MouseInput.getX(), MouseInput.getY(), !MouseInput.isLeftDown());
@@ -16,6 +28,8 @@ public abstract class Screen {
 	}
 
 	public abstract void render();
+	
+	public abstract void render(MapPoint[][] data);
 
 	/**
 	 * Called when the mouse is clicked on the screen.

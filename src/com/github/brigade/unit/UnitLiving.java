@@ -34,7 +34,7 @@ public abstract class UnitLiving extends Unit {
 	 */
 	public UnitLiving(int origX, int origY, int health, int healthMax, UnitData data, String name) {
 		super(origX, origY);
-		stats = new StatHandler(data.getFactionName());
+		stats = new StatHandler();
 		this.health = health;
 		this.healthMax = healthMax;
 		this.data = data;

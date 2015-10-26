@@ -52,6 +52,10 @@ public class MapPoint {
 		this.unit = null;
 	}
 	
+	public boolean hasUnit(){
+		return unit != null;
+	}
+	
 	public UnitLiving getUnit(){
 		return unit;
 	}

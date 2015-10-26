@@ -6,7 +6,7 @@ public enum EnumMapSize {
 	private final int size;
 
 	EnumMapSize(int size) {
-		this.size = size;;
+		this.size = size;
 	}
 
 	public int getSize() {

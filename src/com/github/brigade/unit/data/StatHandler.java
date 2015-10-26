@@ -1,8 +1,6 @@
 package com.github.brigade.unit.data;
 
 public class StatHandler {
-
-	private String faction;
 	
 	private int attack;
 	private int defense;
@@ -20,9 +18,7 @@ public class StatHandler {
 	 * 			The name of the faction that the unit is a part of.
 	 * 
 	 */
-	public StatHandler(String faction){
-	
-		this.faction = faction;
+	public StatHandler(){
 		attack = 0;
 		defense = 0;
 		agility = 0;
@@ -30,17 +26,6 @@ public class StatHandler {
 		accuracy = 0;
 		accuracyDecay = 0;
 		criticalChance = 0;
-		
-	}
-	
-	/**
-	 * Sets the unit's faction to a different faction.
-	 * 
-	 * @param faction
-	 * 			The faction that the unit is being moved to.
-	 */
-	public void setFaction(String faction){
-		this.faction = faction;
 	}
 	
 	/**
@@ -155,15 +140,6 @@ public class StatHandler {
 	 */
 	public float getCriticalChance(){
 		return criticalChance;
-	}
-	
-	/**
-	 * Gives the faction name of the unit.
-	 * 
-	 * @return faction
-	 */
-	public String getFaction(){
-		return faction;
 	}
 	
 }

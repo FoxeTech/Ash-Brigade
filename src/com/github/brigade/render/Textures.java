@@ -31,8 +31,11 @@ public class Textures {
 	public static Texture Mountain;
 	public static Texture Trees;
 	public static Texture Lewd;
+	//
+	public static Texture Test_Unit;
 
 	public static void setup() {
+		Test_Unit = TextureUtil.loadTexture("test", "png");
 		Snow = TextureUtil.loadTexture("Tiles/snow", "png");
 		ColdGrass = TextureUtil.loadTexture("Tiles/high_grass", "png");
 		Grass = TextureUtil.loadTexture("Tiles/grass", "png");

@@ -1,9 +1,9 @@
 package com.github.brigade.unit.data;
 
 public enum EnumFaction {
-	Asian("Adesh", "", "", "", "", "", 9, 81, 729, 6561, 39366), 
-	Euro("Lanett", "Contubernium", "Cohort", "", "", "", 8, 80, 480, 4920, 19680), 
-	Arab("Reyan", "Squad", "Brigade", "", "", "",10, 100, 1000, 10000, 100000), 
+	Adesh("Adesh", "", "", "", "", "", 9, 81, 729, 6561, 39366), 
+	Lanett("Lanett", "Contubernium", "Cohort", "", "", "", 8, 80, 480, 4920, 19680), 
+	Reyan("Reyan", "Squad", "Brigade", "", "", "",10, 100, 1000, 10000, 100000), 
 	Rogue("Rogue", "Gang", "Bandit", "", "", "",10, 100, 1000, 10000, 100000);
 
 	private String name, groupName1, groupName2, groupName3, groupName4, groupName5;

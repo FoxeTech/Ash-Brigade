@@ -62,8 +62,16 @@ public class UnitGroup {
 		return numUnits;
 	}
 	
+	public int getNumGroups(){
+		return numGroups;
+	}
+	
 	public int getGroupType(){
 		return groupType;
+	}
+	
+	public int getMaxUnits(){
+		return maxUnits;
 	}
 	
 	public String getGroupName(){
@@ -72,6 +80,14 @@ public class UnitGroup {
 	
 	public EnumFaction getFaction(){
 		return faction;
+	}
+	
+	public UnitLiving getUnit(int index){
+		return units[index];
+	}
+	
+	public UnitGroup getUnitGroup(int index){
+		return groups[index];
 	}
 	
 }

@@ -17,8 +17,8 @@ import com.github.brigade.unit.data.EnumFaction;
 public class AIMovementController {
 	
 	LineOfSight los = new LineOfSight();
-	Faction faction = new Faction(EnumFaction.Arab);
-	Faction enemyFaction = new Faction(EnumFaction.Asian);
+	Faction faction = new Faction(EnumFaction.Reyan);
+	Faction enemyFaction = new Faction(EnumFaction.Adesh);
 	
 	public void moveUnit(UnitLiving unit){
 		

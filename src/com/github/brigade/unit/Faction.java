@@ -5,7 +5,13 @@ import com.github.brigade.unit.data.EnumFaction;
 
 public class Faction {
 
-	//will also hold cities under faction's control
+	/**
+	 * 
+	 * This class is meant to hold all of the conquest-level information
+	 * of a faction. Including the army and cities under the faction's control.
+	 * 
+	 * @author Chandler
+	 */
 	
 	private int numUnits;
 	

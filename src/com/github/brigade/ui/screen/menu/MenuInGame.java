@@ -5,6 +5,7 @@ import org.newdawn.slick.opengl.Texture;
 
 import com.github.brigade.Game;
 import com.github.brigade.exception.MapException;
+import com.github.brigade.map.MapPoint;
 import com.github.brigade.render.DrawUtil;
 import com.github.brigade.render.GameTextureLevel;
 import com.github.brigade.render.Textures;
@@ -13,16 +14,26 @@ import com.github.brigade.ui.screen.component.Component;
 import com.github.brigade.ui.screen.component.Container;
 import com.github.brigade.ui.screen.component.MapDisplay;
 import com.github.brigade.ui.util.MouseInput;
+import com.github.brigade.unit.UnitGroup;
+import com.github.brigade.unit.UnitLiving;
 
 public class MenuInGame extends MenuScreen {
+	
 	private int x = 0, y = 0, lx = 0, ly = 0;
 	private int textureSize = 128;
 	private Selection sel = new Selection();
 	private Tile[][] tiles;
 	private Tile tileMouseOver = null;
-
-	public MenuInGame() {
-		super(getComponents());
+	
+	private UnitGroup occupyingArmy;
+	private UnitGroup attackingArmy;
+	private MapPoint[][] data;
+	
+	public MenuInGame(MapPoint[][] data, UnitGroup occupyingArmy, UnitGroup attackingArmy) {
+		super(getComponents(), "Skirmish");
+		this.data = data;
+		this.occupyingArmy = occupyingArmy;
+		this.attackingArmy = attackingArmy;
 	}
 
 	@Override
@@ -58,8 +69,25 @@ public class MenuInGame extends MenuScreen {
 		lx = x;
 		ly = y;
 		super.update();
+		updateUnits();
 	}
-
+	
+	public void updateUnits(){
+		
+		for(int i = 0; i < occupyingArmy.getNumUnits(); i++){
+			UnitLiving currUnit = occupyingArmy.getUnit(i);
+			data[currUnit.getX()][currUnit.getY()].setUnit(currUnit);
+		}
+		
+		for(int i = 0; i < occupyingArmy.getNumGroups(); i++){
+			for(int a = 0; a < occupyingArmy.getUnitGroup(i).getNumUnits(); a++){
+				UnitLiving currUnit = occupyingArmy.getUnit(i);
+				data[currUnit.getX()][currUnit.getY()].setUnit(currUnit);
+			}
+		}
+		renderUnits();
+	}
+	
 	@Override
 	protected void onClick(int mouseID, int x, int y, boolean isMouseReleasing) {
 		if (isMouseReleasing) {
@@ -109,8 +137,13 @@ public class MenuInGame extends MenuScreen {
 		return Game.getMap().getHeight() * (textureSize) - Game.gameResolution.getHeight();
 	}
 
-	@Override
-	public void render() {
+	public void render(MapPoint[][] data) {
+		renderMap();
+		renderUnits();
+		super.render();
+	}
+
+	private void renderMap(){
 		boolean blurTextures = false;
 		boolean rotate = false;
 		if (blurTextures) {
@@ -160,9 +193,23 @@ public class MenuInGame extends MenuScreen {
 		if (blurTextures) {
 			GL11.glTranslated(-textureSize / 2, -textureSize / 2, 0);
 		}
-		super.render();
 	}
-
+	
+	private void renderUnits(){
+		if(tiles != null){
+			for(int y = 0; y < tiles.length; y++){
+				for(int x = 0; x < tiles[y].length; x++){
+					Tile t = tiles[y][x];
+					if(data[y][x].hasUnit()){
+						UnitLiving unit = data[y][x].getUnit();
+						DrawUtil.drawRectangle(t.y, t.x, t.size, t.size, unit.getTexture());
+					}
+				}
+			}
+			
+		} 
+	}
+	
 	/**
 	 * Returns a 2D array of Tiles to assist in rendering.
 	 */

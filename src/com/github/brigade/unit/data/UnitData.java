@@ -18,7 +18,7 @@ public class UnitData {
 	 * @param commanderID
 	 *            The ID of this unit's commander
 	 * @param loyaltyIndex
-	 *            The unit that commands this one's ID
+	 *            The unit that commands this one's ID (-1 = no commander)
 	 * @param faction
 	 *            The faction the unit belongs to
 	 */
@@ -28,13 +28,13 @@ public class UnitData {
 		this.loyaltyIndex = loyaltyIndex;
 		this.faction = faction;
 		
-		if(faction == EnumFaction.Arab){
+		if(faction == EnumFaction.Reyan){
 			selfWorth = 100;
 			honour = 50;
-		}else if(faction == EnumFaction.Asian){
+		}else if(faction == EnumFaction.Adesh){
 			selfWorth = 50;
 			honour = 100;
-		}else if(faction == EnumFaction.Euro){
+		}else if(faction == EnumFaction.Lanett){
 			selfWorth = 50;
 			honour = 50;
 		}
@@ -47,7 +47,7 @@ public class UnitData {
 	 * @param id
 	 *            The unit's unique ID
 	 * @param commanderID
-	 *            <b>TODO</b>: Get Chandler to elaborate what this is
+	 *            ID of this unit's commander
 	 * @param faction
 	 *            The faction the unit belongs to
 	 */

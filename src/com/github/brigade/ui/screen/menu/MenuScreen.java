@@ -16,7 +16,8 @@ public abstract class MenuScreen extends Screen {
 	 * @param menuComponents
 	 *            The menu components
 	 */
-	public MenuScreen(Component[] menuComponents) {
+	public MenuScreen(Component[] menuComponents, String screenName) {
+		super(screenName);
 		this.menuComponents = menuComponents;
 	}
 
