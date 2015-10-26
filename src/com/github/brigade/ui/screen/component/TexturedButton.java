@@ -6,6 +6,11 @@ import com.github.brigade.render.DrawUtil;
 import com.github.brigade.render.Textures;
 import com.github.brigade.ui.util.MouseInput;
 
+/**
+ * Creates a button and allows textures to be drawn for it
+ * @author Craig
+ *
+ */
 public class TexturedButton extends Button {
 	private final Texture[] imageStates;
 	private ButtonAction action;

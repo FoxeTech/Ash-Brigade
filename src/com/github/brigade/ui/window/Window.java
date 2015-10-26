@@ -57,14 +57,26 @@ public class Window {
 		System.exit(0);
 	}
 
+	/**
+	 * Returns the width of the window
+	 * @return Returns the width of the window
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * Returns the height of the window
+	 * @return Returns the height of the window
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * Returns if the window is fullscreen
+	 * @return
+	 */
 	public boolean isFullscreen() {
 		return fullscreen;
 	}

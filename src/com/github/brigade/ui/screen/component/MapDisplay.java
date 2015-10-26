@@ -8,6 +8,11 @@ import com.github.brigade.render.DrawUtil;
 import com.github.brigade.render.TextureUtil;
 import com.github.brigade.render.Textures;
 
+/**
+ * 
+ * @author Matt
+ *
+ */
 public class MapDisplay extends Component {
 	private Map lastMap;
 	private Texture mapTexture;

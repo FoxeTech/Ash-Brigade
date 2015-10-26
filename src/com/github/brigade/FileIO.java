@@ -9,8 +9,11 @@ import java.io.PrintWriter;
 import java.util.List;
 
 public class FileIO {
+	//TODO: Needs to be optimized
 	/**
-	 * Needs to be optimized.
+	 * Saves all of the lines to a file
+	 * @param file
+	 * @param text
 	 */
 	public static void saveAllLines(String file, List<String> text) {
 		File f = new File(file);
@@ -34,6 +37,11 @@ public class FileIO {
 		}
 	}
 
+	/**
+	 * Reads all of the lines of a file
+	 * @param file
+	 * @return
+	 */
 	public static String readAllLines(String file) {
 		StringBuilder content = new StringBuilder("");
 		try {

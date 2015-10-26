@@ -1,5 +1,10 @@
 package com.github.brigade.unit.data;
 
+/**
+ * A list of all of the character types in the game
+ * @author Chandler
+ *
+ */
 public enum EnumCharacterType {
 	
 	//European

@@ -20,10 +20,17 @@ public class OptionsMenu extends MenuScreen {
 	private static final int width = Display.getWidth() / 6;
 	private static final int height = Display.getHeight() / 10;
 
+	/**
+	 * Adds components to screen
+	 */
 	public OptionsMenu() {
 		super(get(), "Options");
 	}
 
+	/**
+	 * Returns the components that need to be added to the screen
+	 * @return Returns the components that need to be added to the screen
+	 */
 	public static Component[] get() {
 		FontObj font = FontUtil.CreateFont("Xeranthemum.ttf", 20);
 		Text t = new Text(Display.getWidth() / 2 - 4 * ((int) (font.getSize())), 20, 0, 0, "Options", font);
@@ -39,7 +46,7 @@ public class OptionsMenu extends MenuScreen {
 				
 			}
 		});
-		TexturedButton vsync = new TexturedButton(40,40 + MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff,Textures.vsyncOn},
+		TexturedButton vsync = new TexturedButton(40,50 + MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff,Textures.vsyncOn},
 		new ButtonAction(){
 			@Override
 			public void onClick(){
@@ -59,7 +66,7 @@ public class OptionsMenu extends MenuScreen {
 				}
 			}
 		});
-		TexturedButton vsync30 = new TexturedButton(40,40 + 2 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff30,Textures.vsyncOn30},
+		TexturedButton vsync30 = new TexturedButton(40,60 + 2 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff30,Textures.vsyncOn30},
 		new ButtonAction(){
 			@Override
 			public void onClick(){
@@ -79,7 +86,7 @@ public class OptionsMenu extends MenuScreen {
 				}
 			}
 		});
-		TexturedButton vsync60 = new TexturedButton(40,40 + 3 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff60,Textures.vsyncOn60},
+		TexturedButton vsync60 = new TexturedButton(40,70 + 3 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff60,Textures.vsyncOn60},
 		new ButtonAction(){
 			@Override
 			public void onClick(){

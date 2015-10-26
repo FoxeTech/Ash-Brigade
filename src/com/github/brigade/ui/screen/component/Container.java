@@ -11,6 +11,14 @@ import com.github.brigade.render.Textures;
 public class Container extends Component {
 	private final Component[] components;
 
+	/**
+	 * Creates a new container
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param components
+	 */
 	public Container(int x, int y, int width, int height, Component[] components) {
 		super(x, y, width, height);
 		for (Component c : components) {
@@ -20,6 +28,9 @@ public class Container extends Component {
 		this.components = components;
 	}
 
+	/**
+	 * If the container is clicked it sends the click to all of the components inside of it
+	 */
 	@Override
 	public void onClick(int mouseID) {
 		for (Component c : components) {
@@ -29,6 +40,9 @@ public class Container extends Component {
 		}
 	}
 
+	/**
+	 * Draws the container to the screen
+	 */
 	@Override
 	public void render() {
 		GL11.glColor3f(1f, 1f, 1f);
@@ -40,14 +54,26 @@ public class Container extends Component {
 		}
 	}
 
+	/**
+	 * Returns all of the components in the container
+	 * @return Returns all of the components int he container
+	 */
 	public Component[] getComponents() {
 		return components;
 	}
 
+	/**
+	 * Returns the component at a specific index of the components in the array of components in the container
+	 * @param index
+	 * @return
+	 */
 	public Component getComponent(int index) {
 		return components[index];
 	}
 
+	/**
+	 * Updates the state of the button
+	 */
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub

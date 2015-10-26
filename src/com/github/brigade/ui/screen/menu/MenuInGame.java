@@ -17,6 +17,11 @@ import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.unit.UnitGroup;
 import com.github.brigade.unit.UnitLiving;
 
+/**
+ * 
+ * @author Matt
+ *
+ */
 public class MenuInGame extends MenuScreen {
 	
 	private int x = 0, y = 0, lx = 0, ly = 0;
@@ -24,6 +29,7 @@ public class MenuInGame extends MenuScreen {
 	private Selection sel = new Selection();
 	private Tile[][] tiles;
 	private Tile tileMouseOver = null;
+<<<<<<< HEAD
 	
 	private UnitGroup occupyingArmy;
 	private UnitGroup attackingArmy;
@@ -34,6 +40,14 @@ public class MenuInGame extends MenuScreen {
 		this.data = data;
 		this.occupyingArmy = occupyingArmy;
 		this.attackingArmy = attackingArmy;
+=======
+
+	/**
+	 * Adds GUI Components to the screen
+	 */
+	public MenuInGame() {
+		super(getComponents());
+>>>>>>> origin/master
 	}
 
 	@Override
@@ -241,14 +255,26 @@ public class MenuInGame extends MenuScreen {
 		return (tiles == null) ? true : (lx != x || ly != y);
 	}
 
+	/**
+	 * Returns the MapDisplay
+	 * @return Returns the MapDisplay
+	 */
 	private MapDisplay getMapDisplay() {
 		return (MapDisplay) getComponents()[1];
 	}
 
+	/**
+	 * Returns the components on the screen
+	 * @return Returns the components on the screen
+	 */
 	private Container getContainer() {
 		return (Container) getComponents()[0];
 	}
 
+	/**
+	 * Returns the components on the screen
+	 * @return
+	 */
 	private static Component[] getComponents() {
 		int h = Game.getWindow().getHeight();
 		int w = Game.getWindow().getWidth();
@@ -281,6 +307,11 @@ public class MenuInGame extends MenuScreen {
 		return new Component[] { container, mapDisp };
 	}
 
+	/**
+	 * 
+	 * @author Matt
+	 *
+	 */
 	class Selection {
 		public boolean selection;
 		public boolean canShow;
@@ -315,6 +346,11 @@ public class MenuInGame extends MenuScreen {
 		}
 	}
 
+	/**
+	 * 
+	 * @author Matt
+	 *
+	 */
 	class Tile {
 		public Texture texture;
 		public int x, y, size;

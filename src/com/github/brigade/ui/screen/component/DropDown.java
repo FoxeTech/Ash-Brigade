@@ -4,6 +4,11 @@ import org.newdawn.slick.opengl.Texture;
 
 import com.github.brigade.ui.util.MouseInput;
 
+/**
+ * A menu of buttons that can go up and down
+ * @author Craig
+ *
+ */
 public class DropDown extends Component{
 	
 	private TexturedButton button;
@@ -12,6 +17,17 @@ public class DropDown extends Component{
 	private ButtonAction action;
 	private UpdateButton update;
 
+	/**
+	 * Creates a drop down menu
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param texture
+	 * @param options
+	 * @param action
+	 * @param update
+	 */
 	public DropDown(int x, int y, int width, int height, Texture texture,Component[] options,ButtonAction action,UpdateButton update) {
 		super(x, y, width, height);
 		this.options = options;
@@ -19,6 +35,9 @@ public class DropDown extends Component{
 		button = new TexturedButton(x,y,width,height,texture,action,update);
 	}
 
+	/**
+	 * If the drop down menu is clicked events occur
+	 */
 	@Override
 	public void onClick(int mouseID) {
 		if(mouseID == MouseInput.LEFT){
@@ -26,6 +45,9 @@ public class DropDown extends Component{
 		}
 	}
 
+	/**
+	 * Draws the drop down menu to the screen
+	 */
 	@Override
 	public void render() {
 		if(clicked){
@@ -40,6 +62,9 @@ public class DropDown extends Component{
 		}
 	}
 
+	/**
+	 * Updates the state of the drop down menu
+	 */
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub

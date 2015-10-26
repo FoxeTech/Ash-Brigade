@@ -34,6 +34,9 @@ public class Textures {
 	//
 	public static Texture Test_Unit;
 
+	/**
+	 * Loads in all of the textures from a file
+	 */
 	public static void setup() {
 		Test_Unit = TextureUtil.loadTexture("test", "png");
 		Snow = TextureUtil.loadTexture("Tiles/snow", "png");

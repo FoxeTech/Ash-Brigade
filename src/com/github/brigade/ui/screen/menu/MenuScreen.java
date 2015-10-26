@@ -6,6 +6,11 @@ import com.github.brigade.ui.screen.Screen;
 import com.github.brigade.ui.screen.component.Component;
 import com.github.brigade.ui.util.MouseInput;
 
+/**
+ * 
+ * @author Matt
+ *
+ */
 public abstract class MenuScreen extends Screen {
 
 	private final Component[] menuComponents;

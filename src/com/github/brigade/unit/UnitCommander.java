@@ -46,10 +46,18 @@ public class UnitCommander extends UnitLiving {
 		numSubordinates++;
 	}
 
+	/**
+	 * Returns the rank name
+	 * @return Returns the rank name
+	 */
 	public String getRankName() {
 		return rankName;
 	}
 
+	/**
+	 * Returns the subordinates
+	 * @return Returns the subordinates
+	 */
 	public UnitLiving[] getSubordinates() {
 		return subordinates;
 	}

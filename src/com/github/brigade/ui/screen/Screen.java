@@ -2,8 +2,13 @@ package com.github.brigade.ui.screen;
 
 import com.github.brigade.map.MapPoint;
 import com.github.brigade.ui.util.MouseInput;
-
+/**
+ * 
+ * @author Matt
+ *
+ */
 public abstract class Screen {
+<<<<<<< HEAD
 	
 	private String screenName;
 	
@@ -15,6 +20,11 @@ public abstract class Screen {
 		return screenName;
 	}
 	
+=======
+	/**
+	 * Updates the state of the screen such as keyboard input
+	 */
+>>>>>>> origin/master
 	public void update() {
 		if (MouseInput.hasClickedLeft()) {
 			onClick(MouseInput.LEFT, MouseInput.getX(), MouseInput.getY(), !MouseInput.isLeftDown());
