@@ -1,7 +1,5 @@
 package com.github.brigade.ui.screen.menu;
 
-import org.lwjgl.input.Mouse;
-
 import com.github.brigade.ui.screen.Screen;
 import com.github.brigade.ui.screen.component.Component;
 import com.github.brigade.ui.util.MouseInput;

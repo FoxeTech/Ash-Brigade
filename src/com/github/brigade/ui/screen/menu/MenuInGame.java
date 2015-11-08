@@ -23,31 +23,29 @@ import com.github.brigade.unit.UnitLiving;
  *
  */
 public class MenuInGame extends MenuScreen {
-	
+
 	private int x = 0, y = 0, lx = 0, ly = 0;
 	private int textureSize = 128;
 	private Selection sel = new Selection();
 	private Tile[][] tiles;
 	private Tile tileMouseOver = null;
-<<<<<<< HEAD
-	
+
 	private UnitGroup occupyingArmy;
 	private UnitGroup attackingArmy;
 	private MapPoint[][] data;
-	
+
 	public MenuInGame(MapPoint[][] data, UnitGroup occupyingArmy, UnitGroup attackingArmy) {
 		super(getComponents(), "Skirmish");
 		this.data = data;
 		this.occupyingArmy = occupyingArmy;
 		this.attackingArmy = attackingArmy;
-=======
+	}
 
 	/**
 	 * Adds GUI Components to the screen
 	 */
 	public MenuInGame() {
-		super(getComponents());
->>>>>>> origin/master
+		super(getComponents(), "MainMenu");
 	}
 
 	@Override
@@ -57,14 +55,16 @@ public class MenuInGame extends MenuScreen {
 			y -= MouseInput.getLastYDiff();
 		}
 		clamp();
-		if (sel.canShow) {
-			sel.x2 = MouseInput.getX();
-			sel.y2 = MouseInput.getY();
-		} else {
-			sel.x1 = MouseInput.getX();
-			sel.y1 = MouseInput.getY();
-			sel.x2 = MouseInput.getX();
-			sel.y2 = MouseInput.getY();
+		if (MouseInput.isLeftDown()) {
+			if (sel.canShow) {
+				sel.x2 = MouseInput.getX();
+				sel.y2 = MouseInput.getY();
+			} else {
+				sel.x1 = MouseInput.getX();
+				sel.y1 = MouseInput.getY();
+				sel.x2 = MouseInput.getX();
+				sel.y2 = MouseInput.getY();
+			}
 		}
 		if (tilesNeedUpdate()) {
 			tiles = genTiles();
@@ -85,34 +85,35 @@ public class MenuInGame extends MenuScreen {
 		super.update();
 		updateUnits();
 	}
-	
-	public void updateUnits(){
-		
-		for(int i = 0; i < occupyingArmy.getNumUnits(); i++){
+
+	public void updateUnits() {
+
+		for (int i = 0; i < occupyingArmy.getNumUnits(); i++) {
 			UnitLiving currUnit = occupyingArmy.getUnit(i);
 			data[currUnit.getX()][currUnit.getY()].setUnit(currUnit);
 		}
-		
-		for(int i = 0; i < occupyingArmy.getNumGroups(); i++){
-			for(int a = 0; a < occupyingArmy.getUnitGroup(i).getNumUnits(); a++){
+
+		for (int i = 0; i < occupyingArmy.getNumGroups(); i++) {
+			for (int a = 0; a < occupyingArmy.getUnitGroup(i).getNumUnits(); a++) {
 				UnitLiving currUnit = occupyingArmy.getUnit(i);
 				data[currUnit.getX()][currUnit.getY()].setUnit(currUnit);
 			}
 		}
 		renderUnits();
 	}
-	
+
 	@Override
 	protected void onClick(int mouseID, int x, int y, boolean isMouseReleasing) {
-		if (isMouseReleasing) {
-			sel.canShow = false;
-			sel.selection = true;
-		} else {
-			sel.canShow = true;
-			sel.selection = false;
-			sel.x1 = x;
-			sel.y1 = y;
-		}
+		if (mouseID == 0)
+			if (isMouseReleasing) {
+				sel.canShow = false;
+				sel.selection = true;
+			} else {
+				sel.canShow = true;
+				sel.selection = false;
+				sel.x1 = x;
+				sel.y1 = y;
+			}
 	}
 
 	/**
@@ -157,7 +158,7 @@ public class MenuInGame extends MenuScreen {
 		super.render();
 	}
 
-	private void renderMap(){
+	private void renderMap() {
 		boolean blurTextures = false;
 		boolean rotate = false;
 		if (blurTextures) {
@@ -208,22 +209,22 @@ public class MenuInGame extends MenuScreen {
 			GL11.glTranslated(-textureSize / 2, -textureSize / 2, 0);
 		}
 	}
-	
-	private void renderUnits(){
-		if(tiles != null){
-			for(int y = 0; y < tiles.length; y++){
-				for(int x = 0; x < tiles[y].length; x++){
+
+	private void renderUnits() {
+		if (tiles != null) {
+			for (int y = 0; y < tiles.length; y++) {
+				for (int x = 0; x < tiles[y].length; x++) {
 					Tile t = tiles[y][x];
-					if(data[y][x].hasUnit()){
+					if (data[y][x].hasUnit()) {
 						UnitLiving unit = data[y][x].getUnit();
 						DrawUtil.drawRectangle(t.y, t.x, t.size, t.size, unit.getTexture());
 					}
 				}
 			}
-			
-		} 
+
+		}
 	}
-	
+
 	/**
 	 * Returns a 2D array of Tiles to assist in rendering.
 	 */
@@ -257,6 +258,7 @@ public class MenuInGame extends MenuScreen {
 
 	/**
 	 * Returns the MapDisplay
+	 * 
 	 * @return Returns the MapDisplay
 	 */
 	private MapDisplay getMapDisplay() {
@@ -265,6 +267,7 @@ public class MenuInGame extends MenuScreen {
 
 	/**
 	 * Returns the components on the screen
+	 * 
 	 * @return Returns the components on the screen
 	 */
 	private Container getContainer() {
@@ -273,6 +276,7 @@ public class MenuInGame extends MenuScreen {
 
 	/**
 	 * Returns the components on the screen
+	 * 
 	 * @return
 	 */
 	private static Component[] getComponents() {

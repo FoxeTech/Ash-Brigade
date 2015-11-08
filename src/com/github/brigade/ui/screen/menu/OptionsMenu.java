@@ -112,6 +112,4 @@ public class OptionsMenu extends MenuScreen {
 		return new Component[] { t, d, vsync, vsync30, vsync60 };
 	}
 
-	@Override
-	public void render(MapPoint[][] data) {}
 }

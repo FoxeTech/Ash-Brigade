@@ -8,7 +8,6 @@ import com.github.brigade.ui.util.MouseInput;
  *
  */
 public abstract class Screen {
-<<<<<<< HEAD
 	
 	private String screenName;
 	
@@ -20,11 +19,9 @@ public abstract class Screen {
 		return screenName;
 	}
 	
-=======
 	/**
 	 * Updates the state of the screen such as keyboard input
 	 */
->>>>>>> origin/master
 	public void update() {
 		if (MouseInput.hasClickedLeft()) {
 			onClick(MouseInput.LEFT, MouseInput.getX(), MouseInput.getY(), !MouseInput.isLeftDown());
@@ -38,8 +35,6 @@ public abstract class Screen {
 	}
 
 	public abstract void render();
-	
-	public abstract void render(MapPoint[][] data);
 
 	/**
 	 * Called when the mouse is clicked on the screen.

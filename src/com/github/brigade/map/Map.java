@@ -7,8 +7,6 @@ import java.util.HashMap;
 import com.github.brigade.exception.MapException;
 import com.github.brigade.map.generation.NoiseParameters;
 import com.github.brigade.map.generation.PerlinNoise;
-import com.github.brigade.unit.UnitGroup;
-import com.github.brigade.unit.UnitLiving;
 
 /**
  * <b>TODO</b>: Assosicate more data with map point and perhaps have multiple 2D

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="javadoc">
-    <target name="javadoc">
-        <javadoc access="public" author="true" classpath="libraries/lzma.jar;libraries/lwjgl.jar;libraries/slick-util.jar;libraries/lwjgl_util.jar;libraries/AppleJavaExtensions.jar;libraries/lwjgl-debug.jar;libraries/ibxm.jar;libraries/lwjgl_util_applet.jar;libraries/jogg-0.0.7.jar;libraries/jorbis-0.0.15.jar;libraries/asm-debug-all.jar;libraries/lwjgl_test.jar;libraries/gson-2.3.1.jar;libraries/jinput.jar" destdir="doc" doctitle="Ash-Brigade" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" source="1.8" sourcefiles="src/temp/TextFileManipulator.java" sourcepath="src" splitindex="true" use="true" version="true"/>
-    </target>
-</project>

@@ -6,7 +6,6 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.ARBMultisample;
 
-import com.github.brigade.exception.GroupOverflowException;
 import com.github.brigade.map.EnumMapSize;
 import com.github.brigade.map.Map;
 import com.github.brigade.map.MapPoint;
@@ -17,38 +16,28 @@ import com.github.brigade.ui.screen.Screen;
 import com.github.brigade.ui.screen.menu.MainMenu;
 import com.github.brigade.ui.screen.menu.MenuInGame;
 import com.github.brigade.ui.screen.menu.MenuScreen;
-import com.github.brigade.ui.screen.menu.OptionsMenu;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.ui.window.Window;
-import com.github.brigade.unit.UnitGroup;
-import com.github.brigade.unit.UnitLiving;
-import com.github.brigade.unit.data.EnumFaction;
-import com.github.brigade.unit.data.UnitData;
-import com.github.brigade.unit.unitClasses.TestUnit;
 
 public class Game {
-	//Options Variables
+	// Options Variables
 	public static boolean vsync = false;
 	public static boolean vsync60 = false;
 	public static boolean vsync30 = false;
 	public static boolean msaa = false;
 	public static GameTextureLevel textureLevel = GameTextureLevel.MEDIUM;
 	public static Resolution gameResolution = Resolution.X1600x900;
-	//End Options Variables
+	// End Options Variables
 	private static Game instance;
 	private final Map map;
 	private final Window window;
 	private final UserClient client;
 	private int updateTicks;
 	private Screen currentScreen;
-<<<<<<< HEAD
-	
-=======
 
 	/**
 	 * Initializes everything needed to create a window and start the game
 	 */
->>>>>>> origin/master
 	public Game() {
 		instance = this;
 		// TODO: Load from settings to get last display settings for the window
@@ -63,22 +52,16 @@ public class Game {
 		//
 		map = new Map(EnumMapSize.Small);
 	}
-<<<<<<< HEAD
-	
-=======
 
-	/**
-	 * Runs main game loop
-	 */
->>>>>>> origin/master
 	public void run() {
 		window.setup();// All textures loading code must go after window.setup
 		Textures.setup();
 		//
 		map.generateTerrain();
 		//
-		currentScreen = new MainMenu();//currentScreen must be initialized after textures have been loaded
-		//setup();
+		currentScreen = new MainMenu();// currentScreen must be initialized
+										// after textures have been loaded
+		// setup();
 		long lastTime = System.nanoTime();
 		double nanoCap = 1000000000.0 / (60.0);
 		double delta = 0;
@@ -128,51 +111,54 @@ public class Game {
 	 * Updates the mouse values and the screen
 	 */
 	private void update() {
-		//client.getConnection().receive();
+		// client.getConnection().receive();
 		MouseInput.update();
 		currentScreen.update();
 	}
 
-<<<<<<< HEAD
 	private void render(MapPoint[][] data) {
-		
-		if(currentScreen.getScreenName().equalsIgnoreCase("Skirmish"))
-			currentScreen.render(data);
-			
-=======
+
+		if (currentScreen.getScreenName().equalsIgnoreCase("Skirmish")) {
+			((MenuInGame) currentScreen).render(data);
+		} else {
+			currentScreen.render();
+		}
+	}
+
 	/**
 	 * Draws the current screen to the screen
 	 */
 	private void render() {
->>>>>>> origin/master
 		currentScreen.render();
-		if(vsync){
-			if(vsync60){
+		if (vsync) {
+			if (vsync60) {
 				Display.sync(60);
-			}else if(vsync30){
+			} else if (vsync30) {
 				Display.sync(30);
 			}
 		}
-		if(msaa){
+		if (msaa) {
 			GL11.glEnable(ARBMultisample.GL_MULTISAMPLE_ARB);
-		}else{
+		} else {
 			GL11.glDisable(ARBMultisample.GL_MULTISAMPLE_ARB);
 		}
 	}
 
 	/**
 	 * Returns an instance of the current screen.
+	 * 
 	 * @return Returns an instance of the current screen
 	 */
 	public static Screen getCurrentScreen() {
 		return instance.currentScreen;
 	}
-	
+
 	/**
 	 * Sets the screen to a new screen
+	 * 
 	 * @param screen
 	 */
-	public static void setScreen(MenuScreen screen){
+	public static void setScreen(MenuScreen screen) {
 		instance.currentScreen = screen;
 	}
 
@@ -197,16 +183,11 @@ public class Game {
 		return updateTicks;
 	}
 
-<<<<<<< HEAD
-=======
-	// TODO: Remove. This is purely for testing purposes for AI
-	private final Map map;
-
 	/**
 	 * Returns the map
+	 * 
 	 * @return Returns the map
 	 */
->>>>>>> origin/master
 	public static Map getMap() {
 		return instance.map;
 	}
