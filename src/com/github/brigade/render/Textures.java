@@ -14,6 +14,8 @@ public class Textures {
 	public static Texture vsyncOn30;
 	public static Texture vsyncOff60;
 	public static Texture vsyncOn60;
+	public static Texture msaaOn;
+	public static Texture msaaOff;
 	//
 	public static Texture Map_Holder;
 	public static Texture Map_Holder_Large;
@@ -60,6 +62,8 @@ public class Textures {
 		vsyncOn30 = TextureUtil.loadTexture("Menu/Vsync_On_30","png");
 		vsyncOff60 = TextureUtil.loadTexture("Menu/Vsync_Off_60","png");
 		vsyncOn60 = TextureUtil.loadTexture("Menu/Vsync_On_60","png");
+		msaaOff = TextureUtil.loadTexture("Menu/MSAA_Off","png");
+		msaaOn = TextureUtil.loadTexture("Menu/MSAA_On","png");
 		Map_Holder_Large = TextureUtil.loadTexture("holder_large", "png");
 	}
 }

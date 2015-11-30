@@ -15,6 +15,11 @@ import com.github.brigade.ui.screen.component.Text;
 import com.github.brigade.ui.screen.component.TexturedButton;
 import com.github.brigade.ui.screen.component.UpdateButton;
 
+/**
+ * Stores everthing for the Options Menu
+ * @author Craig Ferris
+ *
+ */
 public class OptionsMenu extends MenuScreen {
 
 	private static final int width = Display.getWidth() / 6;
@@ -29,87 +34,105 @@ public class OptionsMenu extends MenuScreen {
 
 	/**
 	 * Returns the components that need to be added to the screen
+	 * 
 	 * @return Returns the components that need to be added to the screen
 	 */
 	public static Component[] get() {
 		FontObj font = FontUtil.CreateFont("Xeranthemum.ttf", 20);
 		Text t = new Text(Display.getWidth() / 2 - 4 * ((int) (font.getSize())), 20, 0, 0, "Options", font);
-		TexturedButton d = new TexturedButton(40,40,MainMenu.width,MainMenu.height,new Texture[]{Textures.placeHolder1,Textures.placeHolder2},
-		new ButtonAction() {
+		TexturedButton d = new TexturedButton(40, 40, MainMenu.width, MainMenu.height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 }, new ButtonAction() {
 			@Override
 			public void onClick() {
 				Game.setScreen(new MainMenu());
 			}
-		},new UpdateButton(){
+		}, new UpdateButton() {
 			@Override
-			public void updateSelected(TexturedButton button){
-				
+			public void updateSelected(TexturedButton button) {
+
 			}
 		});
-		TexturedButton vsync = new TexturedButton(40,50 + MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff,Textures.vsyncOn},
-		new ButtonAction(){
+		TexturedButton vsync = new TexturedButton(40, 50 + MainMenu.height, MainMenu.width, MainMenu.height, new Texture[] { Textures.vsyncOff, Textures.vsyncOn }, new ButtonAction() {
 			@Override
-			public void onClick(){
+			public void onClick() {
 				Game.vsync = !Game.vsync;
 				Game.vsync60 = !Game.vsync60;
-				if(Game.vsync30){
+				if (Game.vsync30) {
 					Game.vsync30 = false;
 				}
 			}
-		},Game.vsync,new UpdateButton(){
+		}, Game.vsync, new UpdateButton() {
 			@Override
-			public void updateSelected(TexturedButton button){
-				if(Game.vsync){
+			public void updateSelected(TexturedButton button) {
+				if (Game.vsync) {
 					button.setSelected(true);
-				}else{
+				} else {
 					button.setSelected(false);
 				}
 			}
 		});
-		TexturedButton vsync30 = new TexturedButton(40,60 + 2 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff30,Textures.vsyncOn30},
-		new ButtonAction(){
+		TexturedButton vsync30 = new TexturedButton(40, 60 + 2 * MainMenu.height, MainMenu.width, MainMenu.height, new Texture[] { Textures.vsyncOff30, Textures.vsyncOn30 }, new ButtonAction() {
 			@Override
-			public void onClick(){
+			public void onClick() {
 				Game.vsync30 = !Game.vsync30;
 				Game.vsync = Game.vsync30;
-				if(Game.vsync60){
+				if (Game.vsync60) {
 					Game.vsync60 = false;
 				}
 			}
-		},Game.vsync30,new UpdateButton(){
+		}, Game.vsync30, new UpdateButton() {
 			@Override
-			public void updateSelected(TexturedButton button){
-				if(Game.vsync30){
+			public void updateSelected(TexturedButton button) {
+				if (Game.vsync30) {
 					button.setSelected(true);
-				}else{
+				} else {
 					button.setSelected(false);
 				}
 			}
 		});
-		TexturedButton vsync60 = new TexturedButton(40,70 + 3 * MainMenu.height,MainMenu.width,MainMenu.height,new Texture[]{Textures.vsyncOff60,Textures.vsyncOn60},
-		new ButtonAction(){
+		TexturedButton vsync60 = new TexturedButton(40, 70 + 3 * MainMenu.height, MainMenu.width, MainMenu.height, new Texture[] { Textures.vsyncOff60, Textures.vsyncOn60 }, new ButtonAction() {
 			@Override
-			public void onClick(){
+			public void onClick() {
 				Game.vsync60 = !Game.vsync60;
 				Game.vsync = Game.vsync60;
-				if(Game.vsync30){
+				if (Game.vsync30) {
 					Game.vsync30 = false;
 				}
 			}
-		},Game.vsync60,new UpdateButton(){
+		}, Game.vsync60, new UpdateButton() {
 			@Override
-			public void updateSelected(TexturedButton button){
-				if(Game.vsync60){
+			public void updateSelected(TexturedButton button) {
+				if (Game.vsync60) {
 					button.setSelected(true);
-				}else{
+				} else {
 					button.setSelected(false);
 				}
 			}
 		});
-		//TexturedButton tb1 = new TexturedButton(0, 0, MainMenu.width, MainMenu.height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 },Game.previousScreen);
-		//TexturedButton tb2 = new TexturedButton(0, 0, MainMenu.width, MainMenu.height, new Texture[] { Textures.placeHolder1, Textures.placeHolder2 },null);
-		//DropDown d = new DropDown(20, 20, 100, 50, Textures.testTexture,null, new Component[] { tb1, tb2 });
-		return new Component[] { t, d, vsync, vsync30, vsync60 };
+
+		TexturedButton msaa = new TexturedButton(40, 70 + 4 * MainMenu.height, MainMenu.width, MainMenu.height, new Texture[] { Textures.msaaOff, Textures.msaaOn }, new ButtonAction() {
+			@Override
+			public void onClick() {
+				Game.msaa = !Game.msaa;
+			}
+		}, Game.msaa, new UpdateButton() {
+			@Override
+			public void updateSelected(TexturedButton button) {
+				if (Game.msaa) {
+					button.setSelected(true);
+				} else {
+					button.setSelected(false);
+				}
+			}
+		});
+		// TexturedButton tb1 = new TexturedButton(0, 0, MainMenu.width,
+		// MainMenu.height, new Texture[] { Textures.placeHolder1,
+		// Textures.placeHolder2 },Game.previousScreen);
+		// TexturedButton tb2 = new TexturedButton(0, 0, MainMenu.width,
+		// MainMenu.height, new Texture[] { Textures.placeHolder1,
+		// Textures.placeHolder2 },null);
+		// DropDown d = new DropDown(20, 20, 100, 50, Textures.testTexture,null,
+		// new Component[] { tb1, tb2 });
+		return new Component[] { t, d, vsync, vsync30, vsync60, msaa };
 	}
 
 }
