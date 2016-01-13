@@ -1,4 +1,4 @@
-package com.github.brigade.Test;
+package com.github.brigade.ui.screen.menu;
 
 import org.newdawn.slick.opengl.Texture;
 

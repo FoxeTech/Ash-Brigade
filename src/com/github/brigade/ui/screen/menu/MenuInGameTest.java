@@ -1,19 +1,19 @@
-package com.github.brigade.Test;
+package com.github.brigade.ui.screen.menu;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.github.brigade.Camera;
 import com.github.brigade.Game;
 import com.github.brigade.map.EnumTileType;
 import com.github.brigade.map.MapPoint;
 import com.github.brigade.render.DrawUtil;
+import com.github.brigade.ui.screen.Camera;
 import com.github.brigade.ui.screen.component.Component;
-import com.github.brigade.ui.screen.menu.MenuScreen;
 import com.github.brigade.ui.util.KeyboardInput;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.unit.UnitGroup;
 import com.github.brigade.unit.data.UnitData;
+import com.github.brigade.unit.units.TestUnit01;
 import com.sun.org.apache.bcel.internal.generic.LAND;
 
 public class MenuInGameTest extends MenuScreen{

@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import com.github.brigade.Game;
-import com.github.brigade.Test.TestUnit01;
 import com.github.brigade.exception.MapException;
 import com.github.brigade.map.MapPoint;
 import com.github.brigade.render.DrawUtil;
@@ -18,6 +17,7 @@ import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.unit.UnitGroup;
 import com.github.brigade.unit.UnitLiving;
 import com.github.brigade.unit.data.UnitData;
+import com.github.brigade.unit.units.TestUnit01;
 import com.github.brigade.unit.UnitLiving;
 
 /**

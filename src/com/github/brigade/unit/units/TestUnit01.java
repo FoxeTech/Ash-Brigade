@@ -1,4 +1,4 @@
-package com.github.brigade.Test;
+package com.github.brigade.unit.units;
 
 import com.github.brigade.render.Textures;
 import com.github.brigade.unit.UnitLiving;

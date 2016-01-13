@@ -1,4 +1,4 @@
-package com.github.brigade;
+package com.github.brigade.ui.screen;
 
 public class Camera {
 	private int x, y;
