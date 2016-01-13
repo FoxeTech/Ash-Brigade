@@ -6,7 +6,7 @@ public abstract class Unit {
 	protected int x, y;
 	protected final int origX, origY;
 
-	private Texture texture;
+	protected Texture texture;
 
 	/**
 	 * Instantiates the unit with an initial X and Y.

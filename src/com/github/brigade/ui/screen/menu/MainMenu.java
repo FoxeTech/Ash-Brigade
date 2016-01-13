@@ -4,6 +4,7 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 
 import com.github.brigade.Game;
+import com.github.brigade.Test.MenuInGameTest;
 import com.github.brigade.exception.GroupOverflowException;
 import com.github.brigade.map.MapPoint;
 import com.github.brigade.render.Textures;
@@ -43,6 +44,7 @@ public class MainMenu extends MenuScreen {
 	 * @return All of the GUI components to be added to the GUI
 	 */
 	private static Component[] get() {
+		generateArmies();
 		ButtonAction ba1 = new ButtonAction() {
 			@Override
 			public void onClick() {
@@ -53,7 +55,7 @@ public class MainMenu extends MenuScreen {
 			@Override
 			public void onClick() {
 				generateArmies();
-				Game.setScreen(new MenuInGame(Game.getMap().getMapData(), army1, army2));
+				Game.setScreen(new MenuInGameTest(Game.getMap().getMapData(), army1, army2));
 			}
 		};
 		ButtonAction ba3 = new ButtonAction() {

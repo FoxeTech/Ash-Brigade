@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import com.github.brigade.Game;
+import com.github.brigade.Test.TestUnit01;
 import com.github.brigade.exception.MapException;
 import com.github.brigade.map.MapPoint;
 import com.github.brigade.render.DrawUtil;
@@ -15,6 +16,8 @@ import com.github.brigade.ui.screen.component.Container;
 import com.github.brigade.ui.screen.component.MapDisplay;
 import com.github.brigade.ui.util.MouseInput;
 import com.github.brigade.unit.UnitGroup;
+import com.github.brigade.unit.UnitLiving;
+import com.github.brigade.unit.data.UnitData;
 import com.github.brigade.unit.UnitLiving;
 
 /**
@@ -39,6 +42,8 @@ public class MenuInGame extends MenuScreen {
 		this.data = data;
 		this.occupyingArmy = occupyingArmy;
 		this.attackingArmy = attackingArmy;
+		TestUnit01 t = new TestUnit01(0,0,100,1000,new UnitData(0,1,-1,occupyingArmy.getFaction()),"Test Unit");
+		data[0][0].setUnit(t);
 	}
 
 	/**
@@ -212,7 +217,7 @@ public class MenuInGame extends MenuScreen {
 
 	private void renderUnits() {
 		if (tiles != null) {
-			for (int y = 0; y < tiles.length; y++) {
+			/*for (int y = 0; y < tiles.length; y++) {
 				for (int x = 0; x < tiles[y].length; x++) {
 					Tile t = tiles[y][x];
 					if (data[y][x].hasUnit()) {
@@ -220,8 +225,7 @@ public class MenuInGame extends MenuScreen {
 						DrawUtil.drawRectangle(t.y, t.x, t.size, t.size, unit.getTexture());
 					}
 				}
-			}
-
+			}*/
 		}
 	}
 
@@ -356,14 +360,46 @@ public class MenuInGame extends MenuScreen {
 	 *
 	 */
 	class Tile {
-		public Texture texture;
-		public int x, y, size;
+		private Texture texture;
+		private int x, y, size;
 
 		Tile(int x, int y, int s, Texture t) {
 			this.texture = t;
 			this.x = x;
 			this.y = y;
 			this.size = s;
+		}
+
+		public Texture getTexture() {
+			return texture;
+		}
+
+		public void setTexture(Texture texture) {
+			this.texture = texture;
+		}
+
+		public int getX() {
+			return x;
+		}
+
+		public void setX(int x) {
+			this.x = x;
+		}
+
+		public int getY() {
+			return y;
+		}
+
+		public void setY(int y) {
+			this.y = y;
+		}
+
+		public int getSize() {
+			return size;
+		}
+
+		public void setSize(int size) {
+			this.size = size;
 		}
 	}
 }

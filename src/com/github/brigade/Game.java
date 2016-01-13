@@ -42,7 +42,7 @@ public class Game {
 		instance = this;
 		// TODO: Load from settings to get last display settings for the window
 		int displayWidth = gameResolution.getWidth(), displayHeight = gameResolution.getHeight();
-		boolean fullscreen = false;
+		boolean fullscreen = true;
 		window = new Window(displayWidth, displayHeight, fullscreen);
 		//
 		String username = "test";
