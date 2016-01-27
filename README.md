@@ -1,6 +1,6 @@
 # Ash-Brigade
 
-Some game we're making. Yeah that's all we gotta say for now.
+AshBrigade is a fantasy game focused on a single unit in a military brigade. You are that unit, however you are nothing special, you don't have magical powers, you aren't destined by some fates to save the world, you are simply a soldier following orders in a chaotic war where there are few, but powerful Mages. The game is more thought out than just that currently, however our group has decided to not share any further details.
 
 # Temp code pastes:
 
